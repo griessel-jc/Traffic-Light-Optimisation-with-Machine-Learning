@@ -6,15 +6,23 @@ public class vehicleSpawner : MonoBehaviour
 {
     public GameObject spawnee;
     public bool stopSpawning = false;
-    public float spawnTime;
+    public float spawnTimeInit;
     public float spawnDelay;
-
+    public bool random = false;
+    public float randomStartInit, randomEndInit;
+    public float randomStartDelay, randomEndDelay;
     private GameObject go;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObject", spawnTime, spawnDelay);
+        if (random)
+        {
+            InvokeRepeating("SpawnObject", Random.Range(randomStartInit, randomEndInit), Random.Range(randomStartDelay, randomEndDelay));
+        }else{
+            InvokeRepeating("SpawnObject", spawnTimeInit, spawnDelay);
+        }
+        
     }
 
     // Update is called once per frame
