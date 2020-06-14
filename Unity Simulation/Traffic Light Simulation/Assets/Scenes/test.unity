@@ -2270,7 +2270,7 @@ PrefabInstance:
     - target: {fileID: 6941410515466088852, guid: b7869e7738f71fc4d85b9d13027ffa48,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.248804
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: 6941410515466088852, guid: b7869e7738f71fc4d85b9d13027ffa48,
         type: 3}
@@ -2656,7 +2656,7 @@ PrefabInstance:
     - target: {fileID: 956442308803287909, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
       propertyPath: m_Name
-      value: TrafficLight (3)
+      value: TrafficLight East
       objectReference: {fileID: 0}
     - target: {fileID: 956442308853698232, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
@@ -8680,7 +8680,7 @@ PrefabInstance:
     - target: {fileID: 956442308803287909, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
       propertyPath: m_Name
-      value: TrafficLight (1)
+      value: TrafficLight West
       objectReference: {fileID: 0}
     - target: {fileID: 956442308853698232, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
@@ -14073,7 +14073,7 @@ PrefabInstance:
     - target: {fileID: 956442308803287909, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
       propertyPath: m_Name
-      value: TrafficLight
+      value: TrafficLight South
       objectReference: {fileID: 0}
     - target: {fileID: 956442308853698232, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
@@ -14242,7 +14242,7 @@ PrefabInstance:
     - target: {fileID: 956442308803287909, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}
       propertyPath: m_Name
-      value: TrafficLight (2)
+      value: TrafficLight North
       objectReference: {fileID: 0}
     - target: {fileID: 956442308853698232, guid: 89f8f6ebc5f9b3e44999077493a20a92,
         type: 3}

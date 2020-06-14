@@ -60,6 +60,10 @@ public class IntersectionController : MonoBehaviour
 		
 	}
 	
+	void toGreen(GameObject x){
+			GameObject green = x.transform.GetChild (1).gameObject.transform.GetChild (1).gameObject;
+		}
+	
 	// Update is called once per frame
 	void Update(){
         

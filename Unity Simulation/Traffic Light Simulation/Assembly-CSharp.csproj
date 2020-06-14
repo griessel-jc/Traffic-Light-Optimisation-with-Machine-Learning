@@ -60,6 +60,8 @@
      <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
      <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshSurface.cs" />
      <Compile Include="Assets\Scripts\IntersectionController.cs" />
+     <Compile Include="Assets\Scripts\Road\roadEnd.cs" />
+     <Compile Include="Assets\Scripts\Road\roadStart.cs" />
      <Compile Include="Assets\Scripts\TsectionController.cs" />
      <Compile Include="Assets\Scripts\agentController.cs" />
      <Compile Include="Assets\Scripts\exitPoints.cs" />
