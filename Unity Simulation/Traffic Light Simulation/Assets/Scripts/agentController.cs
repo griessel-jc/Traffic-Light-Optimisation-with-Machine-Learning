@@ -9,17 +9,19 @@ public class agentController : MonoBehaviour
     Vector3 target;
     float destinationReachedTreshold;
     
+    //private Vector3 right, forward, left;
     private Transform[] exitPointList;
     private Vector3[] destinationPoint;
     private bool finalDestinationSet = true;
+    private NavMeshPath path;
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-        checkPath();
-        checkDestination();
+        //checkPath();
+        //checkDestination();
     }
 
     /// <summary>
@@ -28,8 +30,9 @@ public class agentController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        getExitPointChildren();
-        setAgentDestination();
+        path = new NavMeshPath();
+        //getExitPointChildren();
+        //setAgentDestination();
     }
 
     void setAgentDestination(){
@@ -77,6 +80,29 @@ public class agentController : MonoBehaviour
             Debug.Log("collided");
             Destroy(gameObject);
         }
+
+        if (other.CompareTag("roadStart")){
+            Debug.Log("roadstart");
+            target = other.gameObject.GetComponent<roadStart>().getRoadEnd();
+            agent.destination = target;
+            //NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+            //agent.SetPath(path);
+
+        }
+
+        if (other.CompareTag("roadEnd")){
+            Debug.Log("roadEnd");
+            //left = other.gameObject.GetComponent<roadEnd>().getLeftPoint();
+            //right = other.gameObject.GetComponent<roadEnd>().getRightPoint();
+            //forward = other.gameObject.GetComponent<roadEnd>().getForwardPoint();
+            target = other.gameObject.GetComponent<roadEnd>().getExitPoint();
+            if (!NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path)){
+                target = other.gameObject.GetComponent<roadEnd>().getExitPoint();
+            }
+            agent.destination = target;
+            //NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+            //agent.SetPath(path);
+        }
     }
 
     void resume(){
@@ -84,7 +110,7 @@ public class agentController : MonoBehaviour
         agent.isStopped = false;
     }
 
-    void checkPath(){
+    /*void checkPath(){
         if (!agent.pathPending)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -112,5 +138,5 @@ public class agentController : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }
