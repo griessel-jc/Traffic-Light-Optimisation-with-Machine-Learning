@@ -14,7 +14,8 @@ public class TsectionController : MonoBehaviour
 	public GameObject Least;
 	public GameObject Lwest;
 	
-	
+	public int z = 8;
+	public int x = 8;
 	
 	// Start is called before the first frame update
 	void Start(){
@@ -27,7 +28,7 @@ public class TsectionController : MonoBehaviour
 			Left.SetActive(true);
 			Right.SetActive(true);
 			Split.SetActive(false);
-			yield return new WaitForSeconds(10);
+			yield return new WaitForSeconds(z);
 			
 			Entrance.SetActive(true);
 			Left.SetActive(true);
@@ -39,13 +40,18 @@ public class TsectionController : MonoBehaviour
 			Left.SetActive(false);
 			Right.SetActive(false);
 			Split.SetActive(true);
-			yield return new WaitForSeconds(10);
+			yield return new WaitForSeconds(x);
 			
 			Entrance.SetActive(true);
 			Left.SetActive(true);
 			Right.SetActive(true);
 			Split.SetActive(false);
-			yield return new WaitForSeconds(3);
+			yield return new WaitForSeconds(2);
+			
+			//put api call here
+			
+			
+			yield return new WaitForSeconds(1);
 		}
 		
 	}
