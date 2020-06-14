@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.Diagnostics;
+using System.Security.Policy;
+using SimpleJSON;
 
 public class TsectionController : MonoBehaviour
 {	
@@ -16,7 +20,8 @@ public class TsectionController : MonoBehaviour
 	
 	public int z = 8;
 	public int x = 8;
-	
+	public string localSpringServerURL = "localhost:8080/api/";
+
 	// Start is called before the first frame update
 	void Start(){
 		StartCoroutine(waiter());
@@ -47,15 +52,37 @@ public class TsectionController : MonoBehaviour
 			Right.SetActive(true);
 			Split.SetActive(false);
 			yield return new WaitForSeconds(2);
-			
+
 			//put api call here
-			
-			
+			GetApiRequestFunction();
+
 			yield return new WaitForSeconds(1);
 		}
 		
 	}
-	
+
+	IEnumerator GetApiRequestFunction()
+	{
+		/*get JSON*/
+		UnityWebRequest apiRequest = UnityWebRequest.Get(localSpringServerURL);
+		yield return apiRequest.SendWebRequest();
+
+		if (apiRequest.isNetworkError || apiRequest.isHttpError)
+		{
+			UnityEngine.Debug.LogError(apiRequest.error);
+			yield break;
+		}
+
+		/*parse JSON*/
+		JSONNode apiRequestInfo = JSON.Parse(apiRequest.downloadHandler.text);
+
+		int xReceived = apiRequestInfo["xKey"];
+		int zReceived = apiRequestInfo["yKey"];
+
+		x = xReceived; z = zReceived;
+
+	}
+
 	// Update is called once per frame
 	void Update(){
         
