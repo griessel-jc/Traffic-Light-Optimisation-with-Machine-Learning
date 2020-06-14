@@ -16,11 +16,14 @@ public class AegisApplication {
 		SpringApplication.run(AegisApplication.class, args);
 	}
 
-	@RequestMapping(value = "/api/", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/testCall", method = RequestMethod.GET)
 	@ResponseBody
 	public String testCall() {
 		try{
-			return new JSONObject().put("testKey", "testVal").toString();
+			return new JSONObject()
+                                .put("xKey", 13)
+                                .put("yKey", 15)
+                                .toString();
 		}catch(Exception e){
 			//return testCall();
 			return "{\"Error\":\"Internal Server Error\",\"Have you tried turning it\":\"off and back on again\"}";
