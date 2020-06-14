@@ -2352,6 +2352,9 @@ MonoBehaviour:
   Lsouth: {fileID: 0}
   Least: {fileID: 0}
   Lwest: {fileID: 0}
+  z: 8
+  x: 8
+  localSpringServerURL: localhost:8080/api/testCall
 --- !u!1 &221658457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4257815237169446545, guid: b7869e7738f71fc4d85b9d13027ffa48,
@@ -12044,6 +12047,9 @@ MonoBehaviour:
   Lsouth: {fileID: 0}
   Least: {fileID: 0}
   Lwest: {fileID: 0}
+  z: 8
+  x: 8
+  localSpringServerURL: localhost:8080/api/testCall
 --- !u!1001 &1485746505
 PrefabInstance:
   m_ObjectHideFlags: 0

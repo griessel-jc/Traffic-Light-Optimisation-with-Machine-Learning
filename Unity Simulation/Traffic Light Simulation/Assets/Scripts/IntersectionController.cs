@@ -22,7 +22,7 @@ public class IntersectionController : MonoBehaviour
 
 	public int z = 8;
 	public int x = 8;
-	public string localSpringServerURL = "localhost:8080/api/";
+	public string localSpringServerURL = "localhost:8080/api/testCall";
 
 	// Start is called before the first frame update
 	void Start() {
@@ -66,7 +66,7 @@ public class IntersectionController : MonoBehaviour
 			yield return new WaitForSeconds(2);
 
 			//put api call here
-			GetApiRequestFunction();
+			StartCoroutine(GetApiRequestFunction());
 
 			yield return new WaitForSeconds(1);
 		}
@@ -91,7 +91,7 @@ public class IntersectionController : MonoBehaviour
 		int zReceived = apiRequestInfo["yKey"];
 
 		x = xReceived; z = zReceived;
-
+		UnityEngine.Debug.Log("The z value is: " + z);
 	}
 	
 	void toGreen(GameObject x){
