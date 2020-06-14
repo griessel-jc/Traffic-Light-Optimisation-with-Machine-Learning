@@ -23,11 +23,31 @@ namespace Tests
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator TestScriptWithEnumeratorPasses()
+        public IEnumerator IntersectionTestEnumerator()
         {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+		yield return null;
+		bool test = false;
+		bool expected = true;
+
+		if (true){
+			test = true;
+		}
+
+		Assert.AreEqual(test, expected);
+        }
+	
+	[UnityTest]
+        public IEnumerator TSectionTestEnumerator()
+        {
+		yield return null;
+		bool test = false;
+		bool expected = true;
+
+		if (true){
+			test = true;
+		}
+
+		Assert.AreEqual(test, expected);
         }
     }
 }

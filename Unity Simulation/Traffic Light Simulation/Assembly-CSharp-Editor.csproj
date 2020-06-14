@@ -650,13 +650,13 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{41832D11-E826-507A-5417-24448CCE84DD}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{B3A10277-29D5-C465-23EE-F0D148EDF525}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="GameAssembly.csproj">
+      <Project>{1C71570E-1713-8346-2B3E-92645AF1CEA3}</Project>
+      <Name>GameAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
