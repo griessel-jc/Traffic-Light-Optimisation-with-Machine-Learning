@@ -9,21 +9,21 @@ import com.aegis.aegis.modal.Role;
 import com.aegis.aegis.modal.User;
 import dto.loginDto;
 import exception.BadGatewayException;
-import exception.BadRequestException;
 import exception.RecordNotFoundException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import javassist.NotFoundException;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import org.jasypt.util.text.AES256TextEncryptor;
+
 @Repository
 public class UserDAOImplemented implements UserDAO {
 
+    private final static String PASSWORD = "This is a password";
     @Autowired
     private EntityManager entityManager;
 
@@ -37,9 +37,17 @@ public class UserDAOImplemented implements UserDAO {
 
     @Override
     public User get(int id) {
-        Session currSession = entityManager.unwrap(Session.class);
-        User user = currSession.get(User.class, id);
-        return user;
+        try {
+            Session currSession = entityManager.unwrap(Session.class);
+            User user = currSession.get(User.class, id);
+            AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+            textEncryptor.setPassword(PASSWORD);
+            user.setPassword(textEncryptor.decrypt(user.getPassword()));
+            return user;
+        } catch (Exception ex) {
+            throw new RecordNotFoundException("No User record exists for given id", id + "");
+        }
+
     }
 
     @Override
@@ -58,7 +66,9 @@ public class UserDAOImplemented implements UserDAO {
         String SQL_QUERY = "from User as o where o.username=?0 and password=?1";
         Query query = currSession.createQuery(SQL_QUERY);
         query.setParameter(0, username);
-        query.setParameter(1, password);
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword(PASSWORD);
+        query.setParameter(1, textEncryptor.encrypt(password));
         List list = query.list();
         if ((list != null) /*&& (list.size() > 0)*/ && (!list.isEmpty())) {
             userFound = true;
@@ -77,14 +87,17 @@ public class UserDAOImplemented implements UserDAO {
             }
         } catch (RecordNotFoundException re) {
             if (validate(user)) {
+                AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+                textEncryptor.setPassword(PASSWORD);
                 u = new User();
                 u.setRole_Id(2);
-                u.setPassword(user.getPassword());
                 u.setUsername(user.getUsername());
+                u.setPassword(textEncryptor.encrypt(user.getPassword()));
                 Session currSession = entityManager.unwrap(Session.class);
                 currSession.saveOrUpdate(u);
-            }else throw new BadGatewayException("Invalid user fields","");
-
+            } else {
+                throw new BadGatewayException("Invalid user fields", "");
+            }
         }
     }
 
@@ -101,7 +114,12 @@ public class UserDAOImplemented implements UserDAO {
         query.setParameter(0, username);
         List list = query.list();
         if ((list != null) && (!list.isEmpty())) {
-            return (User) list.get(0);
+            User user = (User) list.get(0);
+            AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+            textEncryptor.setPassword(PASSWORD);
+            user.setPassword(textEncryptor.decrypt(user.getPassword()));
+            return user;
+            //return (User) list.get(0);
         }
         throw new RecordNotFoundException("No User record exists for given username", username);
     }

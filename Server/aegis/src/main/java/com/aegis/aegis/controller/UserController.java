@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aegis.aegis.modal.User;
 import com.aegis.aegis.service.UserService;
 import dto.userDto;
-import validator.UserValidator;
+
 
 @RestController
 @RequestMapping("/api")

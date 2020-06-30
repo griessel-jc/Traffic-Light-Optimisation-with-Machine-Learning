@@ -32,7 +32,7 @@ public class User {
     private Integer role_id;
     
     @ManyToOne()
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Role role;
 
     public Role getRole() {
