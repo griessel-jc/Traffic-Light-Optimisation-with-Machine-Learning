@@ -20,5 +20,6 @@ public interface UserDAO {
     public void save(loginDto user);
     public void delete(int id);
     public boolean checkLogin(String username, String password);
+    public boolean validate(loginDto user);
     public User findByUsername(String username);
 }

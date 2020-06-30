@@ -8,6 +8,7 @@ package com.aegis.aegis.dao;
 import com.aegis.aegis.modal.Role;
 import com.aegis.aegis.modal.User;
 import dto.loginDto;
+import exception.BadGatewayException;
 import exception.BadRequestException;
 import exception.RecordNotFoundException;
 import java.util.HashSet;
@@ -20,13 +21,12 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public class UserDAOImplemented implements UserDAO{
+public class UserDAOImplemented implements UserDAO {
 
     @Autowired
     private EntityManager entityManager;
-    
+
     @Override
     public List<User> get() {
         Session currSession = entityManager.unwrap(Session.class);
@@ -48,53 +48,62 @@ public class UserDAOImplemented implements UserDAO{
         User user = currSession.get(User.class, id);
         currSession.delete(user);
     }
-    
+
     @Override
-    public boolean checkLogin(String username, String password){
-        Session currSession = entityManager.unwrap(Session.class );
+    public boolean checkLogin(String username, String password) {
+        Session currSession = entityManager.unwrap(Session.class);
         boolean userFound = false;
         //Query using Hibernate Query Language
         //String SQL_QUERY = "from User as o where o.username='"+username+"' and o.password='"+password+"'";
         String SQL_QUERY = "from User as o where o.username=?0 and password=?1";
         Query query = currSession.createQuery(SQL_QUERY);
-        query.setParameter(0,username);
-        query.setParameter(1,password);
+        query.setParameter(0, username);
+        query.setParameter(1, password);
         List list = query.list();
-        if((list != null) /*&& (list.size() > 0)*/&& (!list.isEmpty()) ){
+        if ((list != null) /*&& (list.size() > 0)*/ && (!list.isEmpty())) {
             userFound = true;
         }
         currSession.close();
         return userFound;
     }
-    
+
     @Override
     public void save(loginDto user) {
         User u;
-        try{
-             u = this.findByUsername(user.getUsername());
-             if(u != null ) 
-                throw new BadRequestException("That username is already taken.",user.getUsername());
-        }catch(RecordNotFoundException re ){
-            u = new User();
-            u.setRole_Id(2);
-            u.setPassword(user.getPassword());
-            u.setUsername(user.getUsername());
-            Session currSession = entityManager.unwrap(Session.class);
-            currSession.saveOrUpdate(u);
+        try {
+            u = this.findByUsername(user.getUsername());
+            if (u != null) {
+                throw new BadGatewayException("That username is already taken.", user.getUsername());
+            }
+        } catch (RecordNotFoundException re) {
+            if (validate(user)) {
+                u = new User();
+                u.setRole_Id(2);
+                u.setPassword(user.getPassword());
+                u.setUsername(user.getUsername());
+                Session currSession = entityManager.unwrap(Session.class);
+                currSession.saveOrUpdate(u);
+            }else throw new BadGatewayException("Invalid user fields","");
+
         }
     }
-    
+
     @Override
-    public User findByUsername(String username){
+    public boolean validate(loginDto user) {
+        return (user.getUsername().length() >= 6 && user.getUsername().length() < 45) && (user.getPassword().length() >= 8 || user.getPassword().length() < 45);
+    }
+
+    @Override
+    public User findByUsername(String username) {
         Session currSession = entityManager.unwrap(Session.class);
         String SQL_QUERY = "from User as o where o.username=?0";
         Query query = currSession.createQuery(SQL_QUERY);
-        query.setParameter(0,username);
+        query.setParameter(0, username);
         List list = query.list();
-        if((list != null) && (!list.isEmpty())){
+        if ((list != null) && (!list.isEmpty())) {
             return (User) list.get(0);
         }
-        throw new RecordNotFoundException("No User record exists for given username",username);
+        throw new RecordNotFoundException("No User record exists for given username", username);
     }
-    
+
 }
