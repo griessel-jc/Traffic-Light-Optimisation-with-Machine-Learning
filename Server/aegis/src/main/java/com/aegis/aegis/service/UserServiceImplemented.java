@@ -45,7 +45,7 @@ public class UserServiceImplemented implements UserService {
 
     }
     
-    public boolean checkLogin(String username, String password){
+    public User checkLogin(String username, String password){
         return userDao.checkLogin(username, password);
     }
     

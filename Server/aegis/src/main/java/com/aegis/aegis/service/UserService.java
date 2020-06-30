@@ -15,7 +15,7 @@ public interface UserService {
 
     void delete(int id); 
     
-    boolean checkLogin(String username, String password);
+    User checkLogin(String username, String password);
     
     User findByUsername(String username);
 }

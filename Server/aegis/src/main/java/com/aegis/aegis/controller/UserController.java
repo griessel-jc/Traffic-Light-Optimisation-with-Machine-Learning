@@ -73,7 +73,7 @@ public class UserController {
     }
     
     @PostMapping("/login")
-    public boolean Login(@RequestBody loginDto login){
+    public User Login(@RequestBody loginDto login){
         return userService.checkLogin(login.getUsername(), login.getPassword());
     }
     

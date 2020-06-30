@@ -10,6 +10,7 @@ import com.aegis.aegis.modal.User;
 import dto.loginDto;
 import exception.BadGatewayException;
 import exception.RecordNotFoundException;
+import exception.UnauthorizedException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import javassist.NotFoundException;
 import org.jasypt.util.text.AES256TextEncryptor;
 
 @Repository
@@ -42,8 +44,13 @@ public class UserDAOImplemented implements UserDAO {
             User user = currSession.get(User.class, id);
             AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
             textEncryptor.setPassword(PASSWORD);
-            user.setPassword(textEncryptor.decrypt(user.getPassword()));
-            return user;
+            User copy = new User();
+            copy.setId(user.getId());
+            copy.setRole(user.getRole());
+            copy.setPassword(textEncryptor.decrypt(user.getPassword()));
+            copy.setUsername(user.getUsername());
+            copy.setRole_Id(user.getRole_Id());
+            return copy;
         } catch (Exception ex) {
             throw new RecordNotFoundException("No User record exists for given id", id + "");
         }
@@ -58,23 +65,14 @@ public class UserDAOImplemented implements UserDAO {
     }
 
     @Override
-    public boolean checkLogin(String username, String password) {
-        Session currSession = entityManager.unwrap(Session.class);
-        boolean userFound = false;
-        //Query using Hibernate Query Language
-        //String SQL_QUERY = "from User as o where o.username='"+username+"' and o.password='"+password+"'";
-        String SQL_QUERY = "from User as o where o.username=?0 and password=?1";
-        Query query = currSession.createQuery(SQL_QUERY);
-        query.setParameter(0, username);
-        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-        textEncryptor.setPassword(PASSWORD);
-        query.setParameter(1, textEncryptor.encrypt(password));
-        List list = query.list();
-        if ((list != null) /*&& (list.size() > 0)*/ && (!list.isEmpty())) {
-            userFound = true;
+    public User checkLogin(String username, String password) {
+        try {
+            User user = this.findByUsername(username);
+            if(user.getPassword().equals(password)) return user;
+            throw new UnauthorizedException("Invalid login ", "");
+        } catch (RecordNotFoundException ex) {
+            throw new UnauthorizedException("Invalid login ", "");
         }
-        currSession.close();
-        return userFound;
     }
 
     @Override

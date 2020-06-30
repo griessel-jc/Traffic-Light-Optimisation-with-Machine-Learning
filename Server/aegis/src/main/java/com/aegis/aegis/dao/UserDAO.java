@@ -19,7 +19,7 @@ public interface UserDAO {
     public User get(int id);
     public void save(loginDto user);
     public void delete(int id);
-    public boolean checkLogin(String username, String password);
+    public User checkLogin(String username, String password);
     public boolean validate(loginDto user);
     public User findByUsername(String username);
 }
