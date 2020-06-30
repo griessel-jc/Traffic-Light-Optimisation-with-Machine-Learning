@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aegis.aegis.modal.User;
 import com.aegis.aegis.service.UserService;
 import dto.userDto;
+import validator.UserValidator;
 
 @RestController
 @RequestMapping("/api")
@@ -30,17 +31,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    
+    
     @GetMapping("/getUsers")
     public List<User> get() {
         return userService.get();
     }
-
+    
+    /*
     @PostMapping("/saveUser")
     public User save(@RequestBody User user) {
         userService.save(user);
         return user;
     }
-
+    */
+    
     @GetMapping("/getUser/{id}")
     public User get(@PathVariable int id) {
         return userService.get(id);
@@ -54,11 +60,16 @@ public class UserController {
         return "Employee removed with id " + id;
 
     }
-
+    /*
     @PutMapping("/user")
-    public User update(@RequestBody User employee) {
-        userService.save(employee);
-        return employee;
+    public User update(@RequestBody User user) {
+        userService.save(user);
+        return user;
+    }
+    */
+    @PostMapping("/findByUsername")
+    public User FindByUsername(@RequestBody userDto username){
+        return userService.findByUsername(username.getUsername());
     }
     
     @PostMapping("/login")
@@ -66,8 +77,10 @@ public class UserController {
         return userService.checkLogin(login.getUsername(), login.getPassword());
     }
     
-    @PostMapping("/findByUsername")
-    public User FindByUsername(@RequestBody userDto username){
-        return userService.findByUsername(username.getUsername());
+    @PostMapping("/register")
+    public String Register(@RequestBody loginDto regUser){
+        userService.save(regUser);
+        return "Success";
     }
+
 }

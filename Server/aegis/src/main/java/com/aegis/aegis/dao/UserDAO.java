@@ -6,6 +6,7 @@
 package com.aegis.aegis.dao;
 
 import com.aegis.aegis.modal.User;
+import dto.loginDto;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public interface UserDAO {
     
     public List<User> get();
     public User get(int id);
-    public void save(User user);
+    public void save(loginDto user);
     public void delete(int id);
     public boolean checkLogin(String username, String password);
     public User findByUsername(String username);

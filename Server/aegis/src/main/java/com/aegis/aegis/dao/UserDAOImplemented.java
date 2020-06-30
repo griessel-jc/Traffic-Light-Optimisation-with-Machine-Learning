@@ -5,9 +5,14 @@
  */
 package com.aegis.aegis.dao;
 
+import com.aegis.aegis.modal.Role;
 import com.aegis.aegis.modal.User;
+import dto.loginDto;
+import exception.BadRequestException;
 import exception.RecordNotFoundException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javassist.NotFoundException;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
@@ -38,12 +43,6 @@ public class UserDAOImplemented implements UserDAO{
     }
 
     @Override
-    public void save(User user) {
-        Session currSession = entityManager.unwrap(Session.class);
-        currSession.saveOrUpdate(user);
-    }
-
-    @Override
     public void delete(int id) {
         Session currSession = entityManager.unwrap(Session.class);
         User user = currSession.get(User.class, id);
@@ -66,6 +65,23 @@ public class UserDAOImplemented implements UserDAO{
         }
         currSession.close();
         return userFound;
+    }
+    
+    @Override
+    public void save(loginDto user) {
+        User u;
+        try{
+             u = this.findByUsername(user.getUsername());
+             if(u != null ) 
+                throw new BadRequestException("That username is already taken.",user.getUsername());
+        }catch(RecordNotFoundException re ){
+            u = new User();
+            u.setRole_Id(2);
+            u.setPassword(user.getPassword());
+            u.setUsername(user.getUsername());
+            Session currSession = entityManager.unwrap(Session.class);
+            currSession.saveOrUpdate(u);
+        }
     }
     
     @Override

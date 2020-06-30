@@ -2,6 +2,7 @@
 package com.aegis.aegis.service;
 
 import com.aegis.aegis.modal.User; 
+import dto.loginDto;
 import java.util.List;
 
 public interface UserService {
@@ -10,7 +11,7 @@ public interface UserService {
 
     User get(int id);
 
-    void save(User user);
+    void save(loginDto user);
 
     void delete(int id); 
     

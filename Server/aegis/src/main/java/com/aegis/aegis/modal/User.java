@@ -28,7 +28,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    
+    @Column(name = "role_id")
+    private Integer role_id;
     
     @ManyToOne()
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -51,10 +52,18 @@ public class User {
         return id;
     }
 
+    public void setRole_Id(Integer id) {
+        this.role_id = id;
+    }
+
+    public Integer getRole_Id() {
+        return role_id;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public String getUsername() {
         return username;
     }

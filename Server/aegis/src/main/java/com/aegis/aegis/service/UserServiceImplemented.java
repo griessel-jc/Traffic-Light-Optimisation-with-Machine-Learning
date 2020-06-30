@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aegis.aegis.dao.UserDAO;
 import com.aegis.aegis.modal.User;
+import dto.loginDto;
 
 @Service
 public class UserServiceImplemented implements UserService {
@@ -33,9 +34,8 @@ public class UserServiceImplemented implements UserService {
 
     @Transactional
     @Override
-    public void save(User user) {
+    public void save(loginDto user) {
         userDao.save(user);
-
     }
 
     @Transactional
@@ -49,6 +49,8 @@ public class UserServiceImplemented implements UserService {
         return userDao.checkLogin(username, password);
     }
     
+    @Override
+    @Transactional(readOnly = true)
     public User findByUsername(String username){
         return userDao.findByUsername(username);
     }
