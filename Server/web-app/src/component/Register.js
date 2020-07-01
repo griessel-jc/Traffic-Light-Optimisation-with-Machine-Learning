@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Login from './Login';
-import { Router,Route, NavLink, Link } from 'react-router-dom';
+import {validatePassword,validateCredentials} from '../utils/Validator';
 
 function Register(props){
     const username              = useFormInput('');
@@ -13,22 +12,19 @@ function Register(props){
     // handle button lick of register form
     const handleRegister = () => {
         setError(null);
-        setLoading(true);
-        console.log(username,password,confPassword);
-        if(new String(password).trim().valueOf() === new String(confPassword).trim().valueOf()){
-            axios.post('http://localhost:8080/api/register', {username: username.value, password: password.value}).then(response =>{
+        if(validateCredentials(username.value.trim(),password.value.trim()) && validatePassword(password.value.trim(), confPassword.value.trim())){
+            setLoading(true);
+            axios.post('http://localhost:8080/api/register', {username: username.value.trim(), password: password.value.trim()}).then(response =>{
                 setLoading(false);
-                const data = response.data;
                 props.history.push('/');
             }).catch(error =>{
                   setLoading(false);
                   console.log(error);
-                  //if(error.response.status === 401) setError(error.response.data.message);
-                  //else setError("Something went wrong. Please try again later.")
+                    setError("Can not use that username.");
             });
         }else{
             setLoading(false);
-            setError("Passwords do not match.");
+            setError("Passwords are empty or do not match.");
         }
     }
 

@@ -101,7 +101,7 @@ public class UserDAOImplemented implements UserDAO {
 
     @Override
     public boolean validate(loginDto user) {
-        return (user.getUsername().length() >= 6 && user.getUsername().length() < 45) && (user.getPassword().length() >= 8 || user.getPassword().length() < 45);
+        return (user.getUsername().length() >= 6 && user.getUsername().length() < 12) && (user.getPassword().length() >= 8 || user.getPassword().length() < 20);
     }
 
     @Override
