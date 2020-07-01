@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aegis.aegis.modal.User;
 import com.aegis.aegis.service.UserService;
 import dto.userDto;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @RestController
@@ -71,12 +72,12 @@ public class UserController {
     public User FindByUsername(@RequestBody userDto username){
         return userService.findByUsername(username.getUsername());
     }
-    
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public User Login(@RequestBody loginDto login){
         return userService.checkLogin(login.getUsername(), login.getPassword());
     }
-    
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public String Register(@RequestBody loginDto regUser){
         userService.save(regUser);

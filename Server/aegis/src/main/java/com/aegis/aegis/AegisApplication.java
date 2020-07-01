@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AegisApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AegisApplication.class, args);
+            SpringApplication.run(AegisApplication.class, args);
 	}
 
 	@RequestMapping(value = "/api/testCall", method = RequestMethod.GET)
