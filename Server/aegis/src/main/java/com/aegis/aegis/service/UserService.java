@@ -13,6 +13,8 @@ public interface UserService {
 
     void save(loginDto user);
 
+    void saveEncrypted(loginDto user);
+    
     void delete(int id); 
     
     User checkLogin(String username, String password);

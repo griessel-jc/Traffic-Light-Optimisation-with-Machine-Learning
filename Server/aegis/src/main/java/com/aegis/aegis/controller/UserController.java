@@ -83,5 +83,13 @@ public class UserController {
         userService.save(regUser);
         return "Success";
     }
+    
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/registerEnc")
+    public String RegisterEncrypted(@RequestBody loginDto regUser){
+        userService.saveEncrypted(regUser);
+        return "Success";
+    }
+    
 
 }

@@ -16,7 +16,6 @@ import dto.loginDto;
 
 @Service
 public class UserServiceImplemented implements UserService {
-
     @Autowired
     private UserDAO userDao;
 
@@ -38,6 +37,12 @@ public class UserServiceImplemented implements UserService {
         userDao.save(user);
     }
 
+    @Transactional 
+    @Override
+    public void saveEncrypted(loginDto user){
+        userDao.saveEncrypted(user);
+    }
+    
     @Transactional
     @Override
     public void delete(int id) {
@@ -45,6 +50,7 @@ public class UserServiceImplemented implements UserService {
 
     }
     
+    @Override
     public User checkLogin(String username, String password){
         return userDao.checkLogin(username, password);
     }

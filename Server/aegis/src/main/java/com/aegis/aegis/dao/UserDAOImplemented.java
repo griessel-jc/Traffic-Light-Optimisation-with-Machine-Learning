@@ -5,8 +5,12 @@
  */
 package com.aegis.aegis.dao;
 
+import Util.AesUtil;
 import com.aegis.aegis.modal.Role;
 import com.aegis.aegis.modal.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import dto.loginDto;
 import exception.BadGatewayException;
 import exception.RecordNotFoundException;
@@ -19,12 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import java.util.UUID;
 import javassist.NotFoundException;
 import org.jasypt.util.text.AES256TextEncryptor;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Repository
 public class UserDAOImplemented implements UserDAO {
-
+    private final static int workload = 12;
     private final static String PASSWORD = "This is a password";
     @Autowired
     private EntityManager entityManager;
@@ -42,15 +48,7 @@ public class UserDAOImplemented implements UserDAO {
         try {
             Session currSession = entityManager.unwrap(Session.class);
             User user = currSession.get(User.class, id);
-            AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-            textEncryptor.setPassword(PASSWORD);
-            User copy = new User();
-            copy.setId(user.getId());
-            copy.setRole(user.getRole());
-            copy.setPassword(textEncryptor.decrypt(user.getPassword()));
-            copy.setUsername(user.getUsername());
-            copy.setRole_Id(user.getRole_Id());
-            return copy;
+            return user;
         } catch (Exception ex) {
             throw new RecordNotFoundException("No User record exists for given id", id + "");
         }
@@ -67,9 +65,20 @@ public class UserDAOImplemented implements UserDAO {
     @Override
     public User checkLogin(String username, String password) {
         try {
-            User user = this.findByUsername(username);
-            if(user.getPassword().equals(password)) return user;
-            throw new UnauthorizedException("Invalid login ", "");
+            String decryptedPassword = new String(java.util.Base64.getDecoder().decode(password));
+            AesUtil aesUtil = new AesUtil(128,1000);
+            String pw = "";
+            if(decryptedPassword != null && decryptedPassword.split("::").length == 3){
+                pw = aesUtil.decrypt(decryptedPassword.split("::")[1], decryptedPassword.split("::")[0], PASSWORD, decryptedPassword.split("::")[2]);
+                User user = this.findByUsername(username);
+                if (BCrypt.checkpw(pw,user.getPassword()) /*user.getPassword().equals(password)*/) {
+                    return user;
+                }
+                throw new UnauthorizedException("Invalid login ", "");
+            }else{
+                throw new BadGatewayException("Invalid user fields", "");
+            }
+            
         } catch (RecordNotFoundException ex) {
             throw new UnauthorizedException("Invalid login ", "");
         }
@@ -100,6 +109,46 @@ public class UserDAOImplemented implements UserDAO {
     }
 
     @Override
+    public void saveEncrypted(loginDto encrypted) {
+        loginDto user = new loginDto();
+        User u;
+        try {
+            String decryptedPassword = new String(java.util.Base64.getDecoder().decode(encrypted.getPassword()));
+            AesUtil aesUtil = new AesUtil(128,1000);
+            String pw = "";
+            if(decryptedPassword != null && decryptedPassword.split("::").length == 3){
+                pw = aesUtil.decrypt(decryptedPassword.split("::")[1], decryptedPassword.split("::")[0], PASSWORD, decryptedPassword.split("::")[2]);
+                
+                String pw_hash = BCrypt.hashpw(pw,BCrypt.gensalt());
+                user.setUsername(encrypted.getUsername());
+                user.setPassword(pw_hash);
+            }else{
+                throw new BadGatewayException("Invalid user fields", "");
+            }
+            
+            
+            
+            u = this.findByUsername(user.getUsername());
+            if (u != null) {
+                throw new BadGatewayException("That username is already taken.", user.getUsername());
+            }
+        }catch (RecordNotFoundException re) {
+            if (validate(user)) {
+                u = new User();
+                u.setRole_Id(2);
+                u.setUsername(user.getUsername());
+                u.setPassword(user.getPassword());
+                Session currSession = entityManager.unwrap(Session.class);
+                currSession.saveOrUpdate(u);
+            } else {
+                throw new BadGatewayException("Invalid user fields", "");
+            }
+        }catch(Exception e){
+            throw new BadGatewayException("Could not decrypt", "");
+        }
+    }
+
+    @Override
     public boolean validate(loginDto user) {
         return (user.getUsername().length() >= 6 && user.getUsername().length() < 12) && (user.getPassword().length() >= 8 || user.getPassword().length() < 20);
     }
@@ -113,9 +162,6 @@ public class UserDAOImplemented implements UserDAO {
         List list = query.list();
         if ((list != null) && (!list.isEmpty())) {
             User user = (User) list.get(0);
-            AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
-            textEncryptor.setPassword(PASSWORD);
-            user.setPassword(textEncryptor.decrypt(user.getPassword()));
             return user;
             //return (User) list.get(0);
         }
