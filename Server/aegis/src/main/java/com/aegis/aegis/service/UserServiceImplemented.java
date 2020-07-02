@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aegis.aegis.dao.UserDAO;
 import com.aegis.aegis.modal.User;
+import dto.adminDto;
 import dto.loginDto;
 
 @Service
@@ -25,6 +26,12 @@ public class UserServiceImplemented implements UserService {
         return userDao.get();
     }
 
+    @Transactional
+    @Override
+    public void changeRole(adminDto admin){
+        userDao.changeRole(admin);
+    }
+    
     @Transactional
     @Override
     public User get(int id) {

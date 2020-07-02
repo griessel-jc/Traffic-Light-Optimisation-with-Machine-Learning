@@ -24,12 +24,12 @@ function Login(props) {
             var salt    = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
             var ciphertext = encrypt(128,1000,salt,iv,PASSWORD,pw);
             var aesPassword = (iv+"::"+salt+"::"+ciphertext);
-            console.log("AES:",aesPassword);
+            //console.log("AES:",aesPassword);
             pw    = btoa(aesPassword);
             
             
             var data = {username: un, password: pw}
-            console.log(data);
+            //console.log(data);
       axios.post('http://localhost:8080/api/login',data).then(response => {
         setLoading(false);
         const data = response.data;

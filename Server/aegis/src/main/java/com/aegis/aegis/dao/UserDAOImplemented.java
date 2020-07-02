@@ -11,6 +11,7 @@ import com.aegis.aegis.modal.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dto.adminDto;
 import dto.loginDto;
 import exception.BadGatewayException;
 import exception.RecordNotFoundException;
@@ -162,10 +163,29 @@ public class UserDAOImplemented implements UserDAO {
         List list = query.list();
         if ((list != null) && (!list.isEmpty())) {
             User user = (User) list.get(0);
+            //currSession.close();
             return user;
             //return (User) list.get(0);
         }
+//        currSession.close();
         throw new RecordNotFoundException("No User record exists for given username", username);
     }
 
+    @Override
+    public void changeRole(adminDto admin){
+        User user = this.findByUsername(admin.getUsername());
+        Session currSession = entityManager.unwrap(Session.class);
+        if(user != null && user.getRole().getName().equalsIgnoreCase("admin")){ 
+            
+            String SQL_QUERY = "from User as o where o.id=?0";
+            Query query = currSession.createQuery(SQL_QUERY);
+            query.setParameter(0, admin.getId());
+            List list = query.list();
+            if ((list != null) && (!list.isEmpty())) {
+                User u = (User) list.get(0);
+                u.setRole_Id(admin.getRole_Id());
+                currSession.saveOrUpdate(u);
+            }else throw new RecordNotFoundException("No User record exists for given id", admin.getId().toString());
+        }
+    }
 }

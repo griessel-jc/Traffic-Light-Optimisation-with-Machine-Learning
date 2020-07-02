@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aegis.aegis.modal.User;
 import com.aegis.aegis.service.UserService;
+import dto.adminDto;
 import dto.userDto;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -34,11 +35,18 @@ public class UserController {
 
 
     
-    
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getUsers")
     public List<User> get() {
         return userService.get();
     }
+    
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/changeRole")
+    public String changeRole(@RequestBody adminDto admin){
+        userService.changeRole(admin);
+        return "Role updated for user with id "+admin.getId();
+    } 
     
     /*
     @PostMapping("/saveUser")
@@ -52,13 +60,14 @@ public class UserController {
     public User get(@PathVariable int id) {
         return userService.get(id);
     }
-
+    
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/deleteUser/{id}")
     public String delete(@PathVariable int id) {
 
         userService.delete(id);
 
-        return "Employee removed with id " + id;
+        return "User removed with id " + id;
 
     }
     /*

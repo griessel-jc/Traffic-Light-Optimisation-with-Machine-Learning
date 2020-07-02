@@ -2,6 +2,7 @@
 package com.aegis.aegis.service;
 
 import com.aegis.aegis.modal.User; 
+import dto.adminDto;
 import dto.loginDto;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface UserService {
 
     void save(loginDto user);
 
+    void changeRole(adminDto admin);
+    
     void saveEncrypted(loginDto user);
     
     void delete(int id); 
