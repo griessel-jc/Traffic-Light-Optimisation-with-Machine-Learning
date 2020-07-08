@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { setUserSession } from '../utils/Common';
 import { validateCredentials } from '../utils/Validator';
 import CryptoJS from 'crypto-js';
-import {encrypt} from '../utils/Cryptography';
+import { encrypt } from '../utils/Cryptography';
 import axios from 'axios';
+import { Button, Container, Card, Form } from 'react-bootstrap';
 function Login(props) {
-  const PASSWORD              = "This is a password";
+  const PASSWORD = "This is a password";
   const username = useFormInput('');
   const password = useFormInput('');
   const [error, setError] = useState(null);
@@ -15,22 +16,18 @@ function Login(props) {
   // handle button click of login form
   const handleLogin = () => {
     setError(null);
-    
+
     if (validateCredentials(username.value.trim(), password.value.trim())) {
       setLoading(true);
       var un = username.value.trim().toString();
-            var pw = password.value.trim().toString();
-            var iv      = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-            var salt    = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-            var ciphertext = encrypt(128,1000,salt,iv,PASSWORD,pw);
-            var aesPassword = (iv+"::"+salt+"::"+ciphertext);
-            //console.log("AES:",aesPassword);
-            pw    = btoa(aesPassword);
-            
-            
-            var data = {username: un, password: pw}
-            //console.log(data);
-      axios.post('http://localhost:8080/api/login',data).then(response => {
+      var pw = password.value.trim().toString();
+      var iv = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
+      var salt = CryptoJS.lib.WordArray.random(128 / 8).toString(CryptoJS.enc.Hex);
+      var ciphertext = encrypt(128, 1000, salt, iv, PASSWORD, pw);
+      var aesPassword = (iv + "::" + salt + "::" + ciphertext);
+      pw = btoa(aesPassword);
+      var data = { username: un, password: pw }
+      axios.post('http://localhost:8080/api/login', data).then(response => {
         setLoading(false);
         const data = response.data;
         setUserSession(''/*token*/, data);
@@ -42,7 +39,7 @@ function Login(props) {
         //if(error.response.status === 401) setError(error.response.data.message);
         //else setError("Something went wrong. Please try again later.")
       });
-    }else setError("Illegal characters or empty input fields.")
+    } else setError("Illegal characters or empty input fields.")
 
 
   }
@@ -53,20 +50,34 @@ function Login(props) {
 
   return (
     <div>
-      Login<br /><br />
-      <div>
-        Username<br />
-        <input type="text" {...username} autoComplete="new-password" />
-      </div>
-      <div style={{ marginTop: 10 }}>
-        Password<br />
-        <input type="password" {...password} autoComplete="new-password" />
-      </div>
-      {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-      <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
-      <br />
-      <input type="button" onClick={Signup} value="Need an account?" /><br />
-
+      <Container>
+        <Card>
+          <Card.Header>Login</Card.Header>
+          <Card.Body>
+            <Form>
+              <fieldset>
+                <div className="row">
+                  <div className="col-12 col-lg-6">
+                    <label for="username">Username</label>
+                    <input className="form-control" placeholder="Username" type="text" {...username} name="username" id="username" autoComplete="new-password" />
+                  </div>
+                </div>
+                <div className="row mt-3">
+                  <div className="col-12 col-lg-6">
+                    <label for="password">Password</label>
+                    <input className="form-control" placeholder="password" type="password" {...password} name="password" id="password" autoComplete="new-password" />
+                  </div>
+                </div>
+                <div className="row mt-3">
+                  {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
+                  <Button variant="primary" onClick={handleLogin} disabled={loading}>{loading ? 'Loading...' : 'Login'}</Button>
+                </div>
+              </fieldset>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Container>
+      <Button variant="link" onClick={Signup}>Need an Account?</Button>
     </div>
   );
 }
