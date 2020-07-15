@@ -50,34 +50,40 @@ function Login(props) {
 
   return (
     <div>
-      <Container>
-        <Card>
-          <Card.Header>Login</Card.Header>
-          <Card.Body>
-            <Form>
-              <fieldset>
-                <div className="row">
-                  <div className="col-12 col-lg-6">
-                    <label for="username">Username</label>
-                    <input className="form-control" placeholder="Username" type="text" {...username} name="username" id="username" autoComplete="new-password" />
+      <div className="left-column">
+        <div>
+        </div>
+      </div>
+      <div className="right-column">
+          <div>
+            <h1 className="project-heading">Traffic Lights Optimisation with Machine Learning</h1>
+            <div className="form-wrapper">
+              <h1>Dashboard</h1>
+              <h1>Sign in</h1>
+              <form>
+                <div className="input-wrapper">
+                  <div>
+                    <label htmlFor="username">Username</label>
+                    <input placeholder="Username" type="text" {...username} name="username" id="username" autoComplete="new-password" />
                   </div>
                 </div>
-                <div className="row mt-3">
-                  <div className="col-12 col-lg-6">
-                    <label for="password">Password</label>
-                    <input className="form-control" placeholder="password" type="password" {...password} name="password" id="password" autoComplete="new-password" />
+                <div className="input-wrapper">
+                  <div>
+                    <label htmlFor="password">Password</label>
+                    <input placeholder="Password" type="password" {...password} name="password" id="password" autoComplete="new-password" />
                   </div>
                 </div>
-                <div className="row mt-3">
-                  {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-                  <Button variant="primary" onClick={handleLogin} disabled={loading}>{loading ? 'Loading...' : 'Login'}</Button>
+                <div className="error-wrapper">
+                {error && <><small style={{ color: 'red' }}>{error}</small></>}
                 </div>
-              </fieldset>
-            </Form>
-          </Card.Body>
-        </Card>
-      </Container>
-      <Button variant="link" onClick={Signup}>Need an Account?</Button>
+                <div className="button-wrapper">
+                  <Button className="switch-btn" variant="link" onClick={Signup}>Create Account</Button>
+                  <Button className="login-btn" variant="primary" onClick={handleLogin} disabled={loading}>{loading ? 'Loading...' : 'Login'}</Button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
     </div>
   );
 }

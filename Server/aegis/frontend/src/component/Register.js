@@ -49,39 +49,47 @@ function Register(props) {
 
     return (
         <div>
-            <Container>
-                <Card>
-                    <Card.Header>Register</Card.Header>
-                    <Card.Body>
-                        <Form >
-                            <fieldset>
-                                <div className="row">
-                                    <div className="col-12 col-lg-6">
-                                        <label for="username">Username:</label>
-                                        <input className="form-control" type="text" placeholder="Username" {...username} name="username" id="username" />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col-12 col-lg-6">
-                                        <label for="password">Create Password:</label>
-                                        <input className="form-control" type="password" placeholder="password" {...password} name="password" id="password" />
-                                    </div>
-                                    <div className="col-12 col-lg-6">
-                                        <label for="regEmail">Confirm Password:</label>
-                                        <input className="form-control" type="password" placeholder="password" {...confPassword} name="confPassword" id="confPassword" />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-                                    <Button variant="primary" onClick={handleRegister} disabled={loading}>{loading ? 'Loading...' : 'Register'}</Button>
-                                </div>
-                            </fieldset>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </Container>
-            <Button variant="link" onClick={Login}>Already have an account?</Button>
+      <div className="left-column">
+        <div>
         </div>
+      </div>
+      <div className="right-column">
+          <div>
+            <h1 className="project-heading">Traffic Lights Optimisation with Machine Learning</h1>
+            <div className="form-wrapper">
+              <h1>Dashboard</h1>
+              <h1>Sign up</h1>
+              <form>
+                <div className="input-wrapper">
+                  <div>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" placeholder="Username" {...username} name="username" id="username" />
+                  </div>
+                </div>
+                <div className="input-wrapper">
+                  <div>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" placeholder="Password" {...password} name="password" id="password" />
+                  </div>
+                </div>
+                <div className="input-wrapper">
+                  <div>
+                    <label htmlFor="regEmail">Confirm Password</label>
+                    <input  type="password" placeholder="Confirm Password" {...confPassword} name="confPassword" id="confPassword" />
+                  </div>
+                </div>
+                <div className="error-wrapper">
+                {error && <><small style={{ color: 'red' }}>{error}</small></>}
+                </div>
+                <div className="button-wrapper">
+                  <Button className="switch-btn" variant="link" onClick={Login}>Sign in</Button>
+                  <Button className="login-btn" variant="primary" onClick={handleRegister} disabled={loading}>{loading ? 'Loading...' : 'Sign up'}</Button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
     );
 }
 
