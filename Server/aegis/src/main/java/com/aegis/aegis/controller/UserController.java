@@ -6,6 +6,7 @@
 package com.aegis.aegis.controller;
 
 
+import com.aegis.aegis.modal.Trafficlight;
 import dto.loginDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.aegis.aegis.modal.User;
+import com.aegis.aegis.service.TrafficlightService;
 import com.aegis.aegis.service.UserService;
 import dto.adminDto;
 import dto.userDto;
@@ -32,14 +34,22 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-
+    
+    @Autowired
+    private TrafficlightService trafficlightService;
+    
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getTrafficlights")
+    public List<Trafficlight> getTrafficlights() {
+        return trafficlightService.getTrafficlights();
+    }
     
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getUsers")
     public List<User> get() {
-        return userService.get();
+        return userService.getUsers();
     }
+    
     
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/changeRole")
@@ -58,7 +68,7 @@ public class UserController {
     
     @GetMapping("/getUser/{id}")
     public User get(@PathVariable int id) {
-        return userService.get(id);
+        return userService.getUser(id);
     }
     
     @CrossOrigin(origins = "http://localhost:3000")

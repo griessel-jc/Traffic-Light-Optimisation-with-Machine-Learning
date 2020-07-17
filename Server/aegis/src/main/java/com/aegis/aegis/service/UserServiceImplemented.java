@@ -5,6 +5,7 @@
  */
 package com.aegis.aegis.service;
 
+import com.aegis.aegis.dao.TrafficlightDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,13 @@ import dto.loginDto;
 public class UserServiceImplemented implements UserService {
     @Autowired
     private UserDAO userDao;
-
+     
     @Transactional
     @Override
-    public List<User> get() {
+    public List<User> getUsers() {
         return userDao.get();
     }
-
+ 
     @Transactional
     @Override
     public void changeRole(adminDto admin){
@@ -34,7 +35,7 @@ public class UserServiceImplemented implements UserService {
     
     @Transactional
     @Override
-    public User get(int id) {
+    public User getUser(int id) {
         return userDao.get(id);
     }
 
@@ -67,4 +68,5 @@ public class UserServiceImplemented implements UserService {
     public User findByUsername(String username){
         return userDao.findByUsername(username);
     }
+
 }

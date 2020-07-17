@@ -1,8 +1,6 @@
 import { getUser } from '../utils/Common';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Router, Rout, Link } from 'react-router';
-import Dashboard from './Dashboard';
 import { Container, Button } from 'react-bootstrap';
 
 class Admin extends React.Component {

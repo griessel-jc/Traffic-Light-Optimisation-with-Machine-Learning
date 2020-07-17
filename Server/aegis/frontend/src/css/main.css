@@ -123,13 +123,6 @@ input:focus {
     color: #6387FF;
 }
 
-.login-btn:active {
-    background-color: white !important;
-    border: none !important;
-    color: #6387FF;
-    font-size: 18px;
-}
-
 .button-wrapper {
     padding-top: 10px;
 }

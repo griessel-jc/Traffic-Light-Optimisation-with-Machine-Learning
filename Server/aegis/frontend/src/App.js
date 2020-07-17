@@ -7,6 +7,7 @@ import Dashboard from './component/Dashboard';
 import Admin from './component/Admin';
 import Statistics from './component/Statistics';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/main.css';
 function App() {
   return (
     <div className="App">
