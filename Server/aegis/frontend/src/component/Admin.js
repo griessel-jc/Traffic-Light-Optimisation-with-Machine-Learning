@@ -2,6 +2,10 @@ import { getUser } from '../utils/Common';
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Container, Button } from 'react-bootstrap';
+import '../css/admin.css';
+import { ReactComponent as BackIcon } from '../images/chevron-left-solid.svg';
+import CodehesionLogo from '../images/codehesion_logo.png';
+import AegisLogo from '../images/Aegis_logo.png';
 
 class Admin extends React.Component {
     constructor(props) {
@@ -90,15 +94,26 @@ class Admin extends React.Component {
         } else {
             return (
                 <div>
-                    <button variant="danger" onClick={this.goBack}>Back</button>
-                    <Container>
-                        <h2>User List</h2>
+                    <div className="topbar-wrapper">
+                        <div className="topbar-back">
+                            <div onClick={this.goBack}>
+                                <BackIcon/>
+                                <button variant="danger" onClick={this.goBack}>BACK</button>
+                            </div>
+                        </div>
+                        <div className="topbar-title">
+                            <div>TRAFFIC LIGHT OPTIMISATION WITH MACHINE LEARNING</div>
+                        </div>
+                    </div>
+                    <div className="user-wrapper">
+                        <h2>USER MANAGEMENT</h2>
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th>Username</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
+                                    <th>USERS</th>
+                                    <th>ROLE</th>
+                                    <th>ADMIN</th>
+                                    <th>MANAGE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,17 +121,28 @@ class Admin extends React.Component {
                                     <tr key={user.id}>
                                         <td>{user.username}</td>
                                         <td>{user.role.name}</td>
-                                        <td>
-                                            <Button onClick={() => this.opUser(user.id, user.role_Id)} variant={user.role.name == "admin" ? "light" : "success"}>{user.role.name == "admin" ? "De-op" : "Op"}</Button>
-                                    &nbsp;
-                                        <Button variant="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button>
-                                        </td>
+                                        <td><Button onClick={() => this.opUser(user.id, user.role_Id)} variant={user.role.name == "admin" ? "light" : "success"}>{user.role.name == "admin" ? "De-op" : "Op"}</Button></td>
+                                        <td><Button variant="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button></td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </Container>
+                    </div>
+                    <div className="footer">
+                        <div className="footer-content">
+                            <p>DEVELOPED BY</p>
+                            <img src={AegisLogo}/>
+                        </div>
 
+                        <div className="footer-content">
+                            <p>PROJECT BY</p>
+                            <img src={CodehesionLogo}/>
+                        </div>
+                        <div className="footer-content">
+                            <p>GITHUB</p>
+                            <a href="https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning">https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning</a>
+                        </div>
+                    </div>
                 </div>
             )
         }

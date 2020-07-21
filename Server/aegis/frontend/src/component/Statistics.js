@@ -2,6 +2,9 @@ import { getUser } from '../utils/Common';
 import React, { Component } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
+import { ReactComponent as BackIcon } from '../images/chevron-left-solid.svg';
+import CodehesionLogo from '../images/codehesion_logo.png';
+import AegisLogo from '../images/Aegis_logo.png';
 
 class Statistics extends Component {
     chartRef    = React.createRef();
@@ -105,8 +108,19 @@ class Statistics extends Component {
     render() {
         return (
             <div>
+                <div className="topbar-wrapper">
+                    <div className="topbar-back">
+                        <div onClick={this.goBack}>
+                            <BackIcon/>
+                            <button variant="danger" onClick={this.goBack}>BACK</button>
+                        </div>
+                    </div>
+                    <div className="topbar-title">
+                        <div>TRAFFIC LIGHT OPTIMISATION WITH MACHINE LEARNING</div>
+                    </div>
+                </div>
+
                 <h1>Statistics:</h1>
-                <input type="button" onClick={this.goBack} value="Back" /> 
                 {this.state.intersections.map(function (trafficlight, index) {
                     return (
                         <div className="mixed-chart">
@@ -120,6 +134,22 @@ class Statistics extends Component {
                         </div>
                     )
                 })}
+
+                    <div className="footer">
+                        <div className="footer-content">
+                            <p>DEVELOPED BY</p>
+                            <img src={AegisLogo}/>
+                        </div>
+
+                        <div className="footer-content">
+                            <p>PROJECT BY</p>
+                            <img src={CodehesionLogo}/>
+                        </div>
+                        <div className="footer-content">
+                            <p>GITHUB</p>
+                            <a href="https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning">https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning</a>
+                        </div>
+                    </div>
             </div>
         )
     }

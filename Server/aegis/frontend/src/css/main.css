@@ -10,6 +10,63 @@ body {
     scroll-behavior: smooth;
 }
 
+.topbar-wrapper {
+    background-color: #2A2733;
+    height: 80px;
+    width: 100%;
+    text-align: left;
+}
+
+.topbar-back {
+    height: 80px;
+    width: 150px;
+    padding-top: 22px;
+    padding-left: 40px;
+    display: inline-block;
+}
+
+.topbar-back > div:hover > button{
+    color: #6387FF;
+    cursor: pointer;
+}
+
+.topbar-back > div:hover > svg{
+    color: #6387FF;
+    cursor: pointer;
+}
+
+.topbar-back > div >  button {
+    background-color: #2A2733;
+    border: none;
+    color: white;
+    font-weight: 600;
+    margin: 0 auto;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.topbar-back > div > svg {
+    color: white;
+    height: 30px;
+    vertical-align: top;
+}
+
+.topbar-title {
+    color: #6387FF;
+    display: inline-block;
+    height: 80px;
+    vertical-align: top;
+    width: 350px;
+    margin-left: 25px;
+    padding-top: 10px;
+}
+
+.topbar-title > div {
+    color: #6387FF;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .left-column {
     width: 50%;
     float: left;
