@@ -5,13 +5,13 @@ import CryptoJS from 'crypto-js';
 import { encrypt } from '../utils/Cryptography';
 import axios from 'axios';
 import { Button, Container, Card, Form } from 'react-bootstrap';
+
 function Login(props) {
   const PASSWORD = "This is a password";
   const username = useFormInput('');
   const password = useFormInput('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
 
   // handle button click of login form
   const handleLogin = () => {

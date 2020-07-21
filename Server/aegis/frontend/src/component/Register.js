@@ -4,6 +4,7 @@ import CryptoJS from 'crypto-js';
 import { validatePassword, validateCredentials } from '../utils/Validator';
 import { encrypt } from '../utils/Cryptography';
 import { Container, Card, Button, Form } from 'react-bootstrap';
+
 function Register(props) {
     const PASSWORD = "This is a password";
     const username = useFormInput('');

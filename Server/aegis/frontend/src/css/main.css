@@ -6,7 +6,8 @@ div.content {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color:#2A2733;
+    background-color: #1D1D1D;
+    scroll-behavior: smooth;
 }
 
 .left-column {
