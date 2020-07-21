@@ -46,11 +46,11 @@ public class Statistic {
         this.id = id;
     }
     
-    public Integer getTrafficlight_Id(){
+    public Integer getIntersection_Id(){
         return this.tl_id;
     }
     
-    public void setTrafficlight_Id(Integer tl_id){
+    public void setIntersection_Id(Integer tl_id){
         this.tl_id = tl_id;
     }
     

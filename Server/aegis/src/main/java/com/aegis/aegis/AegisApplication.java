@@ -1,5 +1,6 @@
 package com.aegis.aegis;
 
+import WebSocketEndpoint.WebsocketServer;
 import org.json.JSONObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ public class AegisApplication {
 
 	public static void main(String[] args) {
             SpringApplication.run(AegisApplication.class, args);
+            new WebsocketServer().start();
 	}
 
 	@RequestMapping(value = "/api/testCall", method = RequestMethod.GET)

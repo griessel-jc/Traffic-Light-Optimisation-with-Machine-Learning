@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `intersection`
+--
+
+DROP TABLE IF EXISTS `intersection`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `intersection` (
+  `tl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`tl_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `intersection`
+--
+
+LOCK TABLES `intersection` WRITE;
+/*!40000 ALTER TABLE `intersection` DISABLE KEYS */;
+INSERT INTO `intersection` VALUES (1,'intersection1',0),(2,'intersection2',0);
+/*!40000 ALTER TABLE `intersection` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `role`
 --
 
@@ -55,9 +80,9 @@ CREATE TABLE `statistic` (
   `moving_vehicles_X` float NOT NULL,
   `moving_vehicles_Y` float NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_tl_id` (`tl_id`),
-  CONSTRAINT `fk_tl_id` FOREIGN KEY (`tl_id`) REFERENCES `trafficlight` (`tl_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  KEY `FK4sureyue8an6xemrgrkkeeiu0` (`tl_id`),
+  CONSTRAINT `FK4sureyue8an6xemrgrkkeeiu0` FOREIGN KEY (`tl_id`) REFERENCES `intersection` (`tl_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +91,7 @@ CREATE TABLE `statistic` (
 
 LOCK TABLES `statistic` WRITE;
 /*!40000 ALTER TABLE `statistic` DISABLE KEYS */;
-INSERT INTO `statistic` VALUES (1,1,'2020-07-17 20:35:09',5,10,6,11),(2,1,'2020-07-17 20:35:09',2,12,3,4),(3,2,'2020-07-17 20:35:09',4,7,2,1),(4,2,'2020-07-17 20:35:09',0,14,9,7);
+INSERT INTO `statistic` VALUES (9,1,'2020-07-21 17:48:17',3,1,2,5),(10,1,'2020-07-21 17:58:13',4,5,9,7),(11,1,'2020-07-21 17:58:37',3,7,5,4),(12,2,'2020-07-21 17:58:53',4,5,10,7),(13,2,'2020-07-21 17:59:24',4,6,10,12),(14,2,'2020-07-21 17:59:46',6,12,12,6);
 /*!40000 ALTER TABLE `statistic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,10 +104,9 @@ DROP TABLE IF EXISTS `trafficlight`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `trafficlight` (
   `tl_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`tl_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +115,6 @@ CREATE TABLE `trafficlight` (
 
 LOCK TABLES `trafficlight` WRITE;
 /*!40000 ALTER TABLE `trafficlight` DISABLE KEYS */;
-INSERT INTO `trafficlight` VALUES (1,'light1',0),(2,'light2',0);
 /*!40000 ALTER TABLE `trafficlight` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-17 23:00:14
+-- Dump completed on 2020-07-21 20:32:01

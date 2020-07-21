@@ -1,6 +1,6 @@
+ 
 package com.aegis.aegis.modal;
-
-import java.io.Serializable;
+ 
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,13 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trafficlight")
-public class Trafficlight{
+@Table(name="intersection")
+public class Intersection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="tl_id")
@@ -51,4 +50,6 @@ public class Trafficlight{
     public void setName(String name){
         this.name = name;
     }
+    
+    
 }

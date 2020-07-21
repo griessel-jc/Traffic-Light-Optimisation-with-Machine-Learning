@@ -1,7 +1,6 @@
  
 package com.aegis.aegis.service;
-
-import com.aegis.aegis.modal.Trafficlight;
+ 
 import com.aegis.aegis.modal.User; 
 import dto.adminDto;
 import dto.loginDto;

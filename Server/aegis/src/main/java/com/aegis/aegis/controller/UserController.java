@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package com.aegis.aegis.controller;
-
-
-import com.aegis.aegis.modal.Trafficlight;
+ 
+import com.aegis.aegis.modal.Intersection; 
 import dto.loginDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.aegis.aegis.modal.User;
-import com.aegis.aegis.service.TrafficlightService;
+import com.aegis.aegis.service.IntersectionService; 
 import com.aegis.aegis.service.UserService;
 import dto.adminDto;
 import dto.userDto;
@@ -32,9 +31,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequestMapping("/api")
 public class UserController {
 
+     
+    
     @Autowired
     private UserService userService;
-    
+    /*
+    @Autowired
+    private IntersectionService intersectionService;
+     
     @Autowired
     private TrafficlightService trafficlightService;
     
@@ -43,6 +47,8 @@ public class UserController {
     public List<Trafficlight> getTrafficlights() {
         return trafficlightService.getTrafficlights();
     }
+    */
+     
     
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getUsers")

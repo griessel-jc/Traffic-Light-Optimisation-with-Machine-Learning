@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package com.aegis.aegis.service;
-
-import com.aegis.aegis.dao.TrafficlightDAO;
+ 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

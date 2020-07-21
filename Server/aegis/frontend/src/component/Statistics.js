@@ -4,47 +4,28 @@ import axios from 'axios';
 import Chart from 'react-apexcharts';
 
 class Statistics extends Component {
-    chartRef = React.createRef();
+    chartRef    = React.createRef();
+    //socket      = new WebSocket("ws://localhost:4444");; 
     constructor(props) {
-        super(props);
-        // this.state = {
-        //     error: null,
-        //     trafficlights: [],
-        //     response: {}
-        // }
-        this.state = {
-            trafficlights: [],
-            /*options: {
-                chart: {
-                    id: "basic-bar"
-                },
-                xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-                }
-            },
-            series: [
-                {
-                    name: "series-1",
-                    data: [30, 40, 45, 50, 49, 60, 70, 91]
-                }
-            ]*/
+        super(props); 
+        this.state = { 
+            intersections: []
         };
     }
 
     updateState() {
         var self = this;
-        var tl_objects = [];
-        axios.get('http://localhost:8080/api/getTrafficlights')
+        //var tl_objects = [];
+        var int_objects = [];
+        axios.get('http://localhost:8080/simu/getIntersections')
             .then(response => {
-                //console.log(response.data);
-                const tl_data = response.data;
-                tl_data.forEach((trafficlight, index) => {
-                    //console.log(trafficlight);
+                var int_data= response.data; 
+                int_data.forEach((intersection, index) => { 
                     var dataStationary = [];
                     var dataMoving = [];
                     var timestamps = [];
-                    var tl_name = trafficlight.name;
-                    trafficlight.statistics.forEach((statistic, index) => {
+                    var i_name = intersection.name;
+                    intersection.statistics.forEach((statistic, index) => {
                         const totalStationary = statistic.stationaryX + statistic.stationaryY;
                         const totalMoving = statistic.movingX + statistic.movingY;
                         const timestamp = Date.parse(statistic.timestamp);
@@ -55,8 +36,8 @@ class Statistics extends Component {
 
                     });
 
-                    var tl_object = {
-                        name: tl_name,
+                    var int_object = {
+                        name: i_name,
                         series: [{
                             name: "Stationary Vehicles",
                             data: dataStationary
@@ -86,19 +67,34 @@ class Statistics extends Component {
                         }
 
                     };
-                    tl_objects.push(tl_object);
+                    int_objects.push(int_object);
                 })
-                const trafficlights = tl_objects;
-                self.setState({ trafficlights });
+                const intersections = int_objects;
+                self.setState({ intersections });
             }).catch(error => {
                 console.log(error);
             });
     }
-
+    
     componentDidMount() {
         if (getUser() !== null) {
             this.updateState();
+            /*
+            this.socket.onopen = function() {
+                console.log("Connected!");
+                //this.send("Ping");
+            };
+            this.socket.onmessage = function(msg){
+                console.log(msg);
+            };
 
+            this.socket.onclose = function() {
+                console.log("closed");
+            };
+            this.socket.onerror = function(e){
+                console.log(e);
+            }
+            */
         }
     }
 
@@ -110,19 +106,8 @@ class Statistics extends Component {
         return (
             <div>
                 <h1>Statistics:</h1>
-                <input type="button" onClick={this.goBack} value="Back" />
-                {/* <div className="row">
-                    
-                    <div className="mixed-chart">
-                        <Chart
-                            options={this.state.options}
-                            series={this.state.series}
-                            type="line"
-                            width="500"
-                        />
-                    </div>
-                </div> */}
-                {this.state.trafficlights.map(function (trafficlight, index) {
+                <input type="button" onClick={this.goBack} value="Back" /> 
+                {this.state.intersections.map(function (trafficlight, index) {
                     return (
                         <div className="mixed-chart">
                             <h1>{trafficlight.name}</h1>
