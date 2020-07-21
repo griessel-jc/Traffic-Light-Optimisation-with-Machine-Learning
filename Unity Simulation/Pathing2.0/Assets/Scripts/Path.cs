@@ -32,15 +32,21 @@ public class Path : MonoBehaviour {
     	Vector3 p2 = curves[curveNum].GetChild(2).position;
     	Vector3 p3 = curves[curveNum].GetChild(3).position;
 
+        Vector3 carPositionPrev;
+        Vector3 directionVector;
+        carPosition = p0;
+
     	while(t < 1){
     		t = t + (Time.deltaTime * speed);
-
+            carPositionPrev = carPosition;
     		carPosition = (Mathf.Pow(1 - t, 3) * p0) +
     			(3 * Mathf.Pow(1 - t, 2) * t * p1) +
     			(3 * (1-t) * Mathf.Pow(t, 2) * p2) +
     			(Mathf.Pow(t, 3) * p3);
 
     		transform.position = carPosition;
+            directionVector = carPosition - carPositionPrev;
+            transform.rotation = Quaternion.LookRotation(directionVector);
     		yield return new WaitForEndOfFrame();
     	}
 
