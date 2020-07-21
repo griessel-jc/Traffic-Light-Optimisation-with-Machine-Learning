@@ -25,7 +25,7 @@ body {
     margin: 40px 0px 40px 0px;
 }
 
-svg {
+.navbar-link > svg {
     color: white;
     width: 30px;
     display: inline-block;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { getUser, removeUserSession } from '../utils/Common';
 import '../css/dashboard.css';
-import { ReactComponent as Chart } from '../images/chart-line-solid.svg';
-import { ReactComponent as User } from '../images/users-cog-solid.svg';
-import { ReactComponent as Logout } from '../images/sign-out-alt-solid.svg';
+import { ReactComponent as ChartIcon } from '../images/chart-line-solid.svg';
+import { ReactComponent as UserIcon } from '../images/users-cog-solid.svg';
+import { ReactComponent as LogoutIcon } from '../images/sign-out-alt-solid.svg';
 import CodehesionLogo from '../images/codehesion_logo.png';
 import AegisLogo from '../images/Aegis_logo.png';
 
@@ -36,12 +36,12 @@ function Dashboard(props) {
                 <div className="navbar-user">Hi, {user.username}</div>
                 <div className="navbar-link-wrapper">
                     <div className="navbar-link" onClick={handleStatistics}>
-                        <Chart/>
+                        <ChartIcon/>
                         <input type="button" value="VIEW STATISTICS"/>
                     </div>
-                    {user.role.id === 1 && <div className="navbar-link"  onClick={handleAdmin}><User/><input type="button" value="MANAGE USERS"></input></div>}
+                    {user.role.id === 1 && <div className="navbar-link"  onClick={handleAdmin}><UserIcon/><input type="button" value="MANAGE USERS"></input></div>}
                     <div className="navbar-link" onClick={handleLogout}>
-                        <Logout/>
+                        <LogoutIcon/>
                         <input type="button" value="LOG OUT" />
                     </div>
                 </div>
