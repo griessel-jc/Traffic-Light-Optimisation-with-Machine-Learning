@@ -119,7 +119,6 @@ public class UserDAOImplemented implements UserDAO {
             String pw = "";
             if(decryptedPassword != null && decryptedPassword.split("::").length == 3){
                 pw = aesUtil.decrypt(decryptedPassword.split("::")[1], decryptedPassword.split("::")[0], PASSWORD, decryptedPassword.split("::")[2]);
-                
                 String pw_hash = BCrypt.hashpw(pw,BCrypt.gensalt());
                 user.setUsername(encrypted.getUsername());
                 user.setPassword(pw_hash);
