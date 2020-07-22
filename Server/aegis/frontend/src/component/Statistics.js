@@ -2,6 +2,7 @@ import { getUser } from '../utils/Common';
 import React, { Component } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
+import '../css/statistics.css';
 import { ReactComponent as BackIcon } from '../images/chevron-left-solid.svg';
 import CodehesionLogo from '../images/codehesion_logo.png';
 import AegisLogo from '../images/Aegis_logo.png';
@@ -51,22 +52,49 @@ class Statistics extends Component {
                         }
                         ],
                         options: {
+                            legend: {
+                                labels: {
+                                    colors: '#fff',
+                                    useSeriesColors: false
+                                },
+                            },
                             xaxis: {
-                                categories: timestamps
+                                categories: timestamps,
+                                labels: {
+                                    style: {
+                                        colors: '#fff',
+                                    },
+                                },
                             },
                             yaxis: [
                                 {
                                     title: {
-                                        text: "Statioanry Vehicles"
-                                    }
+                                        text: "Statioanry Vehicles",
+                                        style: {
+                                            color: '#d1d1d1'
+                                        },
+                                    },
+                                    labels: {
+                                        style: {
+                                            colors: '#fff',
+                                        },
+                                    },
                                 },
                                 {
                                     opposite: true,
                                     title: {
-                                        text: "Moving Vehicles"
-                                    }
-                                }
-                            ]
+                                        text: "Moving Vehicles",
+                                        style: {
+                                            color: '#d1d1d1'
+                                        },
+                                    },
+                                    labels: {
+                                        style: {
+                                            colors: '#fff',
+                                        },
+                                    },
+                                },
+                            ],
                         }
 
                     };
@@ -119,21 +147,42 @@ class Statistics extends Component {
                         <div>TRAFFIC LIGHT OPTIMISATION WITH MACHINE LEARNING</div>
                     </div>
                 </div>
+                
+                <div className="stat-wrapper">
+                    <h2>Statistics</h2>
 
-                <h1>Statistics:</h1>
-                {this.state.intersections.map(function (trafficlight, index) {
-                    return (
-                        <div className="mixed-chart">
-                            <h1>{trafficlight.name}</h1>
-                            <Chart
-                                options={trafficlight.options}
-                                series={trafficlight.series}
-                                width="100%"
-                                height="300"
-                            />
+                    <div className="scene-wrapper">
+                        <div className="scene-left">
+                            <div className="left-img">
+
+                            </div>
+                            <div className="left-info">
+                                <h3>Rural Scene</h3>
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                            </div>
                         </div>
-                    )
-                })}
+                        <div className="scene-right">
+                            <div className="scene-stat-wrapper">
+                                Other statistics here
+                            </div>
+
+                            {this.state.intersections.map(function (trafficlight, index) {
+                                return (
+                                    <div className="mixed-chart chart-wrapper">
+                                        <h4>{trafficlight.name}</h4>
+                                        <Chart
+                                            options={trafficlight.options}
+                                            series={trafficlight.series}
+                                            width="100%"
+                                            height="300"
+                                        />
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                    </div>
+                </div>
 
                     <div className="footer">
                         <div className="footer-content">

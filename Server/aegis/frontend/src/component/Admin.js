@@ -121,7 +121,7 @@ class Admin extends React.Component {
                                     <tr key={user.id}>
                                         <td>{user.username}</td>
                                         <td>{user.role.name}</td>
-                                        <td><Button onClick={() => this.opUser(user.id, user.role_Id)} variant={user.role.name == "admin" ? "light" : "success"}>{user.role.name == "admin" ? "De-op" : "Op"}</Button></td>
+                                        <td className="admin-btn"><Button onClick={() => this.opUser(user.id, user.role_Id)} variant={user.role.name == "admin" ? "light" : "success"}>{user.role.name == "admin" ? "Unassign" : "Assign"}</Button></td>
                                         <td><Button variant="danger" onClick={() => this.deleteUser(user.id)}>Delete</Button></td>
                                     </tr>
                                 ))}
