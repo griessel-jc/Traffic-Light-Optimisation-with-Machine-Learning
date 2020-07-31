@@ -1,20 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Path : MonoBehaviour {	
-	[SerializeField]
-	private Transform[] curves;
+public class Path : NetworkBehaviour {	
+	private GameObject curves;
+
+    [SyncVar]
 	private int nextCurve;
 	private float speed;
+
+    [SyncVar]
 	private Vector3 carPosition;
-	private float t;
-	private bool coroutingAllowed;
+	[SyncVar]
+    private float t;
+	[SyncVar]
+    private bool coroutingAllowed;
 
     private int[] moveToArray;
     private int[][] nextCurveOptions;
 
     void Start(){
+
+        curves = GameObject.Find("roads");
 
         int[] startpoint = new int[] {0, 20,31 ,44, 42};
         nextCurve = startpoint[Random.Range(0,startpoint.Length)];
@@ -86,10 +94,10 @@ public class Path : MonoBehaviour {
 
     private IEnumerator MoveCar(int curveNum){
     	coroutingAllowed = false;
-    	Vector3 p0 = curves[curveNum].GetChild(0).position;
-    	Vector3 p1 = curves[curveNum].GetChild(1).position;
-    	Vector3 p2 = curves[curveNum].GetChild(2).position;
-    	Vector3 p3 = curves[curveNum].GetChild(3).position;
+    	Vector3 p0 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(0).position;
+    	Vector3 p1 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(1).position;
+    	Vector3 p2 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(2).position;
+    	Vector3 p3 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(3).position;
 
         Vector3 carPositionPrev;
         Vector3 directionVector;
