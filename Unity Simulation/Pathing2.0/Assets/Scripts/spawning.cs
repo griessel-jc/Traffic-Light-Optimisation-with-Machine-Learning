@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 [System.Serializable]
-public class spawning : MonoBehaviour
-{
+public class spawning : NetworkBehaviour{
+
     // Start is called before the first frame update
+
 	[SerializeField]
 	private GameObject test;
 	[SerializeField]
@@ -15,9 +17,9 @@ public class spawning : MonoBehaviour
     IEnumerator Start()
     {	
     	while(true){
-        GameObject cloneObject = Instantiate(test);
-		cloneObject.SetActive(true);
-		yield return new WaitForSeconds(10/speed);
+            GameObject cloneObject = Instantiate(test);
+            NetworkServer.Spawn(cloneObject);
+            yield return new WaitForSeconds(60/speed);
 		}
     }
 
