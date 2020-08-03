@@ -8,6 +8,7 @@ public class Path : NetworkBehaviour {
 
     [SyncVar]
 	private int nextCurve;
+    [SyncVar]
 	private float speed;
 
     [SyncVar]
@@ -17,15 +18,25 @@ public class Path : NetworkBehaviour {
 	[SyncVar]
     private bool coroutingAllowed;
 
-    private int[] moveToArray;
+    [SyncVar]
+    private SyncListCustom moveToArray;
     private int[][] nextCurveOptions;
+
+    [SyncVar]
+    private SyncListCustom startpoint;
 
     void Start(){
 
         curves = GameObject.Find("roads");
 
-        int[] startpoint = new int[] {0, 20,31 ,44, 42};
-        nextCurve = startpoint[Random.Range(0,startpoint.Length)];
+        startpoint.Add(0);
+        startpoint.Add(20);
+        startpoint.Add(31);
+        startpoint.Add(44);
+        startpoint.Add(42);
+        //startpoint = new int[] {0, 20, 31, 44, 42};
+
+        nextCurve = startpoint[Random.Range(0,startpoint.Count)];
         t = 0f;
         speed = 0.4f;
         coroutingAllowed = true;
@@ -119,8 +130,13 @@ public class Path : NetworkBehaviour {
 
     	t = 0f;
 
-        moveToArray = nextCurveOptions[nextCurve];
-        nextCurve = moveToArray[Random.Range(0,moveToArray.Length)];
+        for (int i = 0; i < nextCurveOptions[nextCurve].Length; i++)
+        {
+            moveToArray.Add(nextCurveOptions[nextCurve][i]);
+        }
+
+        //moveToArray = nextCurveOptions[nextCurve];
+        nextCurve = moveToArray[Random.Range(0,moveToArray.Count)];
 
         if(nextCurve == -1){
             Destroy(gameObject);
@@ -130,5 +146,9 @@ public class Path : NetworkBehaviour {
     	// }
 
     	coroutingAllowed = true;
+        moveToArray.Clear();
     }
 }
+
+[System.Serializable]
+public class SyncListCustom : SyncList<int> { }

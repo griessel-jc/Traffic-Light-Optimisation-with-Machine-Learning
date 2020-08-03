@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/low_density.unity
+    guid: b8c321ef900728e44a216d8c56880d86
   m_configObjects: {}
