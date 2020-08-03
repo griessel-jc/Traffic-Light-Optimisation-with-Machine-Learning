@@ -8,22 +8,39 @@ public class Path : NetworkBehaviour {
 
     [SyncVar]
 	private int nextCurve;
+    
     [SyncVar]
 	private float speed;
 
     [SyncVar]
 	private Vector3 carPosition;
-	[SyncVar]
+	
+    [SyncVar]
     private float t;
+
 	[SyncVar]
     private bool coroutingAllowed;
 
     [SyncVar]
+    private bool stopped;
+
+    [SyncVar]
     private SyncListCustom moveToArray;
+    
     private int[][] nextCurveOptions;
 
     [SyncVar]
     private SyncListCustom startpoint;
+
+    //The max speed of any car
+    private readonly float maxSpeed = 0.4f;
+
+    //The car ray length
+    private readonly float rayLength = 20f;
+
+    //Distance cars should maintain from each other
+    private readonly float stoppingDistance = 1.825f;
+
 
     void Start(){
 
@@ -103,6 +120,8 @@ public class Path : NetworkBehaviour {
         
     }
 
+
+
     private IEnumerator MoveCar(int curveNum){
     	coroutingAllowed = false;
     	Vector3 p0 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(0).position;
@@ -113,20 +132,48 @@ public class Path : NetworkBehaviour {
         Vector3 carPositionPrev;
         Vector3 directionVector;
         carPosition = p0;
+        carPositionPrev = carPosition;
 
-    	while(t < 1){
-    		t = t + (Time.deltaTime * speed);
-            carPositionPrev = carPosition;
-    		carPosition = (Mathf.Pow(1 - t, 3) * p0) +
-    			(3 * Mathf.Pow(1 - t, 2) * t * p1) +
-    			(3 * (1-t) * Mathf.Pow(t, 2) * p2) +
-    			(Mathf.Pow(t, 3) * p3);
+        /*Collision Detection Stuff*/
+        Vector3 fwd;
+    
+        RaycastHit hit;
+    
+        Ray fwdRay;
 
-    		transform.position = carPosition;
+    	while (t < 1)
+        {
+            fwd = transform.TransformDirection(Vector3.forward) * rayLength;
+            Debug.DrawRay(transform.position, fwd, Color.red);
+            fwdRay = new Ray(transform.position, fwd);
+            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && hit.collider.gameObject.CompareTag("Car"))
+            {
+                print("Found an object - tag : " + hit.collider.gameObject.tag); 
+                if (hit.distance - 0.4f < stoppingDistance)
+                {
+                    speed = 0;
+                }
+                else if(hit.distance -0.4f < rayLength)
+                {
+                    speed = maxSpeed*((hit.distance -0.4f)/rayLength);
+                }
+            }else
+            { 
+                speed = maxSpeed;
+            }
+            //while car hasn't reached end point of curve
+            if(speed > 0f)
+                carPositionPrev = carPosition;
+            //t = t + (Time.deltaTime * speed);
+            t = t + (Time.deltaTime * speed);
+            carPosition = (Mathf.Pow(1 - t, 3) * p0) + (3 * Mathf.Pow(1 - t, 2) * t * p1) + (3 * (1 - t) * Mathf.Pow(t, 2) * p2) + (Mathf.Pow(t, 3) * p3);
+            //transform is the object this script is attached to
+            transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
+            //it aligns the objects forward vector with the vector we provide
             transform.rotation = Quaternion.LookRotation(directionVector);
-    		yield return new WaitForEndOfFrame();
-    	}
+            yield return new WaitForEndOfFrame();//block until end of frame
+        }
 
     	t = 0f;
 
