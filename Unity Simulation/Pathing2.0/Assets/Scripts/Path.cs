@@ -48,9 +48,15 @@ public class Path : NetworkBehaviour {
 
         startpoint.Add(0);
         startpoint.Add(20);
-        startpoint.Add(31);
         startpoint.Add(44);
         startpoint.Add(42);
+        startpoint.Add(52);
+        startpoint.Add(56);
+        startpoint.Add(57);
+        startpoint.Add(62);
+        startpoint.Add(63);
+        startpoint.Add(65);
+        
         //startpoint = new int[] {0, 20, 31, 44, 42};
 
         nextCurve = startpoint[Random.Range(0,startpoint.Count)];
@@ -58,7 +64,7 @@ public class Path : NetworkBehaviour {
         speed = 0.4f;
         coroutingAllowed = true;
 
-        nextCurveOptions = new int[52][];
+        nextCurveOptions = new int[90][];
         nextCurveOptions[0] = new int[] {2, 13};
         nextCurveOptions[1] = new int[] {36, 37, 38};
         nextCurveOptions[2] = new int[] {3};
@@ -89,7 +95,7 @@ public class Path : NetworkBehaviour {
         nextCurveOptions[27] = new int[] {28, 29};
         nextCurveOptions[28] = new int[] {9};
         nextCurveOptions[29] = new int[] {23};
-        nextCurveOptions[30] = new int[] {-1};
+        nextCurveOptions[30] = new int[] {67, 68};
         nextCurveOptions[31] = new int[] {39, 40, 41};
         nextCurveOptions[32] = new int[] {25};
         nextCurveOptions[33] = new int[] {27};
@@ -111,6 +117,46 @@ public class Path : NetworkBehaviour {
         nextCurveOptions[49] = new int[] {45};
         nextCurveOptions[50] = new int[] {26};
         nextCurveOptions[51] = new int[] {43};
+        nextCurveOptions[52] = new int[] {70, 71};
+        nextCurveOptions[53] = new int[] {-1};
+        nextCurveOptions[54] = new int[] {72, 78, 79, 80, 81};
+        nextCurveOptions[55] = new int[] {66, 69};
+        nextCurveOptions[56] = new int[] {77, 89};
+        nextCurveOptions[57] = new int[] {76, 88};
+        nextCurveOptions[58] = new int[] {-1};
+        nextCurveOptions[59] = new int[] {-1};
+        nextCurveOptions[60] = new int[] {-1};
+        nextCurveOptions[61] = new int[] {-1};
+        nextCurveOptions[62] = new int[] {74, 86};
+        nextCurveOptions[63] = new int[] {75, 87};
+        nextCurveOptions[64] = new int[] {-1};
+        nextCurveOptions[65] = new int[] {73, 82, 83, 84, 85};
+        nextCurveOptions[66] = new int[] {31};
+        nextCurveOptions[67] = new int[] {54};
+        nextCurveOptions[68] = new int[] {53};
+        nextCurveOptions[69] = new int[] {53};
+        nextCurveOptions[70] = new int[] {54};
+        nextCurveOptions[71] = new int[] {31};
+        nextCurveOptions[72] = new int[] {64};
+        nextCurveOptions[73] = new int[] {55};
+        nextCurveOptions[74] = new int[] {58};
+        nextCurveOptions[75] = new int[] {59};
+        nextCurveOptions[76] = new int[] {61};
+        nextCurveOptions[77] = new int[] {60};
+        nextCurveOptions[78] = new int[] {60};
+        nextCurveOptions[79] = new int[] {61};
+        nextCurveOptions[80] = new int[] {58};
+        nextCurveOptions[81] = new int[] {59};
+        nextCurveOptions[82] = new int[] {59};
+        nextCurveOptions[83] = new int[] {58};
+        nextCurveOptions[84] = new int[] {61};
+        nextCurveOptions[85] = new int[] {60};
+        nextCurveOptions[86] = new int[] {55};
+        nextCurveOptions[87] = new int[] {64};
+        nextCurveOptions[88] = new int[] {64};
+        nextCurveOptions[89] = new int[] {55};
+
+        
     }
 
     // Update is called once per frame
@@ -166,7 +212,10 @@ public class Path : NetworkBehaviour {
                 carPositionPrev = carPosition;
             //t = t + (Time.deltaTime * speed);
             t = t + (Time.deltaTime * speed);
-            carPosition = (Mathf.Pow(1 - t, 3) * p0) + (3 * Mathf.Pow(1 - t, 2) * t * p1) + (3 * (1 - t) * Mathf.Pow(t, 2) * p2) + (Mathf.Pow(t, 3) * p3);
+            carPosition = (Mathf.Pow(1 - t, 3) * p0) + 
+            (3 * Mathf.Pow(1 - t, 2) * t * p1) + 
+            (3 * (1 - t) * Mathf.Pow(t, 2) * p2) + 
+            (Mathf.Pow(t, 3) * p3);
             //transform is the object this script is attached to
             transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
