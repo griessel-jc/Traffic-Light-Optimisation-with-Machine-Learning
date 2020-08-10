@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Path : NetworkBehaviour {	
+public class Path : NetworkBehaviour 
+{	
 	private GameObject curves;
 
     [SyncVar]
@@ -42,7 +43,8 @@ public class Path : NetworkBehaviour {
     private readonly float stoppingDistance = 1.825f;
 
 
-    void Start(){
+    void Start()
+    {
 
         curves = GameObject.Find("roads");
 
@@ -160,7 +162,8 @@ public class Path : NetworkBehaviour {
     }
 
     // Update is called once per frame
-    void Update(){
+    void Update()
+    {
         if(coroutingAllowed)
         	StartCoroutine(MoveCar(nextCurve));
         
@@ -168,7 +171,8 @@ public class Path : NetworkBehaviour {
 
 
 
-    private IEnumerator MoveCar(int curveNum){
+    private IEnumerator MoveCar(int curveNum)
+    {
     	coroutingAllowed = false;
     	Vector3 p0 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(0).position;
     	Vector3 p1 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(1).position;
@@ -192,9 +196,9 @@ public class Path : NetworkBehaviour {
             fwd = transform.TransformDirection(Vector3.forward) * rayLength;
             Debug.DrawRay(transform.position, fwd, Color.red);
             fwdRay = new Ray(transform.position, fwd);
-            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && hit.collider.gameObject.CompareTag("Car"))
+            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && (hit.collider.gameObject.CompareTag("Car") || hit.collider.gameObject.CompareTag("Red") || hit.collider.gameObject.CompareTag("Orange")))
             {
-                print("Found an object - tag : " + hit.collider.gameObject.tag); 
+                //print("Found an object - tag : " + hit.collider.gameObject.tag); 
                 if (hit.distance - 0.4f < stoppingDistance)
                 {
                     speed = 0;
@@ -203,7 +207,8 @@ public class Path : NetworkBehaviour {
                 {
                     speed = maxSpeed*((hit.distance -0.4f)/rayLength);
                 }
-            }else
+            }
+            else
             { 
                 speed = maxSpeed;
             }
@@ -224,6 +229,18 @@ public class Path : NetworkBehaviour {
             yield return new WaitForEndOfFrame();//block until end of frame
         }
 
+        /*void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Red")
+            {
+                speed = 0;
+            }
+            else
+            {
+                speed = maxSpeed;
+            }
+        }*/
+
     	t = 0f;
 
         for (int i = 0; i < nextCurveOptions[nextCurve].Length; i++)
@@ -234,7 +251,8 @@ public class Path : NetworkBehaviour {
         //moveToArray = nextCurveOptions[nextCurve];
         nextCurve = moveToArray[Random.Range(0,moveToArray.Count)];
 
-        if(nextCurve == -1){
+        if(nextCurve == -1)
+        {
             Destroy(gameObject);
         }
     	// if(nextCurve > curves.Length - 1){

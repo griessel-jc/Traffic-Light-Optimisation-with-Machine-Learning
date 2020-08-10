@@ -2,6 +2,7 @@ package com.aegis.aegis.controller;
  
 import com.aegis.aegis.modal.Intersection;
 import com.aegis.aegis.service.IntersectionService;
+import com.google.gson.Gson;
 import dto.intersectionDto;
 import dto.statisticDto;
 import java.util.List;
@@ -38,4 +39,27 @@ public class SimulationController {
         return this.getIntersections();
     }
     
+    public void addStat(statisticDto statistic){
+        intersectionService.addStatistic(statistic);
+    }
+    
+    /*
+    @CrossOrigin(origins = "http://localhost:7777")
+    @PostMapping("/addStatistics")
+    public String addstatistics(@RequestBody String statistics){
+        statisticDto[] stats = new Gson().fromJson(statistics, statisticDto[].class);
+        for (int i = 0; i < stats.length; i++) {
+            addStat(stats[i]);
+        }
+        return  statistics ;
+    }
+    */
+    @CrossOrigin(origins = "http://localhost:7777")
+    @PostMapping("/addStatistics")
+    public statisticDto[] addstatistics(@RequestBody statisticDto[] stats){
+        for (int i = 0; i < stats.length; i++) {
+            addStat(stats[i]);
+        }
+        return  stats ;
+    }
 }

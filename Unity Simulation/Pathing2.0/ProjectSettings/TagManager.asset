@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Car
+  - Intersection
+  - Red
+  - Green
+  - Orange
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Vehicle
   - 
   - 
   - 
