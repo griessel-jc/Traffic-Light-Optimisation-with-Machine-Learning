@@ -42,6 +42,7 @@ public class IntersectionDAOImplemented implements IntersectionDAO{
             i = this.findbyName(s.getName());
             if(i != null){
                 Statistic statistic = new Statistic();
+                statistic.setPhase(s.getPhase());
                 statistic.setIntersection_Id(i.getId());
                 statistic.setMovingX(s.getMovingX());
                 statistic.setMovingY(s.getMovingY());

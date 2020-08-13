@@ -5,7 +5,7 @@ import com.aegis.aegis.service.IntersectionService;
 import com.google.gson.Gson;
 import dto.intersectionDto;
 import dto.statisticDto;
-import java.util.List;
+import java.util.List; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/simu")
-public class SimulationController {
-    
+public class SimulationController { 
     @Autowired
     private IntersectionService intersectionService;
     
@@ -43,23 +42,16 @@ public class SimulationController {
         intersectionService.addStatistic(statistic);
     }
     
-    /*
     @CrossOrigin(origins = "http://localhost:7777")
     @PostMapping("/addStatistics")
-    public String addstatistics(@RequestBody String statistics){
-        statisticDto[] stats = new Gson().fromJson(statistics, statisticDto[].class);
-        for (int i = 0; i < stats.length; i++) {
+    public int addstatistics(@RequestBody statisticDto[] stats){
+        int numIntersections = stats.length;
+        for (int i = 0; i < numIntersections; i++) {
             addStat(stats[i]);
         }
-        return  statistics ;
-    }
-    */
-    @CrossOrigin(origins = "http://localhost:7777")
-    @PostMapping("/addStatistics")
-    public statisticDto[] addstatistics(@RequestBody statisticDto[] stats){
-        for (int i = 0; i < stats.length; i++) {
-            addStat(stats[i]);
-        }
-        return  stats ;
+        int max = (int)Math.pow(2, numIntersections+1)-1;
+        int min = 0;
+        int range = max - min +1;
+        return  (int)(Math.random() * range) + min ;
     }
 }

@@ -5,6 +5,15 @@ public class statisticDto {
     private float stationary_vehicles_Y;
     private float moving_vehicles_X;
     private float moving_vehicles_Y;
+    private int phase;
+    
+    public int getPhase(){
+        return this.phase;
+    }
+    
+    public void setPhase(int phase){
+        this.phase = phase;
+    }
     
     public String getName(){
         return this.name;

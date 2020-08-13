@@ -24,6 +24,10 @@ public class ThreeWayIntersection : IntersectionParent
     private float timeLeftBothRed;
     public bool light_configruation = false;
     bool isZ = false;
+    bool isX = false;
+    bool isXZ = false;
+    bool insideLightChange = false;
+    bool isMakeChange = false;
     
     void Start()
     {
@@ -41,7 +45,7 @@ public class ThreeWayIntersection : IntersectionParent
     
     public override TrafficIntersection getIntersection()
     {
-        float stationaryX = 0, stationaryY =0, movingY = 0, movingX = 0;
+        float stationaryX = 0, stationaryY = 0, movingY = 0, movingX = 0, phase = 0;
         stationaryX += inX.GetComponent<IncomingCounter>().getNumberCars();
         stationaryY += inZ1.GetComponent<IncomingCounter>().getNumberCars();
         stationaryY += inZ2.GetComponent<IncomingCounter>().getNumberCars();
@@ -57,6 +61,19 @@ public class ThreeWayIntersection : IntersectionParent
         intersection.movingX       = movingX;
         intersection.movingY       = movingY;
 
+        if (isX)
+        {
+            intersection.phase = 0;
+        }
+        else if (isZ)
+        {
+            intersection.phase = 1;
+        }
+        else
+        {
+            intersection.phase = 2;
+        }
+
         return intersection;
     }
 
@@ -68,6 +85,8 @@ public class ThreeWayIntersection : IntersectionParent
             tlZ1.tag = "Red";
             tlZ2.tag = "Red";
             isZ = false;
+            isX = true;
+            isXZ = true;
         }
         else
         {
@@ -75,6 +94,8 @@ public class ThreeWayIntersection : IntersectionParent
             tlZ1.tag = "Green"; //Green
             tlZ2.tag = "Green"; //Green
             isZ = true;
+            isX = false;
+            isXZ = true;
         }
     }
 
@@ -82,14 +103,20 @@ public class ThreeWayIntersection : IntersectionParent
     void Update()
     {
         StartCoroutine(Waiter());
+        if(isMakeChange)
+        {
+            StartCoroutine(APILightChange());
+        }
     }
 
     IEnumerator Waiter()
     {
         //reset();
         timeLeft -= Time.deltaTime;
-        if(timeLeft <= 0f && isZ == true)
+        if(timeLeft <= 0f && isZ == true && insideLightChange == false)
         {
+            //isX = false; isZ = false;
+            isXZ = false;
             tlX1.tag = "Red";
             tlZ1.tag = "Orange"; 
             tlZ2.tag = "Orange"; 
@@ -99,8 +126,10 @@ public class ThreeWayIntersection : IntersectionParent
                 reset();
             }
         }
-        else if(timeLeft <= 0f && isZ == false)
+        else if(timeLeft <= 0f && isZ == false && insideLightChange == false)
         {
+            //isX = false; isZ = false;
+            isXZ = false;
             tlX1.tag = "Orange";
             tlZ1.tag = "Red"; 
             tlZ2.tag = "Red"; 
@@ -116,5 +145,48 @@ public class ThreeWayIntersection : IntersectionParent
     public override void updateTimeOut(float newTimeOut)
     {
         timeOut = newTimeOut;
+    }
+
+    public override void makeChange()
+    {
+        isMakeChange = true;
+    }
+
+    IEnumerator APILightChange()
+    {
+        if (!isXZ)
+        {
+            //nothing happens
+            isMakeChange = false;
+        }
+        else if (isZ)
+        {
+            insideLightChange = true;
+            tlX1.tag = "Red";
+            tlZ1.tag = "Orange";
+            tlZ2.tag = "Orange";
+
+            timeLeftBothRed -= Time.deltaTime;
+            if (timeLeftBothRed <= 0f)
+            {
+                isMakeChange = false;
+                reset();
+            }
+        }
+        else if (!isZ)
+        {
+            insideLightChange = true;
+            tlX1.tag = "Orange";
+            tlZ1.tag = "Red";
+            tlZ2.tag = "Red";
+
+            timeLeftBothRed -= Time.deltaTime;
+            if (timeLeftBothRed <= 0f)
+            {
+                isMakeChange = false;
+                reset();
+            }
+        }
+        yield return null;
     }
 }

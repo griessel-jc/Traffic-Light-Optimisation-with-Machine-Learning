@@ -1,8 +1,8 @@
--- MariaDB dump 10.17  Distrib 10.4.13-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.17  Distrib 10.4.6-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: aegisdb
 -- ------------------------------------------------------
--- Server version	10.4.13-MariaDB
+-- Server version	10.4.6-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -79,10 +79,11 @@ CREATE TABLE `statistic` (
   `stationary_vehicles_Y` float NOT NULL,
   `moving_vehicles_X` float NOT NULL,
   `moving_vehicles_Y` float NOT NULL,
+  `phase` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK4sureyue8an6xemrgrkkeeiu0` (`tl_id`),
   CONSTRAINT `FK4sureyue8an6xemrgrkkeeiu0` FOREIGN KEY (`tl_id`) REFERENCES `intersection` (`tl_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE `statistic` (
 
 LOCK TABLES `statistic` WRITE;
 /*!40000 ALTER TABLE `statistic` DISABLE KEYS */;
-INSERT INTO `statistic` VALUES (9,1,'2020-07-21 17:48:17',3,1,2,5),(10,1,'2020-07-21 17:58:13',4,5,9,7),(11,1,'2020-07-21 17:58:37',3,7,5,4),(12,2,'2020-07-21 17:58:53',4,5,10,7),(13,2,'2020-07-21 17:59:24',4,6,10,12),(14,2,'2020-07-21 17:59:46',6,12,12,6);
+INSERT INTO `statistic` VALUES (114,1,'2020-08-11 18:32:06',3,1,2,5,2),(115,1,'2020-08-11 18:32:15',3,1,2,5,1);
 /*!40000 ALTER TABLE `statistic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-21 20:32:01
+-- Dump completed on 2020-08-11 18:54:18

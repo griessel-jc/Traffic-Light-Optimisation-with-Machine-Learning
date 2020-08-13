@@ -37,7 +37,17 @@ public class Statistic {
     @Column(name = "moving_vehicles_Y")
     private float moving_vehicles_Y;
     
-     
+    @Column(name = "phase")
+    private int phase;
+    
+    public int getPhase(){
+        return this.phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+    
     public Integer getId(){
         return this.id;
     }

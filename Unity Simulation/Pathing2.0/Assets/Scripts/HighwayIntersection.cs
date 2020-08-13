@@ -29,6 +29,10 @@ public class HighwayIntersection : IntersectionParent
     private float timeLeftBothRed;
     public bool light_configruation = false;
     bool isZ = false;
+    bool isX = false;
+    bool isXZ = false;
+    bool insideLightChange = false;
+    bool isMakeChange = false;
 
     void Start()
     {
@@ -45,7 +49,7 @@ public class HighwayIntersection : IntersectionParent
 
     public override TrafficIntersection getIntersection() 
     {
-        float stationaryX = 0, stationaryY = 0, movingY = 0, movingX = 0;
+        float stationaryX = 0, stationaryY = 0, movingY = 0, movingX = 0, phase = 0;
         stationaryX += inX1.GetComponent<IncomingCounter>().getNumberCars();
         stationaryX += inX2.GetComponent<IncomingCounter>().getNumberCars();
         stationaryY += inZ1.GetComponent<IncomingCounter>().getNumberCars();
@@ -63,6 +67,19 @@ public class HighwayIntersection : IntersectionParent
         intersection.movingX = movingX;
         intersection.movingY = movingY;
 
+        if (isX)
+        {
+            intersection.phase = 0;
+        }
+        else if (isZ)
+        {
+            intersection.phase = 1;
+        }
+        else
+        {
+            intersection.phase = 2;
+        }
+
         return intersection;
     }
 
@@ -74,6 +91,9 @@ public class HighwayIntersection : IntersectionParent
             tlX2.tag = "Green";
             tlZ1.tag = "Red";
             tlZ2.tag = "Red";
+            isZ = false;
+            isX = true;
+            isXZ = true;
         }
         else
         {
@@ -81,12 +101,19 @@ public class HighwayIntersection : IntersectionParent
             tlX2.tag = "Red";
             tlZ1.tag = "Green"; //Green
             tlZ2.tag = "Green"; //Green
+            isZ = true;
+            isX = false;
+            isXZ = true;
         }
     }
 
      void Update()
     {
         StartCoroutine(Waiter());
+        if (isMakeChange)
+        {
+            StartCoroutine(APILightChange());
+        }
     }
 
 
@@ -94,8 +121,10 @@ public class HighwayIntersection : IntersectionParent
     {
         //reset();
         timeLeft -= Time.deltaTime;
-        if(timeLeft <= 0f && isZ == true)
+        if(timeLeft <= 0f && isZ == true && insideLightChange == false)
         {
+            //isX = false; isZ = false;
+            isXZ = false;
             tlX1.tag = "Red";
             tlX2.tag = "Red";
             tlZ1.tag = "Orange"; 
@@ -106,8 +135,10 @@ public class HighwayIntersection : IntersectionParent
                 reset();
             }
         }
-        else if(timeLeft <= 0f && isZ == false)
+        else if(timeLeft <= 0f && isZ == false && insideLightChange == false)
         {
+            //isX = false; isZ = false;
+            isXZ = false;
             tlX1.tag = "Orange";
             tlX2.tag = "Orange";
             tlZ1.tag = "Red"; 
@@ -124,5 +155,50 @@ public class HighwayIntersection : IntersectionParent
     public override void updateTimeOut(float newTimeOut)
     {
         timeOut = newTimeOut;
+    }
+
+    public override void makeChange()
+    {
+        isMakeChange = true;
+    }
+
+    IEnumerator APILightChange()
+    {
+        if (!isXZ)
+        {
+            //nothing happens
+            isMakeChange = false;
+        }
+        else if (isZ)
+        {
+            insideLightChange = true;
+            tlX1.tag = "Red";
+            tlX2.tag = "Red";
+            tlZ1.tag = "Orange";
+            tlZ2.tag = "Orange";
+
+            timeLeftBothRed -= Time.deltaTime;
+            if (timeLeftBothRed <= 0f)
+            {
+                isMakeChange = false;
+                reset();
+            }
+        }
+        else if (!isZ)
+        {
+            insideLightChange = true;
+            tlX1.tag = "Orange";
+            tlX2.tag = "Orange";
+            tlZ1.tag = "Red";
+            tlZ2.tag = "Red";
+
+            timeLeftBothRed -= Time.deltaTime;
+            if (timeLeftBothRed <= 0f)
+            {
+                isMakeChange = false;
+                reset();
+            }
+        }
+        yield return null;
     }
 }

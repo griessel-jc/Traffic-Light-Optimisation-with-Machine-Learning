@@ -94,11 +94,42 @@ public class CommandCenter : MonoBehaviour
         }
         else
         {
+            String stringResponse = apiRequest.downloadHandler.text;
+            // Example: 32 = 100000
+            int intResponse = Convert.ToInt32(stringResponse);
+
+            String bitStream = Convert.ToString(intResponse, 2);
+
+            //Debug.Log("Original bitstream: " + bitStream);
+
+            //Debug.Log("Bitstream length: " + bitStream.Length);
+            //Debug.Log("Intersections length: " + intersections.Length);
+
+            if (bitStream.Length < intersections.Length)
+            {
+                String temp = "";
+
+                int padAmount = (intersections.Length - bitStream.Length);
+
+                for(int k = 0; k < padAmount; k++)
+                {
+                    temp += "0";
+                }
+
+                bitStream = temp += bitStream;
+            }
+
+            //Debug.Log("After padding: " + bitStream);
+
             Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
 
             for (int j = 0; j < intersections.Length; j++)
             {
-                intersections[j].updateTimeOut(apiRequest.downloadHandler.text[j]);
+                if (bitStream.ToCharArray().GetValue(j).Equals('1'))
+                {
+                    //Debug.Log("Making change to intersection: " + intersections[j].name);
+                    intersections[j].makeChange();
+                }
             }
         }
     }
@@ -110,10 +141,12 @@ public class TrafficIntersection
 {
     public float stationaryX, stationaryY, movingY, movingX;
     public string name;
-
+    public Int32 phase;
+    
     public string toJson(int id)
     {
         return "{\"name\":\"" + name + "\"," + 
+                "\"phase\": 1" + phase + "," + //0-xGreen 1-zGreen 2-neitherGreen
                 "\"intersection_Id\":" + id + "," +
                 "\"stationaryY\":" + stationaryY + ","+
                 "\"stationaryX\":" + stationaryX + ","+ 

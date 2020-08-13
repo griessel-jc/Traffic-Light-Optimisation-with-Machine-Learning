@@ -9,7 +9,13 @@ public class IntersectionParent : MonoBehaviour
         return null;
     }
 
-    public virtual void updateTimeOut(float newTimeOut) {
+    public virtual void updateTimeOut(float newTimeOut) 
+    {
+
+    }
+
+    public virtual void makeChange()
+    {
 
     }
 }
