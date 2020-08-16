@@ -34,7 +34,8 @@ public class Path : NetworkBehaviour
     private SyncListCustom startpoint;
 
     //The max speed of any car
-    private readonly float maxSpeed = 0.4f;
+    [SyncVar]
+    private float maxSpeed = 0.4f;
 
     //The car ray length
     private readonly float rayLength = 20f;
@@ -178,6 +179,17 @@ public class Path : NetworkBehaviour
     	Vector3 p1 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(1).position;
     	Vector3 p2 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(2).position;
     	Vector3 p3 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(3).position;
+		
+		if((Vector3.Distance(p0,p3) > 10)){
+			maxSpeed = 0.4f;
+		}
+		else if((Vector3.Distance(p0,p3) > 6)){
+			maxSpeed = 1.2f;
+		}
+		else{
+			maxSpeed = 0.99f;
+		}
+
 
         Vector3 carPositionPrev;
         Vector3 directionVector;

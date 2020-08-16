@@ -9,7 +9,7 @@ public class spawning : NetworkBehaviour{
     // Start is called before the first frame update
 
 	[SerializeField]
-	[Range(1f,1000f)]
+	[Range(1f,200f)]
 	public float speed;
 
     private GameObject car;
