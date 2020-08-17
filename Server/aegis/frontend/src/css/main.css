@@ -11,7 +11,8 @@ body {
 }
 
 .topbar-wrapper {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     height: 80px;
     width: 100%;
     text-align: left;
@@ -172,6 +173,7 @@ input:focus {
     padding: 0 !important;
     float: right;
     background-color: #6387FF !important;
+    /*background-color:  #30b548 !important;*/
     border: none !important;
 }
 

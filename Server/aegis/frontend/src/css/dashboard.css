@@ -4,7 +4,8 @@ body {
 }
 
 .navbar-wrapper {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     position: fixed;
     width: 450px;
     text-align: left;
@@ -100,7 +101,8 @@ body {
 }
 
 .footer {
-    background-color: #0E0E0F;
+    /*background-color: #0E0E0F;*/
+    background-color: #1D1D1D;
     height: 400px;
     margin-top: 50px;
     padding: 30px;
