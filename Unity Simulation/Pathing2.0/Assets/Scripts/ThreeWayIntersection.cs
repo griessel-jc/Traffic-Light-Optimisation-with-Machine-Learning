@@ -82,15 +82,15 @@ public class ThreeWayIntersection : IntersectionParent
         if(light_configruation)
         {
             tlX1.tag = "Green"; //Green
-            tlZ1.tag = "Red";
-            tlZ2.tag = "Red";
+            tlZ1.tag = "Car";
+            tlZ2.tag = "Car";
             isZ = false;
             isX = true;
             isXZ = true;
         }
         else
         {
-            tlX1.tag = "Red";
+            tlX1.tag = "Car";
             tlZ1.tag = "Green"; //Green
             tlZ2.tag = "Green"; //Green
             isZ = true;
@@ -117,9 +117,9 @@ public class ThreeWayIntersection : IntersectionParent
         {
             //isX = false; isZ = false;
             isXZ = false;
-            tlX1.tag = "Red";
-            tlZ1.tag = "Orange"; 
-            tlZ2.tag = "Orange"; 
+            tlX1.tag = "Car";
+            tlZ1.tag = "Car"; //Orange
+            tlZ2.tag = "Car"; //Orange
             timeLeftBothRed -= Time.deltaTime;
             if(timeLeftBothRed <= 0f)
             {
@@ -130,9 +130,9 @@ public class ThreeWayIntersection : IntersectionParent
         {
             //isX = false; isZ = false;
             isXZ = false;
-            tlX1.tag = "Orange";
-            tlZ1.tag = "Red"; 
-            tlZ2.tag = "Red"; 
+            tlX1.tag = "Car"; //Orange
+            tlZ1.tag = "Car"; 
+            tlZ2.tag = "Car"; 
             timeLeftBothRed -= Time.deltaTime;
             if(timeLeftBothRed <= 0f) 
             {
@@ -162,9 +162,9 @@ public class ThreeWayIntersection : IntersectionParent
         else if (isZ)
         {
             insideLightChange = true;
-            tlX1.tag = "Red";
-            tlZ1.tag = "Orange";
-            tlZ2.tag = "Orange";
+            tlX1.tag = "Car";
+            tlZ1.tag = "Car"; //Orange
+            tlZ2.tag = "Car"; //Orange
 
             timeLeftBothRed -= Time.deltaTime;
             if (timeLeftBothRed <= 0f)
@@ -176,9 +176,9 @@ public class ThreeWayIntersection : IntersectionParent
         else if (!isZ)
         {
             insideLightChange = true;
-            tlX1.tag = "Orange";
-            tlZ1.tag = "Red";
-            tlZ2.tag = "Red";
+            tlX1.tag = "Car"; //Orange
+            tlZ1.tag = "Car";
+            tlZ2.tag = "Car";
 
             timeLeftBothRed -= Time.deltaTime;
             if (timeLeftBothRed <= 0f)
