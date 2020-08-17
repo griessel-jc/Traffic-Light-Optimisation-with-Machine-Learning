@@ -206,3 +206,56 @@ input:focus {
     margin-bottom: 10px;
     color: #FF5B5B !important;
 }
+
+@media only screen and (max-width: 1150px) {
+    .left-column {
+        float: none;
+        width: auto;
+        height: 300px;
+    }
+
+    .right-column {
+        float: none;
+        width: auto;
+    }
+
+    .right-column > div {
+        top: 0;
+        padding: 15px;
+    }
+
+}
+
+@media only screen and (max-width: 560px) {
+    .project-heading {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-wrapper {
+        width: auto;
+    }
+
+    .button-wrapper {
+        text-align: center;
+        height: 200px;
+    }
+
+    .button-wrapper > button {
+        width: 100% !important;
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .switch-btn {
+        position: relative;
+        top: 70px;
+    }
+    
+    .login-btn {
+        position: relative;
+        top: -40px;
+    }
+
+}
