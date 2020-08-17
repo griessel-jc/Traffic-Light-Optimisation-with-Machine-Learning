@@ -20,21 +20,20 @@ public class CommandCenter : MonoBehaviour
 
     [SerializeField]
     public string json;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] temp = GameObject.FindGameObjectsWithTag("Intersection");
-        intersections = new IntersectionParent[temp.Length];
-        for (int i = 0; i < temp.Length; i++)
-        {
-            intersections[i] = temp[i].GetComponent<IntersectionParent>();
-        }
         reset();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (intersections == null || intersections.Length == 0)
+        {
+            scanIntersections();
+        }
         timeleft -= Time.deltaTime;
         if(timeleft <= 0f)
         {
@@ -47,6 +46,16 @@ public class CommandCenter : MonoBehaviour
     {
         timeleft = timeout;
         Debug.Log("Reseting");
+    }
+
+    void scanIntersections()
+    {
+        GameObject[] tempArray = GameObject.FindGameObjectsWithTag("Intersection");
+        intersections = new IntersectionParent[tempArray.Length];
+        for (int k = 0; k < tempArray.Length; k++)
+        {
+            intersections[k] = tempArray[k].GetComponent<IntersectionParent>();
+        }
     }
 
     IEnumerator Upload()
@@ -68,6 +77,8 @@ public class CommandCenter : MonoBehaviour
             json += obj.toJson(i+1);
             json += ",";
         }
+        //Debug.Log("length: " + intersections.Length);
+        //Debug.Log("I: " + i);
         try
         {
             obj = intersections[i].getIntersection();
