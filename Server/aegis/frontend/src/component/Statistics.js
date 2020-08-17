@@ -152,19 +152,6 @@ class Statistics extends Component {
                     <h2>Statistics</h2>
 
                     <div className="scene-wrapper">
-                        <div className="scene-left">
-                            <div className="left-img">
-
-                            </div>
-                            <div className="left-info">
-                                <h3>Rural Scene</h3>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                            </div>
-                        </div>
-                        <div className="scene-right">
-                            <div className="scene-stat-wrapper">
-                                Other statistics here
-                            </div>
 
                             {this.state.intersections.map(function (trafficlight, index) {
                                 return (
@@ -180,7 +167,6 @@ class Statistics extends Component {
                                 )
                             })}
 
-                        </div>
                     </div>
                 </div>
 
