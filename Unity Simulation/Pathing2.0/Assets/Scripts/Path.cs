@@ -208,7 +208,7 @@ public class Path : NetworkBehaviour
             fwd = transform.TransformDirection(Vector3.forward) * rayLength;
             Debug.DrawRay(transform.position, fwd, Color.red);
             fwdRay = new Ray(transform.position, fwd);
-            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && (hit.collider.gameObject.CompareTag("Car") || hit.collider.gameObject.CompareTag("Red") || hit.collider.gameObject.CompareTag("Orange")))
+            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && hit.collider.gameObject.CompareTag("Car"))
             {
                 //print("Found an object - tag : " + hit.collider.gameObject.tag); 
                 if (hit.distance - 0.4f < stoppingDistance)
@@ -224,52 +224,33 @@ public class Path : NetworkBehaviour
             { 
                 speed = maxSpeed;
             }
-            //while car hasn't reached end point of curve
-            if(speed > 0f)
-                carPositionPrev = carPosition;
-            //t = t + (Time.deltaTime * speed);
+
             t = t + (Time.deltaTime * speed);
             carPosition = (Mathf.Pow(1 - t, 3) * p0) + 
             (3 * Mathf.Pow(1 - t, 2) * t * p1) + 
             (3 * (1 - t) * Mathf.Pow(t, 2) * p2) + 
             (Mathf.Pow(t, 3) * p3);
-            //transform is the object this script is attached to
+
             transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
-            //it aligns the objects forward vector with the vector we provide
             transform.rotation = Quaternion.LookRotation(directionVector);
-            yield return new WaitForEndOfFrame();//block until end of frame
+            yield return new WaitForEndOfFrame();
         }
 
-        /*void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.tag == "Red")
-            {
-                speed = 0;
-            }
-            else
-            {
-                speed = maxSpeed;
-            }
-        }*/
 
+        //clean up and prep for next curve
     	t = 0f;
 
-        for (int i = 0; i < nextCurveOptions[nextCurve].Length; i++)
-        {
+        for (int i = 0; i < nextCurveOptions[nextCurve].Length; i++){
             moveToArray.Add(nextCurveOptions[nextCurve][i]);
         }
 
         //moveToArray = nextCurveOptions[nextCurve];
         nextCurve = moveToArray[Random.Range(0,moveToArray.Count)];
 
-        if(nextCurve == -1)
-        {
+        if(nextCurve == -1){
             Destroy(gameObject);
         }
-    	// if(nextCurve > curves.Length - 1){
-    	// 	nextCurve = 0;
-    	// }
 
     	coroutingAllowed = true;
         moveToArray.Clear();
