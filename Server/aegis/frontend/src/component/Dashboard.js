@@ -53,8 +53,10 @@ function Dashboard(props) {
                             <div className="main-title-front">ABOUT THE PROJECT</div>
                             <div className="main-title-back">ABOUT THE PROJECT</div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                        <p>Traffic in big cities can quickly become an issue and in today's times having people reset traffic timers is just not cutting it anymore. 
+                            The idea involves creating a traffic optimisation system using machine learning, image processing and tracking to improve the flow of traffic 
+                            at various times of day, under various kinds of conditions. The aim of the project is to use artificial intelligence to affect traffic light states 
+                            to better control the flow of traffic in a Unity simulation representing real life traffic situations. </p>
                     </div>
 
                     <div className="main-content">
