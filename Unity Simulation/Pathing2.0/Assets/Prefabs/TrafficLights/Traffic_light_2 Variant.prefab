@@ -104,30 +104,6 @@ Halo:
     serializedVersion: 2
     rgba: 4278255392
   m_Size: 0.21
---- !u!122 &1956984414621434523
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7645867775522417652}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278232831
-  m_Size: 0.21
---- !u!122 &1749024760611662204
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7805338235641483145}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278386943
-  m_Size: 0.21
 --- !u!1 &2486875273563757305
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +196,58 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-6540842432607339273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289834160801544724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &-5814801245312745766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289834160801544724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+--- !u!114 &3983002243240990341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289834160801544724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db15d8cf8a2b965458d2a6b394e88f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  currentColour: 
+  greenLight: {fileID: 2347780964411136787}
+  orangeLight: {fileID: 7645867775522417652}
+  redLight: {fileID: 7805338235641483145}
 --- !u!1 &4620542118246290631
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +340,30 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!122 &1956984414621434523
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7645867775522417652}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278232831
+  m_Size: 0.21
+--- !u!122 &1749024760611662204
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7805338235641483145}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278386943
+  m_Size: 0.21
 --- !u!1001 &2406821524817856325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,6 +448,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 635912d9cadb5644185e0a5ef5602a31, type: 3}
+--- !u!1 &3289834160801544724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 635912d9cadb5644185e0a5ef5602a31,
+    type: 3}
+  m_PrefabInstance: {fileID: 2406821524817856325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2347780964411136787 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 140246237825604694, guid: 635912d9cadb5644185e0a5ef5602a31,

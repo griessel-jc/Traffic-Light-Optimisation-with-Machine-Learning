@@ -3,9 +3,16 @@
 public class ControlCamera : MonoBehaviour
 {
     readonly float mainSpeed = 75.0f;
+    readonly float minFOV = 15f;
+    readonly float maxFOV = 90f;
+    readonly float sensitivity = 40f;
 
     void Update()
     {
+        float fov = Camera.main.fieldOfView;
+
+        fov -= Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+
         Vector3 p = new Vector3();
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -33,6 +40,7 @@ public class ControlCamera : MonoBehaviour
         newPosition.z = transform.position.z;
         newPosition.x = Mathf.Clamp(newPosition.x, -100.0f, 100.0f);
         newPosition.z = Mathf.Clamp(newPosition.z, -100.0f, 100.0f);
+        fov = Mathf.Clamp(fov, minFOV, maxFOV);
 
         if (Input.GetKey(KeyCode.Q))
         {
@@ -44,5 +52,6 @@ public class ControlCamera : MonoBehaviour
         }
 
         transform.position = newPosition;
+        Camera.main.fieldOfView = fov;
     }
 }

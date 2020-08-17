@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class ThreeWayIntersection : IntersectionParent
 {
@@ -17,16 +18,34 @@ public class ThreeWayIntersection : IntersectionParent
     public GameObject tlZ1;
     public GameObject tlZ2;
 
+    /*Prefab References*/
+    [SerializeField]
+    public GameObject prefabTLX1;
+    [SerializeField]
+    public GameObject prefabTLZ1;
+    [SerializeField]
+    public GameObject prefabTLZ2;
+
     /*Traffic Light Reg-Green cycle*/
-    private float timeOut = 16.0f;    
+    [SyncVar]
+    private float timeOut = 16.0f;
+    [SyncVar]
     private float timeOutBothRed = 4.0f;
-    private float timeLeft; 
+    [SyncVar]
+    private float timeLeft;
+    [SyncVar]
     private float timeLeftBothRed;
+    [SyncVar]
     public bool light_configruation = false;
+    [SyncVar]
     bool isZ = false;
+    [SyncVar]
     bool isX = false;
+    [SyncVar]
     bool isXZ = false;
+    [SyncVar]
     bool insideLightChange = false;
+    [SyncVar]
     bool isMakeChange = false;
     
     void Start()
@@ -82,8 +101,11 @@ public class ThreeWayIntersection : IntersectionParent
         if(light_configruation)
         {
             tlX1.tag = "Green"; //Green
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Green");
             tlZ1.tag = "Car";
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Red");
             tlZ2.tag = "Car";
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Red");
             isZ = false;
             isX = true;
             isXZ = true;
@@ -91,8 +113,11 @@ public class ThreeWayIntersection : IntersectionParent
         else
         {
             tlX1.tag = "Car";
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Red");
             tlZ1.tag = "Green"; //Green
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Green");
             tlZ2.tag = "Green"; //Green
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Green");
             isZ = true;
             isX = false;
             isXZ = true;
@@ -118,8 +143,11 @@ public class ThreeWayIntersection : IntersectionParent
             //isX = false; isZ = false;
             isXZ = false;
             tlX1.tag = "Car";
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Red");
             tlZ1.tag = "Car"; //Orange
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Orange");
             tlZ2.tag = "Car"; //Orange
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Orange");
             timeLeftBothRed -= Time.deltaTime;
             if(timeLeftBothRed <= 0f)
             {
@@ -131,8 +159,11 @@ public class ThreeWayIntersection : IntersectionParent
             //isX = false; isZ = false;
             isXZ = false;
             tlX1.tag = "Car"; //Orange
-            tlZ1.tag = "Car"; 
-            tlZ2.tag = "Car"; 
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Orange");
+            tlZ1.tag = "Car";
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Red");
+            tlZ2.tag = "Car";
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Red");
             timeLeftBothRed -= Time.deltaTime;
             if(timeLeftBothRed <= 0f) 
             {
@@ -163,8 +194,11 @@ public class ThreeWayIntersection : IntersectionParent
         {
             insideLightChange = true;
             tlX1.tag = "Car";
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Red");
             tlZ1.tag = "Car"; //Orange
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Orange");
             tlZ2.tag = "Car"; //Orange
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Orange");
 
             timeLeftBothRed -= Time.deltaTime;
             if (timeLeftBothRed <= 0f)
@@ -177,8 +211,11 @@ public class ThreeWayIntersection : IntersectionParent
         {
             insideLightChange = true;
             tlX1.tag = "Car"; //Orange
+            prefabTLX1.GetComponent<TrafficLightManager>().changeLight("Orange");
             tlZ1.tag = "Car";
+            prefabTLZ1.GetComponent<TrafficLightManager>().changeLight("Red");
             tlZ2.tag = "Car";
+            prefabTLZ2.GetComponent<TrafficLightManager>().changeLight("Red");
 
             timeLeftBothRed -= Time.deltaTime;
             if (timeLeftBothRed <= 0f)

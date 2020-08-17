@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class IntersectionParent : MonoBehaviour
+public class IntersectionParent : NetworkBehaviour
 {
     public virtual TrafficIntersection getIntersection()
     {
