@@ -7,7 +7,7 @@ body {
     /*background-color: #2A2733;*/
     background-color: #1D1D1D;
     position: fixed;
-    width: 450px;
+    width: 420px;
     text-align: left;
     padding: 50px;
     height: 100vh;
@@ -34,7 +34,8 @@ body {
 }
 
 .navbar-link > input {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     color: white;
     text-align: left;
     font-size: 17px;
@@ -61,7 +62,7 @@ body {
 .main {
     height: 100vh;
     width: 100%;
-    padding-left: 450px;
+    padding-left: 420px;
     text-align: left;
 }
 
@@ -140,4 +141,10 @@ body {
 
 .footer-content:nth-child(3) {
     padding-top: 20px;
+}
+
+@media only screen and (max-width: 524px) {
+    .footer {
+        padding-left: 30px;
+    }
 }

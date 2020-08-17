@@ -261,3 +261,14 @@ input:focus {
     }
 
 }
+
+@media only screen and (max-width: 524px) {
+    .topbar-title {
+        display: none;
+    }
+
+    .topbar-back {
+        padding-left: 20px;
+        padding-top: 25px;
+    }
+}
