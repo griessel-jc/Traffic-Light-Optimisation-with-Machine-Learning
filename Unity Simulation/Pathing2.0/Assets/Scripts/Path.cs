@@ -225,6 +225,9 @@ public class Path : NetworkBehaviour
                 speed = maxSpeed;
             }
 
+            if(speed > 0f){
+                carPositionPrev = carPosition;
+            }
             t = t + (Time.deltaTime * speed);
             carPosition = (Mathf.Pow(1 - t, 3) * p0) + 
             (3 * Mathf.Pow(1 - t, 2) * t * p1) + 
