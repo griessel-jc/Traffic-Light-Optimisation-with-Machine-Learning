@@ -155,7 +155,7 @@ class Statistics extends Component {
 
                             {this.state.intersections.map(function (trafficlight, index) {
                                 return (
-                                    <div className="mixed-chart chart-wrapper">
+                                    <div className="mixed-chart chart-wrapper" key={index}>
                                         <h4>{trafficlight.name}</h4>
                                         <Chart
                                             options={trafficlight.options}
