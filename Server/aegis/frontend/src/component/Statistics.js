@@ -1,5 +1,5 @@
 import { getUser } from '../utils/Common';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
 import '../css/statistics.css';
@@ -17,8 +17,8 @@ class Statistics extends Component {
         };
     }
 
-    updateState() {
-        var self = this;
+    updateState(self) {
+        console.log("updating"); 
         //var tl_objects = [];
         var int_objects = [];
         axios.get('http://localhost:8080/simu/getIntersections')
@@ -102,32 +102,35 @@ class Statistics extends Component {
                 })
                 const intersections = int_objects;
                 self.setState({ intersections });
+                function sleep(ms){
+                    return new Promise(resolve => setTimeout(resolve,ms));
+                }
+                async function update(){
+                    await sleep(5000);
+                    self.updateState(self);
+                }
+                update();
+                
             }).catch(error => {
                 console.log(error);
             });
-    }
+    } 
+
+    
+     
     
     componentDidMount() {
-        if (getUser() !== null) {
-            this.updateState();
-            /*
-            this.socket.onopen = function() {
-                console.log("Connected!");
-                //this.send("Ping");
-            };
-            this.socket.onmessage = function(msg){
-                console.log(msg);
-            };
-
-            this.socket.onclose = function() {
-                console.log("closed");
-            };
-            this.socket.onerror = function(e){
-                console.log(e);
-            }
-            */
-        }
+        if(getUser() !== null){
+            this.updateState(this);  
+        } 
+        /*if (getUser() !== null) {
+            this.updateState(); 
+        }*/
     }
+
+    componentWillUnmount() {
+        // use intervalId from the state to clear the interval
+     }
 
     goBack = () => {
         this.props.history.push("/dashboard");

@@ -19,7 +19,7 @@ public class NeuralNetworkUtitlities {
     public static double epsilon;
 
     public NeuralNetworkUtitlities(int numI, int[] hl, double lr, double e) {
-        NeuralNetworkUtitlities.numIntersections   = 5;
+        NeuralNetworkUtitlities.numIntersections   = numI;
         NeuralNetworkUtitlities.numInput           = numIntersections*numNumbersData;
         NeuralNetworkUtitlities.numOutput          = (int) Math.pow(2,NeuralNetworkUtitlities.numIntersections)-1;
         NeuralNetworkUtitlities.hiddenLayers       = hl;
