@@ -9,11 +9,11 @@ namespace Tests
 {
     public class IntegrationTests
     {
-        [Test]
+        /*[Test]
         public void IntegrationTestsSimplePasses()
         {
             //Simply to test whether the Integration Test script is working
-        }
+        }*/
 
         [UnityTest]
         public IEnumerator IntegrationTestConnectToSpringServer()

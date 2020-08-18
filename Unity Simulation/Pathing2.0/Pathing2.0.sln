@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror", "Mirror.csproj", "{4FB850B3-4223-1D9D-DC6E-A9BE54C0CC14}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Cloud", "Mirror.Cloud.csproj", "{A35937BF-5BC6-356D-EEAB-7F4008D52A30}"
@@ -23,11 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.example.RigidbodyPhy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Weaver", "Mirror.Weaver.csproj", "{073E326E-D76E-9296-AE66-A9D32E565C99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{352E015C-4411-6698-20BA-0AA6087B0271}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.Editor", "Mirror.Editor.csproj", "{480239AA-1732-99CE-79FA-8D03E680FB91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mirror.CompilerSymbols", "Mirror.CompilerSymbols.csproj", "{76936805-9D12-17F2-45E2-6DF888222972}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests.csproj", "{352E015C-4411-6698-20BA-0AA6087B0271}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +79,10 @@ Global
 		{073E326E-D76E-9296-AE66-A9D32E565C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{073E326E-D76E-9296-AE66-A9D32E565C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{073E326E-D76E-9296-AE66-A9D32E565C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352E015C-4411-6698-20BA-0AA6087B0271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352E015C-4411-6698-20BA-0AA6087B0271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352E015C-4411-6698-20BA-0AA6087B0271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352E015C-4411-6698-20BA-0AA6087B0271}.Release|Any CPU.Build.0 = Release|Any CPU
 		{480239AA-1732-99CE-79FA-8D03E680FB91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{480239AA-1732-99CE-79FA-8D03E680FB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{480239AA-1732-99CE-79FA-8D03E680FB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,10 +91,6 @@ Global
 		{76936805-9D12-17F2-45E2-6DF888222972}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76936805-9D12-17F2-45E2-6DF888222972}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76936805-9D12-17F2-45E2-6DF888222972}.Release|Any CPU.Build.0 = Release|Any CPU
-		{352E015C-4411-6698-20BA-0AA6087B0271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{352E015C-4411-6698-20BA-0AA6087B0271}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{352E015C-4411-6698-20BA-0AA6087B0271}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{352E015C-4411-6698-20BA-0AA6087B0271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
