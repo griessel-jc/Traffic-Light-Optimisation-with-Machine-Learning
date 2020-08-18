@@ -22,3 +22,10 @@ th, td {
     bottom: 0;
     text-align: left;
 }
+
+@media only screen and (max-width: 960px) {
+    .user-wrapper {
+        padding: 0px 20px 0px 20px;
+        overflow-x: scroll;
+    }
+}

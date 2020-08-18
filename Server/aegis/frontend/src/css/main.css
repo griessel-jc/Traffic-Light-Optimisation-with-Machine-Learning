@@ -11,7 +11,8 @@ body {
 }
 
 .topbar-wrapper {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     height: 80px;
     width: 100%;
     text-align: left;
@@ -36,7 +37,7 @@ body {
 }
 
 .topbar-back > div >  button {
-    background-color: #2A2733;
+    background-color: #1D1D1D;
     border: none;
     color: white;
     font-weight: 600;
@@ -172,6 +173,7 @@ input:focus {
     padding: 0 !important;
     float: right;
     background-color: #6387FF !important;
+    /*background-color:  #30b548 !important;*/
     border: none !important;
 }
 
@@ -205,4 +207,68 @@ input:focus {
     padding: 10px;
     margin-bottom: 10px;
     color: #FF5B5B !important;
+}
+
+@media only screen and (max-width: 1150px) {
+    .left-column {
+        float: none;
+        width: auto;
+        height: 300px;
+    }
+
+    .right-column {
+        float: none;
+        width: auto;
+    }
+
+    .right-column > div {
+        top: 0;
+        padding: 15px;
+    }
+
+}
+
+@media only screen and (max-width: 560px) {
+    .project-heading {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-wrapper {
+        width: auto;
+    }
+
+    .button-wrapper {
+        text-align: center;
+        height: 200px;
+    }
+
+    .button-wrapper > button {
+        width: 100% !important;
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .switch-btn {
+        position: relative;
+        top: 70px;
+    }
+    
+    .login-btn {
+        position: relative;
+        top: -40px;
+    }
+
+}
+
+@media only screen and (max-width: 524px) {
+    .topbar-title {
+        display: none;
+    }
+
+    .topbar-back {
+        padding-left: 20px;
+        padding-top: 25px;
+    }
 }

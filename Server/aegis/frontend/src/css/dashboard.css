@@ -4,9 +4,10 @@ body {
 }
 
 .navbar-wrapper {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     position: fixed;
-    width: 450px;
+    width: 420px;
     text-align: left;
     padding: 50px;
     height: 100vh;
@@ -33,7 +34,8 @@ body {
 }
 
 .navbar-link > input {
-    background-color: #2A2733;
+    /*background-color: #2A2733;*/
+    background-color: #1D1D1D;
     color: white;
     text-align: left;
     font-size: 17px;
@@ -60,7 +62,7 @@ body {
 .main {
     height: 100vh;
     width: 100%;
-    padding-left: 450px;
+    padding-left: 420px;
     text-align: left;
 }
 
@@ -100,7 +102,8 @@ body {
 }
 
 .footer {
-    background-color: #0E0E0F;
+    /*background-color: #0E0E0F;*/
+    background-color: #1D1D1D;
     height: 400px;
     margin-top: 50px;
     padding: 30px;
@@ -138,4 +141,87 @@ body {
 
 .footer-content:nth-child(3) {
     padding-top: 20px;
+}
+
+@media only screen and (max-width: 524px) {
+    .footer {
+        padding-left: 30px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .main {
+        padding-left: 0;
+        padding-top: 50px;
+    }
+
+    .footer {
+        margin-bottom: 200px;
+    }
+
+    .navbar-wrapper {
+        width: 100%;
+        text-align: center;
+        height: 100px;
+        bottom: 0;
+        z-index: 10;
+        padding: 0;
+        padding-top: 20px;
+    }
+
+    .navbar-user {
+        display: none;
+    }
+
+    .navbar-title {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #1D1D1D;
+        height: 50px;
+        padding: 10px;
+    }
+
+    .navbar-link-wrapper {
+        display: inline-flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .navbar-link {
+        text-align: center;
+    }
+
+    .navbar-link > svg {
+        height: 30px;
+        margin-right: 0;
+    }
+
+    .navbar-link-wrapper > .navbar-link:last-child {
+        margin-top: 0;
+    }
+    
+    .navbar-link > input {
+        text-align: center;
+        font-size: 12px;
+        margin: 0;
+        display: block;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .main {
+        padding-top: 80px;
+    }
+
+    .navbar-title {
+        height: 80px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .main-content > p {
+        padding-top: 40px;
+    }
 }

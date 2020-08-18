@@ -53,8 +53,10 @@ function Dashboard(props) {
                             <div className="main-title-front">ABOUT THE PROJECT</div>
                             <div className="main-title-back">ABOUT THE PROJECT</div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                        <p>Traffic in big cities can quickly become an issue and in today's times having people reset traffic timers is just not cutting it anymore. 
+                            The idea involves creating a traffic optimisation system using machine learning, image processing and tracking to improve the flow of traffic 
+                            at various times of day, under various kinds of conditions. The aim of the project is to use artificial intelligence to affect traffic light states 
+                            to better control the flow of traffic in a Unity simulation representing real life traffic situations. </p>
                     </div>
 
                     <div className="main-content">
@@ -62,8 +64,11 @@ function Dashboard(props) {
                             <div className="main-title-front">THE DASHBOARD</div>
                             <div className="main-title-back">THE DASHBOARD</div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                        <p>The dashboard provides a visual interface for the user to view the statistical value of each individual intersection that runs on the Unity simulation 
+                            in form of a graph. The graph provides nurmerical data of the amount of stationary and moving vehicles are at the specific intersection, showcasing the 
+                            efficiency of the artificial intelligence  and its impact on the traffic flow in the Unity simulation. The ideal scenario is when the moving vehicle value is 
+                            above the stationary vehicles to show that the flow of the traffic is in a good state.
+                        </p>
                     </div>
 
                     <div className="main-content">

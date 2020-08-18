@@ -48,6 +48,12 @@ function Register(props) {
         props.history.push("/")
     }
 
+    const handleKeyPress = (event) => {
+      if(event.key === 'Enter'){
+        handleRegister();
+      }
+    }
+
     return (
         <div>
       <div className="left-column">
@@ -60,7 +66,7 @@ function Register(props) {
             <div className="form-wrapper">
               <h1>Dashboard</h1>
               <h1>Sign up</h1>
-              <form>
+              <form onKeyPress={handleKeyPress}>
                 <div className="input-wrapper">
                   <div>
                     <label htmlFor="username">Username</label>
