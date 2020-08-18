@@ -1,14 +1,13 @@
  
 package com.aegis.aegis.dao;
  
-import com.aegis.aegis.modal.Intersection;
-import com.aegis.aegis.modal.Statistic;
+import com.aegis.aegis.modal.Intersection; 
 import dto.intersectionDto;
 import dto.statisticDto;
 import java.util.List;
 
 public interface IntersectionDAO {
-    public List<Intersection> get();
+    public  List<intersectionDto> get();
     
     public void addIntersection(intersectionDto intersection);
     

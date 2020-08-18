@@ -7,7 +7,7 @@ import dto.statisticDto;
 import java.util.List;
 
 public interface IntersectionService {
-    List<Intersection> getIntersections();
+    List<intersectionDto> getIntersections();
     
     void addIntersection(intersectionDto i);
     

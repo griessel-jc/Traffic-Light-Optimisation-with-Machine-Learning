@@ -6,10 +6,11 @@ import com.aegis.aegis.modal.Statistic;
 import dto.intersectionDto;
 import dto.statisticDto;
 import exception.RecordNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+import org.hibernate.query.Query; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,13 +21,26 @@ public class IntersectionDAOImplemented implements IntersectionDAO{
     private EntityManager entityManager;
     
     @Override
-    public List<Intersection> get() {
+    public List<intersectionDto> get() {
         Session currSession = entityManager.unwrap(Session.class);
-        Query<Intersection> query = currSession.createQuery("from Intersection", Intersection.class);
-        List<Intersection> list = query.getResultList();
-        return list;
-    }
-
+        Query query = currSession.createQuery("from Intersection", Intersection.class);
+        List<Intersection> db_intersections= query.getResultList(); 
+        List<intersectionDto> intersections = new ArrayList();
+        db_intersections.stream().map(i -> {
+            intersectionDto intersection = new intersectionDto();
+            intersection.setName(i.getName());
+            intersection.setTl_Id(i.getId());
+            return intersection;
+        }).map(intersection -> { 
+            Integer tl_id           = intersection.getTl_Id();
+            intersection.setStatistics((List<Statistic>)currSession.createQuery("from Statistic as o where o.tl_id="+tl_id+" order by o.timestamp desc").setMaxResults(20).list());
+            return intersection;
+        }).forEachOrdered(intersection -> {
+            intersections.add(intersection);
+        });
+        return intersections;         
+    } 
+    
     @Override
     public void addIntersection(intersectionDto i) {
         Intersection intersection = new Intersection();

@@ -22,18 +22,12 @@ public class SimulationController {
     
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getIntersections")
-    public List<Intersection> getIntersections(){
+    public List<intersectionDto> getIntersections(){
         return intersectionService.getIntersections();
-    }
-    
-    @PostMapping("/addIntersection")
-    public List<Intersection> addIntersection(@RequestBody intersectionDto i){
-        intersectionService.addIntersection(i);
-        return this.getIntersections();
     } 
     
     @PostMapping("/addStatistic")
-    public List<Intersection> addStatistic(@RequestBody statisticDto statistic){
+    public List<intersectionDto> addStatistic(@RequestBody statisticDto statistic){
         intersectionService.addStatistic(statistic);
         return this.getIntersections();
     }

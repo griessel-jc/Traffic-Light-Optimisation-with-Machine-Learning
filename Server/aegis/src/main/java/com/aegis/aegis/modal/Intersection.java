@@ -21,19 +21,7 @@ public class Intersection {
     private Integer tl_id;
     
     @Column(name = "name")
-    private String name;
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="tl_id")
-    private Set<Statistic> statistics;
-    
-    public Set<Statistic> getStatistics(){
-        return this.statistics;
-    }
-    
-    public void setStatistics(Set<Statistic> statistics){
-        this.statistics = statistics;
-    }
+    private String name; 
     
     public Integer getId(){
         return tl_id;
