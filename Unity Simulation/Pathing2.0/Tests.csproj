@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Tests\Integration Tests.cs" />
-    <Compile Include="Assets\Tests\Unit Tests.cs" />
     <None Include="Assets\Tests\Tests.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
