@@ -18,7 +18,7 @@ public class IntersetionServiceImplemented implements IntersectionService {
     
     @Transactional
     @Override
-    public List<Intersection> getIntersections() {
+    public List<intersectionDto> getIntersections() {
         return intersectionDao.get();
     }
 
