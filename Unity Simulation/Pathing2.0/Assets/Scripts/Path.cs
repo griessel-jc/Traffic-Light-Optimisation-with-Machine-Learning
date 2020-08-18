@@ -37,13 +37,6 @@ public class Path : NetworkBehaviour
     [SyncVar]
     private float maxSpeed = 0.4f;
 
-    //The car ray length
-    private readonly float rayLength = 20f;
-
-    //Distance cars should maintain from each other
-    private readonly float stoppingDistance = 1.825f;
-
-
     void Start()
     {
 
@@ -181,14 +174,14 @@ public class Path : NetworkBehaviour
     	Vector3 p3 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(3).position;
 		
 		if((Vector3.Distance(p0,p3) > 10)){
-			maxSpeed = 0.4f;
-		}
-		else if((Vector3.Distance(p0,p3) > 6)){
-			maxSpeed = 1.2f;
-		}
-		else{
-			maxSpeed = 0.99f;
-		}
+            maxSpeed = 0.4f;
+        }
+        else if((Vector3.Distance(p0,p3) > 6)){
+            maxSpeed = 1.2f;
+        }
+        else{
+            maxSpeed = 0.99f;
+        }
 
 
         Vector3 carPositionPrev;
@@ -196,32 +189,24 @@ public class Path : NetworkBehaviour
         carPosition = p0;
         carPositionPrev = carPosition;
 
-        /*Collision Detection Stuff*/
-        Vector3 fwd;
-    
         RaycastHit hit;
-    
-        Ray fwdRay;
+        Ray myRay;
 
     	while (t < 1)
         {
-            fwd = transform.TransformDirection(Vector3.forward) * rayLength;
-            Debug.DrawRay(transform.position, fwd, Color.red);
-            fwdRay = new Ray(transform.position, fwd);
-            if (Physics.Raycast(fwdRay, out hit) && hit.collider != null && hit.collider.gameObject.CompareTag("Car"))
-            {
-                //print("Found an object - tag : " + hit.collider.gameObject.tag); 
-                if (hit.distance - 0.4f < stoppingDistance)
-                {
+            myRay = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
+            if(Physics.Raycast(myRay, out hit, 20) && hit.collider.gameObject.CompareTag("Car")){
+                if(hit.distance < 1.5f){
                     speed = 0;
                 }
-                else if(hit.distance -0.4f < rayLength)
-                {
-                    speed = maxSpeed*((hit.distance -0.4f)/rayLength);
+                else{
+                    speed = maxSpeed*(hit.distance/20);
                 }
             }
-            else
-            { 
+            else if(speed < maxSpeed && speed < (maxSpeed - 0.01f)){
+                speed = speed + 0.01f;
+            }
+            else{
                 speed = maxSpeed;
             }
 
