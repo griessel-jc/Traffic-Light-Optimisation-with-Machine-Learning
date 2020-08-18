@@ -59,6 +59,10 @@ public class ThreeWayIntersection : IntersectionParent
         timeLeftBothRed = timeOutBothRed;
         light_configruation = !light_configruation;
         changeLights();
+        outX1.GetComponent<OutgoingCounter>().reset();
+        outX2.GetComponent<OutgoingCounter>().reset();
+        outZ1.GetComponent<OutgoingCounter>().reset();
+        outZ2.GetComponent<OutgoingCounter>().reset();
     }
 
     

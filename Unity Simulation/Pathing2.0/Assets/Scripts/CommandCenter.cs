@@ -157,7 +157,7 @@ public class TrafficIntersection
     public string toJson(int id)
     {
         return "{\"name\":\"" + name + "\"," + 
-                "\"phase\": 1" + phase + "," + //0-xGreen 1-zGreen 2-neitherGreen
+                "\"phase\":" + phase + "," + //0-xGreen 1-zGreen 2-neitherGreen
                 "\"intersection_Id\":" + id + "," +
                 "\"stationaryY\":" + stationaryY + ","+
                 "\"stationaryX\":" + stationaryX + ","+ 
