@@ -90,7 +90,7 @@ public class CommandCenter : MonoBehaviour
         obj.name = "intersection" + (i+1);
         json += obj.toJson(i+1);
         json += "]";
-        //Debug.Log("Sending: " + json);
+        Debug.Log("Sending: " + json);
         byte[] bytes = Encoding.UTF8.GetBytes(json);
         UnityWebRequest apiRequest = UnityWebRequest.Put(localSpringServerURL, bytes);//.SetRequestHeader("content-type", "application/json" );
         apiRequest.method = "POST";
@@ -132,13 +132,13 @@ public class CommandCenter : MonoBehaviour
 
             //Debug.Log("After padding: " + bitStream);
 
-            //Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
+            Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
 
             for (int j = 0; j < intersections.Length; j++)
             {
                 if (bitStream.ToCharArray().GetValue(j).Equals('1'))
                 {
-                    //Debug.Log("Making change to intersection: " + intersections[j].name);
+                    Debug.Log("Making change to intersection: " + intersections[j].name);
                     intersections[j].makeChange();
                 }
             }
