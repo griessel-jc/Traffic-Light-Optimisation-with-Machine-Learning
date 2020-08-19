@@ -11,7 +11,7 @@ public class Path : NetworkBehaviour
 	private int nextCurve;
     
     [SyncVar]
-	private float speed;
+	public float speed;
 
     [SyncVar]
 	private Vector3 carPosition;
@@ -21,9 +21,6 @@ public class Path : NetworkBehaviour
 
 	[SyncVar]
     private bool coroutingAllowed;
-
-    [SyncVar]
-    private bool stopped;
 
     [SyncVar]
     private SyncListCustom moveToArray;
