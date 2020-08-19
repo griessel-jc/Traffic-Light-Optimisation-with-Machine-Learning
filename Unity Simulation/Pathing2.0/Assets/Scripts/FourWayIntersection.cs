@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Mirror;
 
@@ -77,23 +78,18 @@ public class FourWayIntersection : IntersectionParent
 
     public override TrafficIntersection getIntersection()
     {
-        float stationaryX = 0, stationaryY = 0, movingY = 0, movingX = 0, phase = 0;
-        stationaryX += inX1.GetComponent<IncomingCounter>().getNumberCars();
-        stationaryX += inX2.GetComponent<IncomingCounter>().getNumberCars();
-        stationaryY += inZ1.GetComponent<IncomingCounter>().getNumberCars();
-        stationaryY += inZ2.GetComponent<IncomingCounter>().getNumberCars();
-
-        movingX += outX1.GetComponent<OutgoingCounter>().getNumberCars();
-        movingX += outX2.GetComponent<OutgoingCounter>().getNumberCars();
-        movingY += outZ1.GetComponent<OutgoingCounter>().getNumberCars();
-        movingY += outZ2.GetComponent<OutgoingCounter>().getNumberCars();
-
         TrafficIntersection intersection = new TrafficIntersection();
-
-        intersection.stationaryX = stationaryX;
-        intersection.stationaryY = stationaryY;
-        intersection.movingX = movingX;
-        intersection.movingY = movingY;
+        if(isZ){
+            intersection.stationaryX += inX1.GetComponent<IncomingCounter>().getNumberCars();
+            intersection.stationaryX += inX2.GetComponent<IncomingCounter>().getNumberCars();
+        }else if(isX){
+            intersection.stationaryY += inZ1.GetComponent<IncomingCounter>().getNumberCars();
+            intersection.stationaryY += inZ2.GetComponent<IncomingCounter>().getNumberCars();
+        }
+        intersection.movingX += outX1.GetComponent<OutgoingCounter>().getNumberCars();
+        intersection.movingX += outX2.GetComponent<OutgoingCounter>().getNumberCars();
+        intersection.movingY += outZ1.GetComponent<OutgoingCounter>().getNumberCars();
+        intersection.movingY += outZ2.GetComponent<OutgoingCounter>().getNumberCars();
 
         if(isX)
         {

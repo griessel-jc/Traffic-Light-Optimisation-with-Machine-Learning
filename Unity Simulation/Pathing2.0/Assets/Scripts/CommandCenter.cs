@@ -153,7 +153,13 @@ public class TrafficIntersection
     public float stationaryX, stationaryY, movingY, movingX;
     public string name;
     public Int32 phase;
-    
+    public TrafficIntersection(){
+        this.stationaryX = 0;
+        this.stationaryY = 0;
+        this.movingX = 0;
+        this.movingY = 0;
+    }
+
     public string toJson(int id)
     {
         return "{\"name\":\"" + name + "\"," + 
