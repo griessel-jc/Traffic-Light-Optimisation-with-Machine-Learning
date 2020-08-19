@@ -1747,7 +1747,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118610745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 684.40356, y: 348.40924, z: -34.840378}
+  m_LocalPosition: {x: -4.95105, y: 8.564056, z: 21.962654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -28705,8 +28705,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -125.39, y: -52.32}
-  m_SizeDelta: {x: 238.44843, y: 98.09903}
+  m_AnchoredPosition: {x: -127.42, y: -64.85}
+  m_SizeDelta: {x: 242.51306, y: 123.16412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296345024
 MonoBehaviour:
@@ -38003,11 +38003,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Number of cars: 0
+  m_text: 'Global Values:
 
-    stationary cars: 0
+    Number of cars: 0
 
-    moving cars: 0
+    Stationary cars: 0
+
+    Moving
+    cars: 0
 
 '
   m_isRightToLeft: 0
@@ -38054,7 +38057,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -38078,12 +38081,12 @@ MonoBehaviour:
   m_margin: {x: -0.10644531, y: 0, z: 0, w: 0.756958}
   m_textInfo:
     textComponent: {fileID: 1717865665}
-    characterCount: 52
+    characterCount: 67
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 10
+    spaceCount: 12
+    wordCount: 12
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
