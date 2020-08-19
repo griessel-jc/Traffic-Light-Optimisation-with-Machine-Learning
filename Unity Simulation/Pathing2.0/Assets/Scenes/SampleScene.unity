@@ -530,10 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c54a2f2115706fef8e2d24cff73bc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curves:
-  - {fileID: 831498245}
-  - {fileID: 2015976871}
-  - {fileID: 1558856390}
+  syncMode: 0
+  syncInterval: 0.1
+  speed: 0
 --- !u!65 &1170152038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -842,10 +841,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c54a2f2115706fef8e2d24cff73bc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curves:
-  - {fileID: 2015976871}
-  - {fileID: 1558856390}
-  - {fileID: 831498245}
+  syncMode: 0
+  syncInterval: 0.1
+  speed: 0
 --- !u!65 &1862442297
 BoxCollider:
   m_ObjectHideFlags: 0
