@@ -17,10 +17,11 @@ public class IncomingCounter : MonoBehaviour
     void Update()
     {
         
-    }
+    } 
 
     public int getNumberCars(){
         hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, layerMask);
+        //Debug.Log("<color=blue> Number stat cars: "+hitColliders.Length+"</color>");
         return hitColliders.Length;
     }
 

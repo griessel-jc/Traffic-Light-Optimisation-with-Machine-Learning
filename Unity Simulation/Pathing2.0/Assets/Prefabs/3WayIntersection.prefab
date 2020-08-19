@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 97370537893552355}
   - component: {fileID: 97370537893552356}
   - component: {fileID: 97370537893552357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutZ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 97370538422996583}
   - component: {fileID: 97370538422996600}
   - component: {fileID: 97370538422996601}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InZ1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 97370538533176523}
   - component: {fileID: 97370538533176520}
   - component: {fileID: 9015318774877518343}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightZ1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 97370538579863950}
   - component: {fileID: 97370538579863951}
   - component: {fileID: 97370538579863936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 97370538680434250}
   - component: {fileID: 97370538680434251}
   - component: {fileID: 97370538680434252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InZ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 97370538871844039}
   - component: {fileID: 97370538871844056}
   - component: {fileID: 97370538871844057}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutZ1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 97370539131935114}
   - component: {fileID: 97370539131935115}
   - component: {fileID: 97370539131935116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 97370539175216725}
   - component: {fileID: 97370539175216722}
   - component: {fileID: 2866817527163783105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightX1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 97370539560014658}
   - component: {fileID: 97370539560014671}
   - component: {fileID: 8757742440483887270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightZ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   - component: {fileID: 97370539591113934}
   - component: {fileID: 7463547768500950898}
   - component: {fileID: 7463547768500950899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 3WayIntersection
   m_TagString: Intersection
   m_Icon: {fileID: 0}
@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 3954190207479461094}
   - component: {fileID: 7806965661932658060}
   - component: {fileID: 6423350443114516125}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 6323275191171480018}
   - component: {fileID: 3476963320217666947}
   - component: {fileID: 7414064109897156726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1187,7 @@ GameObject:
   - component: {fileID: 5818838668429428030}
   - component: {fileID: 7292366938943828504}
   - component: {fileID: 2453307402801130941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Traffic_light_1 Variant (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 3818560745786789690}
   - component: {fileID: 2257930133159441809}
   - component: {fileID: 2539267040395926968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1421,7 +1421,7 @@ GameObject:
   - component: {fileID: 4060519654696515597}
   - component: {fileID: 3597809660860394444}
   - component: {fileID: 5986175362330199560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 227964871600868927}
   - component: {fileID: 451802184199310998}
   - component: {fileID: 3593705709406961321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1579,7 @@ GameObject:
   - component: {fileID: 4779126927272943288}
   - component: {fileID: 7985121144012004786}
   - component: {fileID: 7959815779980944828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Holder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1658,7 +1658,7 @@ GameObject:
   - component: {fileID: 4602524354589151444}
   - component: {fileID: 6156840854807768789}
   - component: {fileID: 1694838162364547044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pole.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1737,7 +1737,7 @@ GameObject:
   - component: {fileID: 3398390002878949763}
   - component: {fileID: 2934620698231662081}
   - component: {fileID: 6005701438304531575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,7 +1816,7 @@ GameObject:
   - component: {fileID: 6985682124519467294}
   - component: {fileID: 6425213350668388039}
   - component: {fileID: 1059903978353089387}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Holder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1895,7 +1895,7 @@ GameObject:
   - component: {fileID: 7905654304878111526}
   - component: {fileID: 7387455775167272101}
   - component: {fileID: 1313000106534765169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightBox.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +1974,7 @@ GameObject:
   - component: {fileID: 2620128580135692400}
   - component: {fileID: 2898581693041121065}
   - component: {fileID: 7301123031022831629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2056,7 +2056,7 @@ GameObject:
   - component: {fileID: 8240991237548180788}
   - component: {fileID: 6746146192539947561}
   - component: {fileID: 3090735230570735243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Traffic_light_4 Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1394990869804959525}
   - component: {fileID: 1394990869804959524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2287,7 +2287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1394990871113316410}
   - component: {fileID: 1394990871113316411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2380,7 +2380,7 @@ GameObject:
   - component: {fileID: 955015089559918097}
   - component: {fileID: 8134426423416791273}
   - component: {fileID: 1970413253531612530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2460,7 +2460,7 @@ GameObject:
   - component: {fileID: 3626008359051650859}
   - component: {fileID: 3462528776179605927}
   - component: {fileID: 7463547768340630119}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2551,7 +2551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594181285692700266}
   - component: {fileID: 9030375874680079821}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2643,7 +2643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 594181285993875829}
   - component: {fileID: 9030375873843051218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2736,7 +2736,7 @@ GameObject:
   - component: {fileID: 1074685026790548469}
   - component: {fileID: 5593573525067969534}
   - component: {fileID: 7501833883535926793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,7 +2816,7 @@ GameObject:
   - component: {fileID: 2557482023793843260}
   - component: {fileID: 812762411878119593}
   - component: {fileID: 2441626675571906821}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2909,7 +2909,7 @@ GameObject:
   - component: {fileID: 4958918343661018160}
   - component: {fileID: 4607110922317078370}
   - component: {fileID: 6161812110399535679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3001,7 +3001,7 @@ GameObject:
   - component: {fileID: 7639349899207345272}
   - component: {fileID: 8894358605689419663}
   - component: {fileID: 1154648208579133153}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3081,7 +3081,7 @@ GameObject:
   - component: {fileID: 8696991200143331915}
   - component: {fileID: 5375639939976488535}
   - component: {fileID: 4992153704596559145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3172,7 +3172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207437823678270260}
   - component: {fileID: 5826519201821657513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3266,7 +3266,7 @@ GameObject:
   - component: {fileID: 3467283655664435780}
   - component: {fileID: 5413440078619394326}
   - component: {fileID: 2399572661180081227}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3357,7 +3357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6809385226568443720}
   - component: {fileID: 556818722276175806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3449,7 +3449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4346219635052183615}
   - component: {fileID: 4911288107912413853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3541,7 +3541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4346219636361101088}
   - component: {fileID: 4911288107137252738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3635,7 +3635,7 @@ GameObject:
   - component: {fileID: 5088489840038525279}
   - component: {fileID: 4954670403700146131}
   - component: {fileID: 1394990870807876627}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3727,7 +3727,7 @@ GameObject:
   - component: {fileID: 1835603175097038162}
   - component: {fileID: 1317964846795328209}
   - component: {fileID: 7419521280698670085}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrafficLightBox.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3809,7 +3809,7 @@ GameObject:
   - component: {fileID: 473502718096988992}
   - component: {fileID: 2977154028632427613}
   - component: {fileID: 6785700579605018879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Traffic_light_4 Variant 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3950,7 +3950,7 @@ GameObject:
   - component: {fileID: 4781314196537640701}
   - component: {fileID: 461103012609682080}
   - component: {fileID: 2519384909944494047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4042,7 +4042,7 @@ GameObject:
   - component: {fileID: 5806064502854579716}
   - component: {fileID: 6698556175041579357}
   - component: {fileID: 1269194164448974457}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4121,7 +4121,7 @@ GameObject:
   - component: {fileID: 8759286606582220901}
   - component: {fileID: 300773962965581469}
   - component: {fileID: 8041046853716404998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GreenHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4200,7 +4200,7 @@ GameObject:
   - component: {fileID: 2526256196661290918}
   - component: {fileID: 4940306263840119799}
   - component: {fileID: 1309375335985600002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4278,7 +4278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7976821062062431202}
   - component: {fileID: 608106087940879422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4372,7 +4372,7 @@ GameObject:
   - component: {fileID: 4625646709944324430}
   - component: {fileID: 7753543341117975525}
   - component: {fileID: 6337285972045644748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OrangeLight.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4464,7 +4464,7 @@ GameObject:
   - component: {fileID: 5409010530724482720}
   - component: {fileID: 2431565341665341601}
   - component: {fileID: 7154706590869971344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pole.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4543,7 +4543,7 @@ GameObject:
   - component: {fileID: 6622077451279693815}
   - component: {fileID: 6662517176310413429}
   - component: {fileID: 2852837176146749955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RedHat.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
