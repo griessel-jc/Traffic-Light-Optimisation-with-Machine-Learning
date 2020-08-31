@@ -218,7 +218,10 @@ public class Path : NetworkBehaviour
 
             transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
-            transform.rotation = Quaternion.LookRotation(directionVector);
+            if (directionVector != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(directionVector);
+            }
             yield return new WaitForEndOfFrame();
         }
 

@@ -49121,6 +49121,31 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 36047ac20136c484a93c7d53a142ef62
       objectReference: {fileID: 0}
+    - target: {fileID: 6877526299493342434, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526299493342436, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526299666184834, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526299984649925, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526299993960065, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6877526300189829140, guid: 36047ac20136c484a93c7d53a142ef62,
         type: 3}
       propertyPath: m_Name
@@ -49179,6 +49204,36 @@ PrefabInstance:
     - target: {fileID: 6877526300189829141, guid: 36047ac20136c484a93c7d53a142ef62,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526300240919080, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526300544264144, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526300544264146, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526300544264149, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526300904653938, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877526301132006474, guid: 36047ac20136c484a93c7d53a142ef62,
+        type: 3}
+      propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

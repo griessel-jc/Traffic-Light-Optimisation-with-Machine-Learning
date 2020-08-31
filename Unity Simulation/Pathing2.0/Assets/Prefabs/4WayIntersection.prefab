@@ -530,9 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df2e731f34750245bf84c650a4338a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!54 &6877526299993960065
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1001,9 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df2e731f34750245bf84c650a4338a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!54 &6877526300544264144
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1127,9 +1121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df2e731f34750245bf84c650a4338a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!54 &6877526300904653938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1253,9 +1244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df2e731f34750245bf84c650a4338a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!54 &6877526301132006474
 Rigidbody:
   m_ObjectHideFlags: 0

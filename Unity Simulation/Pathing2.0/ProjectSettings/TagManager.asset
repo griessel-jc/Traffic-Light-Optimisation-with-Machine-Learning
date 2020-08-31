@@ -10,6 +10,7 @@ TagManager:
   - Green
   - Orange
   - CarSpawned
+  - CountingTag
   layers:
   - Default
   - TransparentFX
