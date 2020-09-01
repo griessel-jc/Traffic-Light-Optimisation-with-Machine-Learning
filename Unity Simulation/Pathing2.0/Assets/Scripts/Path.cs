@@ -54,7 +54,7 @@ public class Path : NetworkBehaviour
 
         nextCurve = startpoint[Random.Range(0,startpoint.Count)];
         t = 0f;
-        speed = 0.4f;
+        speed = 0.1f;
         coroutingAllowed = true;
 
         nextCurveOptions = new int[90][];
