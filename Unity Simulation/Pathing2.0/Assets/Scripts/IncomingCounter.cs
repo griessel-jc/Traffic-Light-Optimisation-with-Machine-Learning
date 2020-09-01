@@ -10,23 +10,30 @@ public class IncomingCounter : MonoBehaviour
     private Collider[] hitColliders;*/
 
     private int numStationaryCars;
+    private int numMovingCars;
 
     void Start()
     {
         //started = true;
         numStationaryCars = 0;
+        numMovingCars = 0;
     }
 
-    void Update()
+    public void reset()
     {
-        
-    } 
+        numMovingCars = 0;
+    }
 
     public int getNumberCars(){
         //hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, layerMask);
         //Debug.Log("<color=blue> Number stat cars: "+hitColliders.Length+"</color>");
         //return hitColliders.Length;
         return numStationaryCars;
+    }
+
+    public int getMovingCars()
+    {
+        return numMovingCars;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +49,7 @@ public class IncomingCounter : MonoBehaviour
         if (other.gameObject.CompareTag("CountingTag"))
         {
             numStationaryCars -= 1;
+            numMovingCars += 1;
         }
     }
 
