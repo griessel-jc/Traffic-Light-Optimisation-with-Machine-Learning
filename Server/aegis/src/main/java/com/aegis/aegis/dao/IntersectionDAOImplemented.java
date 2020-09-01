@@ -9,7 +9,9 @@ import exception.RecordNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
 import org.hibernate.Session;
+import org.hibernate.procedure.ProcedureOutputs;
 import org.hibernate.query.Query; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -65,8 +67,13 @@ public class IntersectionDAOImplemented implements IntersectionDAO{
                 Session currSession = entityManager.unwrap(Session.class);
                 currSession.saveOrUpdate(statistic);
             }
-        }catch(RecordNotFoundException re){
-            
+        }catch(RecordNotFoundException re){}
+        
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("clean_db");
+        try{
+            query.execute();
+        }finally{
+            query.unwrap(ProcedureOutputs.class).release();
         }
     }
 
