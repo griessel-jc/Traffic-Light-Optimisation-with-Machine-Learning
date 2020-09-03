@@ -1,63 +1,81 @@
 package machineLearning; 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ReinforcementLearning {
     public NeuralNetwork target, prediction;
     private NeuralNetworkUtitlities utility;
-    private int lastAction;
+    private ArrayList<Transition> replayBuffer;                                     //replay buffer
+    private int lastAction;                                 
     private int currentAction; 
-    private double[] lastState;
+    private int numMemories; 
+    private double[] lastState;                                                     //holds the last 
     private double[] currState;
-    private int totalIterations;                             //how many iterations before 
     private int currIteration;
-    private double gamma;
-    private double discount;
-    
-    
-    /**
-     * ReinforcementLearning() - Instantiates a Reinforcement Learning Object
-     * @param gamma
-     * @param iterations - number of iterations before updating the target network with the prediction network.
-     * @param numInt - number of intersections.
-     * @param hl - the hidden layer configuration.
-     * @param lr - the learning rate.
-     * @param e - epsilon.
-     */
-    public ReinforcementLearning(double gamma,int iterations,int numInt, int[] hl, double lr, double e) {
-        this.discount               = gamma;
-        this.lastAction             = -1;
-        this.utility                = new  NeuralNetworkUtitlities(numInt,hl, lr,e);
-        this.target                 = NeuralNetworkUtitlities.createTargetNeuralNetwork();
-        this.prediction             = NeuralNetworkUtitlities.createPredictionNeuralNetwork();
+    private final static int minibatchSize      = 100;                                //minibatch size m
+    private final static int memorySize         = 500;                               //memory size
+    private final static double discount        = 0.8;
+    private final static int totalIterations    = 1000;                             //how many iterations before updating target 
+    private final static Random random          = new Random(42069);                //
+     
+    public ReinforcementLearning(int[] hl) {
+        this.lastAction             = -1; 
+        this.utility                = new  NeuralNetworkUtitlities(hl);
+        this.target                 = NeuralNetworkUtitlities.createNeuralNetwork();
+        this.prediction             = NeuralNetworkUtitlities.createNeuralNetwork();
         this.currIteration          = 0;
-        this.totalIterations        = iterations;
-        NeuralNetworkUtitlities.saveModel(target);
-        NeuralNetworkUtitlities.saveModel(prediction);
+        this.replayBuffer           = new ArrayList<>();
     } 
     
     /**
      * getAction() - get the action to take given the state
      * @param state
-     * @return 
+     * @return the action
      */
-    public int getAction(double[] state){
-        System.out.println("GETTING ACTION");
+    public int getAction(double[] state){ 
         this.lastAction             = this.currentAction;
         this.lastState              = this.currState;
         this.currState              = state; 
-        this.currentAction          = prediction.maxA(state);
-        if(lastState != null) this.prediction.Backpropagate(lastAction,Loss());
+        this.currentAction          = prediction.maxA(this.currState);
+        if(lastState != null){
+            storeTransitionAndLearn(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState));
+            //this.replayBuffer.add(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState));
+            NeuralNetworkUtitlities.saveModelState(prediction);
+        }
+        //NeuralNetworkUtitlities.emptyFile();
+        
+        
         ++currIteration;
         if(currIteration >= totalIterations){
             currIteration = 0;
-            NeuralNetworkUtitlities.copy(target,prediction);
-            NeuralNetworkUtitlities.saveModel(target);
-        }
-        NeuralNetworkUtitlities.saveModel(prediction);
+            target = NeuralNetworkUtitlities.restoreNeuralNetwork();
+            prediction.incrementEpoch();
+        } 
+        
         return this.currentAction;
     }
-   
+    
+    /**
+     * storeTransition() - stores a transition and samples replay buffer
+     * @param t - the transition to store
+     */
+    public void storeTransitionAndLearn(Transition t){
+        replayBuffer.add(t);
+        ++numMemories;
+        while(numMemories > memorySize){
+            replayBuffer.remove(0);
+            --numMemories;
+        }
+        int i = 0;
+        while(i < minibatchSize/* && i < numMemories*/){
+            
+            int memoryPosition = this.random.nextInt((numMemories));
+            Transition memory = this.replayBuffer.get(memoryPosition);
+            this.prediction.Backpropagate(memory.action, Loss(memory.state_before,memory.action,memory.state_after));
+            ++i;
+        }
+    }
     /**
      * Reward() - calculate the reward for the action
      * @param s_before
@@ -65,14 +83,14 @@ public class ReinforcementLearning {
      * @param s_after
      * @return a double holding the reward
      */
-    private double Reward(double[] s_before, int a, double[] s_after){
+    private static double Reward(double[] s_before, int a, double[] s_after){
         double r                    = 0;//the reward
         double incNumMoving         = 0;
         double incNumStationary     = 0;
         
         for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
-            incNumStationary            += (currState[(i*NeuralNetworkUtitlities.numNumbersData)+0]-lastState[(i*NeuralNetworkUtitlities.numNumbersData)+0]) + (currState[(i*NeuralNetworkUtitlities.numNumbersData)+1]-lastState[(i*NeuralNetworkUtitlities.numNumbersData)+1]);
-            incNumMoving                += (currState[(i*NeuralNetworkUtitlities.numNumbersData)+2]-lastState[(i*NeuralNetworkUtitlities.numNumbersData)+2]) + (currState[(i*NeuralNetworkUtitlities.numNumbersData)+3]-lastState[(i*NeuralNetworkUtitlities.numNumbersData)+3]); 
+            incNumStationary            += (s_after[(i*NeuralNetworkUtitlities.numNumbersData)+0]-s_before[(i*NeuralNetworkUtitlities.numNumbersData)+0]) + (s_after[(i*NeuralNetworkUtitlities.numNumbersData)+1]-s_before[(i*NeuralNetworkUtitlities.numNumbersData)+1]);
+            incNumMoving                += (s_after[(i*NeuralNetworkUtitlities.numNumbersData)+2]-s_before[(i*NeuralNetworkUtitlities.numNumbersData)+2]) + (s_after[(i*NeuralNetworkUtitlities.numNumbersData)+3]-s_before[(i*NeuralNetworkUtitlities.numNumbersData)+3]); 
         }
         r                           = incNumMoving - (incNumStationary);
         return r;
@@ -82,9 +100,9 @@ public class ReinforcementLearning {
      * Loss() - Calculate the loss.
      * @return the loss
      */
-    private double Loss(){ 
-        double temporalDifference   = Reward(lastState, lastAction, lastState)+ (discount*this.target.maxQ(currState));
-        double TDerror              = temporalDifference - this.prediction.Q(this.lastState,this.lastAction);
+    private double Loss(double[] s_before,int a, double[] s_after){ 
+        double temporalDifference   = Reward(s_before, a, s_after)+ (discount*this.target.maxQ(s_after));
+        double TDerror              = temporalDifference - this.prediction.Q(s_before,a);
         double behaviourDistribution = 0;
         /*return behaviourDistribution*Math.pow(TDerror,2);*/
         return Math.pow(TDerror,2);
