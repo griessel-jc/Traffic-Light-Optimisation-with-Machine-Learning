@@ -19,14 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/simu")
 public class SimulationController { 
-    private final ReinforcementLearning rl = new ReinforcementLearning(
-            0.8,                //Discount factor
-            1000,               //Number iterations before copying prediction model to target model
-            6,                  //Numbr of intersection
-            new int[]{100,100}, //Number hidden layers
-            0.04,               //Learning rate
-            0.05                //Epsilon - for epsilon-greedy algorithm
-    );
+    private ReinforcementLearning rl = new ReinforcementLearning(new int[]{300,300});
     
     @Autowired
     private IntersectionService intersectionService;
@@ -57,8 +50,20 @@ public class SimulationController {
             state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getPhase();
+            state[(i*NeuralNetworkUtitlities.numNumbersData)+4] = stats[i].getPhase();
         } 
         return rl.getAction(state);
     }
+    
+    @PostMapping("/resetModel")
+    public void resetModel(){
+        NeuralNetworkUtitlities.deleteModel();
+        rl = new ReinforcementLearning(new int[]{300,300});
+    }
+    
+    @PostMapping("/print")
+    public void print(){
+        rl.prediction.Print();
+    }
+    
 }
