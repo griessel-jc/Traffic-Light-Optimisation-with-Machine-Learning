@@ -57,7 +57,7 @@ public class SimulationController {
         double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
         for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
             addStat(stats[i]);
-            addStat2(stats[i]);
+            //addStat2(stats[i]);
             state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
