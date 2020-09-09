@@ -9,6 +9,7 @@ import AegisLogo from '../images/Aegis_logo.png';
 
 class Statistics extends Component {
     chartRef = React.createRef();
+    showStat = true;
     //socket      = new WebSocket("ws://localhost:4444");; 
     constructor(props) {
         super(props);
@@ -20,187 +21,189 @@ class Statistics extends Component {
     }
 
     updateState(self) {
-        console.log("updating");
-        //var tl_objects = [];
-        var int_objects = [];
-        var ai_int_objects = [];
-        var normal_int_objects = [];
-        axios.get('http://localhost:8080/simu/getIntersections2')
-            .then(response => {
-                var int_data        = response.data;
-                var ai_int_data     = int_data.ai;
-                var normal_int_data = int_data.normal;
-                ai_int_data.forEach((intersection, index) => {
-                    var dataStationary = [];
-                    var dataMoving = [];
-                    var timestamps = [];
-                    var i_name = intersection.name;
-                    intersection.statistics.forEach((statistic, index) => {
-                        const totalStationary = statistic.stationaryX + statistic.stationaryY;
-                        const totalMoving = statistic.movingX + statistic.movingY;
-                        const timestamp = Date.parse(statistic.timestamp);
-
-                        dataStationary.push(totalStationary);
-                        dataMoving.push(totalMoving);
-                        timestamps.push(timestamp);
-
-                    });
-
-                    var int_object = {
-                        name: i_name,
-                        series: [{
-                            name: "Stationary Vehicles",
-                            data: dataStationary
-                        },
-                        {
-                            name: "Moving Vehicles",
-                            data: dataMoving
-                        }
-                        ],
-                        options: {
-                            legend: {
-                                labels: {
-                                    colors: '#fff',
-                                    useSeriesColors: false
-                                },
+        if(this.showStat){
+            console.log("updating");
+            //var tl_objects = [];
+            var int_objects = [];
+            var ai_int_objects = [];
+            var normal_int_objects = [];
+            axios.get('http://localhost:8080/simu/getIntersections2')
+                .then(response => {
+                    var int_data        = response.data;
+                    var ai_int_data     = int_data.ai;
+                    var normal_int_data = int_data.normal;
+                    ai_int_data.forEach((intersection, index) => {
+                        var dataStationary = [];
+                        var dataMoving = [];
+                        var timestamps = [];
+                        var i_name = intersection.name;
+                        intersection.statistics.forEach((statistic, index) => {
+                            const totalStationary = statistic.stationaryX + statistic.stationaryY;
+                            const totalMoving = statistic.movingX + statistic.movingY;
+                            const timestamp = Date.parse(statistic.timestamp);
+    
+                            dataStationary.push(totalStationary);
+                            dataMoving.push(totalMoving);
+                            timestamps.push(timestamp);
+    
+                        });
+    
+                        var int_object = {
+                            name: i_name,
+                            series: [{
+                                name: "Stationary Vehicles",
+                                data: dataStationary
                             },
-                            xaxis: {
-                                categories: timestamps,
-                                labels: {
-                                    style: {
-                                        colors: '#fff',
-                                    },
-                                },
-                            },
-                            yaxis: [
-                                {
-                                    title: {
-                                        text: "Statioanry Vehicles",
-                                        style: {
-                                            color: '#d1d1d1'
-                                        },
-                                    },
-                                    labels: {
-                                        style: {
-                                            colors: '#fff',
-                                        },
-                                    },
-                                },
-                                {
-                                    opposite: true,
-                                    title: {
-                                        text: "Moving Vehicles",
-                                        style: {
-                                            color: '#d1d1d1'
-                                        },
-                                    },
-                                    labels: {
-                                        style: {
-                                            colors: '#fff',
-                                        },
-                                    },
-                                },
+                            {
+                                name: "Moving Vehicles",
+                                data: dataMoving
+                            }
                             ],
-                        }
-
-                    };
-                    ai_int_objects.push(int_object);
-                });
-
-                normal_int_data.forEach((intersection, index) => {
-                    var dataStationary = [];
-                    var dataMoving = [];
-                    var timestamps = [];
-                    var i_name = intersection.name;
-                    intersection.statistics.forEach((statistic, index) => {
-                        const totalStationary = statistic.stationaryX + statistic.stationaryY;
-                        const totalMoving = statistic.movingX + statistic.movingY;
-                        const timestamp = Date.parse(statistic.timestamp);
-
-                        dataStationary.push(totalStationary);
-                        dataMoving.push(totalMoving);
-                        timestamps.push(timestamp);
-
-                    });
-
-                    var int_object = {
-                        name: i_name,
-                        series: [{
-                            name: "Stationary Vehicles",
-                            data: dataStationary
-                        },
-                        {
-                            name: "Moving Vehicles",
-                            data: dataMoving
-                        }
-                        ],
-                        options: {
-                            legend: {
-                                labels: {
-                                    colors: '#fff',
-                                    useSeriesColors: false
-                                },
-                            },
-                            xaxis: {
-                                categories: timestamps,
-                                labels: {
-                                    style: {
+                            options: {
+                                legend: {
+                                    labels: {
                                         colors: '#fff',
+                                        useSeriesColors: false
                                     },
                                 },
+                                xaxis: {
+                                    categories: timestamps,
+                                    labels: {
+                                        style: {
+                                            colors: '#fff',
+                                        },
+                                    },
+                                },
+                                yaxis: [
+                                    {
+                                        title: {
+                                            text: "Statioanry Vehicles",
+                                            style: {
+                                                color: '#d1d1d1'
+                                            },
+                                        },
+                                        labels: {
+                                            style: {
+                                                colors: '#fff',
+                                            },
+                                        },
+                                    },
+                                    {
+                                        opposite: true,
+                                        title: {
+                                            text: "Moving Vehicles",
+                                            style: {
+                                                color: '#d1d1d1'
+                                            },
+                                        },
+                                        labels: {
+                                            style: {
+                                                colors: '#fff',
+                                            },
+                                        },
+                                    },
+                                ],
+                            }
+    
+                        };
+                        ai_int_objects.push(int_object);
+                    });
+    
+                    normal_int_data.forEach((intersection, index) => {
+                        var dataStationary = [];
+                        var dataMoving = [];
+                        var timestamps = [];
+                        var i_name = intersection.name;
+                        intersection.statistics.forEach((statistic, index) => {
+                            const totalStationary = statistic.stationaryX + statistic.stationaryY;
+                            const totalMoving = statistic.movingX + statistic.movingY;
+                            const timestamp = Date.parse(statistic.timestamp);
+    
+                            dataStationary.push(totalStationary);
+                            dataMoving.push(totalMoving);
+                            timestamps.push(timestamp);
+    
+                        });
+    
+                        var int_object = {
+                            name: i_name,
+                            series: [{
+                                name: "Stationary Vehicles",
+                                data: dataStationary
                             },
-                            yaxis: [
-                                {
-                                    title: {
-                                        text: "Statioanry Vehicles",
-                                        style: {
-                                            color: '#d1d1d1'
-                                        },
-                                    },
-                                    labels: {
-                                        style: {
-                                            colors: '#fff',
-                                        },
-                                    },
-                                },
-                                {
-                                    opposite: true,
-                                    title: {
-                                        text: "Moving Vehicles",
-                                        style: {
-                                            color: '#d1d1d1'
-                                        },
-                                    },
-                                    labels: {
-                                        style: {
-                                            colors: '#fff',
-                                        },
-                                    },
-                                },
+                            {
+                                name: "Moving Vehicles",
+                                data: dataMoving
+                            }
                             ],
-                        }
-
-                    };
-                    normal_int_objects.push(int_object);
+                            options: {
+                                legend: {
+                                    labels: {
+                                        colors: '#fff',
+                                        useSeriesColors: false
+                                    },
+                                },
+                                xaxis: {
+                                    categories: timestamps,
+                                    labels: {
+                                        style: {
+                                            colors: '#fff',
+                                        },
+                                    },
+                                },
+                                yaxis: [
+                                    {
+                                        title: {
+                                            text: "Statioanry Vehicles",
+                                            style: {
+                                                color: '#d1d1d1'
+                                            },
+                                        },
+                                        labels: {
+                                            style: {
+                                                colors: '#fff',
+                                            },
+                                        },
+                                    },
+                                    {
+                                        opposite: true,
+                                        title: {
+                                            text: "Moving Vehicles",
+                                            style: {
+                                                color: '#d1d1d1'
+                                            },
+                                        },
+                                        labels: {
+                                            style: {
+                                                colors: '#fff',
+                                            },
+                                        },
+                                    },
+                                ],
+                            }
+    
+                        };
+                        normal_int_objects.push(int_object);
+                    });
+    
+                    const ai        = ai_int_objects;
+                    const normal    = normal_int_objects;
+                    //const intersections = { ai: ai_int_objects, normal: normal_int_objects };
+                    //self.setState({ intersections });
+                    self.setState({ ai: ai, normal: normal });
+                    function sleep(ms) {
+                        return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+                    async function update() {
+                        await sleep(5000);
+                        self.updateState(self);
+                    }
+                    update();
+    
+                }).catch(error => {
+                    console.log(error);
                 });
-
-                const ai        = ai_int_objects;
-                const normal    = normal_int_objects;
-                //const intersections = { ai: ai_int_objects, normal: normal_int_objects };
-                //self.setState({ intersections });
-                self.setState({ ai: ai, normal: normal });
-                function sleep(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                }
-                async function update() {
-                    await sleep(5000);
-                    self.updateState(self);
-                }
-                update();
-
-            }).catch(error => {
-                console.log(error);
-            });
+        }
     }
 
 
@@ -209,6 +212,7 @@ class Statistics extends Component {
     componentDidMount() {
         if (getUser() !== null) {
             this.updateState(this);
+
         }
         /*if (getUser() !== null) {
             this.updateState(); 
@@ -220,6 +224,7 @@ class Statistics extends Component {
     }
 
     goBack = () => {
+        this.showStat = false;
         this.props.history.push("/dashboard");
     }
 
