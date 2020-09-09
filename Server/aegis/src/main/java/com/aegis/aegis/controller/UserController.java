@@ -34,21 +34,7 @@ public class UserController {
      
     
     @Autowired
-    private UserService userService;
-    /*
-    @Autowired
-    private IntersectionService intersectionService;
-     
-    @Autowired
-    private TrafficlightService trafficlightService;
-    
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getTrafficlights")
-    public List<Trafficlight> getTrafficlights() {
-        return trafficlightService.getTrafficlights();
-    }
-    */
-     
+    private UserService userService; 
     
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getUsers")

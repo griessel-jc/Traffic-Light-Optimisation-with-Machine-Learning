@@ -1,9 +1,8 @@
 package com.aegis.aegis.controller;
  
-import com.aegis.aegis.modal.Intersection;
 import com.aegis.aegis.service.IntersectionService;
-import com.google.gson.Gson;
 import dto.intersectionDto;
+import dto.intersectionsDto;
 import dto.statisticDto;
 import java.util.List; 
 import machineLearning.ReinforcementLearning;
@@ -30,6 +29,14 @@ public class SimulationController {
         return intersectionService.getIntersections();
     } 
     
+    
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getIntersections2")
+    public intersectionsDto getIntersections2(){
+        return intersectionService.getIntersections2();
+    } 
+    
+    
     @PostMapping("/addStatistic")
     public List<intersectionDto> addStatistic(@RequestBody statisticDto statistic){
         intersectionService.addStatistic(statistic);
@@ -40,12 +47,17 @@ public class SimulationController {
         intersectionService.addStatistic(statistic);
     }
     
+    public void addStat2(statisticDto statistic){
+        intersectionService.addStatistic2(statistic);
+    }
+    
     @CrossOrigin(origins = "http://localhost:7777")
     @PostMapping("/addStatistics")
     public int addstatistics(@RequestBody statisticDto[] stats){
         double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
         for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
             addStat(stats[i]);
+            addStat2(stats[i]);
             state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
@@ -54,7 +66,13 @@ public class SimulationController {
         } 
         return rl.getAction(state);
     }
-    
+    @CrossOrigin(origins = "http://localhost:7777")
+    @PostMapping("/addStatistics2")
+    public void addstatistics2(@RequestBody statisticDto[] stats){
+        for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
+            addStat2(stats[i]);
+        } 
+    }
     @PostMapping("/resetModel")
     public void resetModel(){
         NeuralNetworkUtitlities.deleteModel();
