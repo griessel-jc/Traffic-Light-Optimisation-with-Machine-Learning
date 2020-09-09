@@ -74,6 +74,7 @@ public class CommandCenter : MonoBehaviour
                 obj = intersections[i].getIntersection();
             }
             obj.name = "intersection" + (i+1);
+            //obj.name = intersections[i].name;
             json += obj.toJson(i+1);
             json += ",";
         }
@@ -88,6 +89,7 @@ public class CommandCenter : MonoBehaviour
             obj = intersections[i].getIntersection();
         }
         obj.name = "intersection" + (i+1);
+        //obj.name = intersections[i].name;
         json += obj.toJson(i+1);
         json += "]";
         Debug.Log("Sending: " + json);

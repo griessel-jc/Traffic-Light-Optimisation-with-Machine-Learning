@@ -9,12 +9,12 @@ public class FourWayIntersection : IntersectionParent
     /*Car Counters*/
     public GameObject inX1;
     public GameObject inX2;
-    public GameObject outX1;
-    public GameObject outX2;
+    //public GameObject outX1;
+    //public GameObject outX2;
     public GameObject inZ1;
     public GameObject inZ2;
-    public GameObject outZ1;
-    public GameObject outZ2;
+    //public GameObject outZ1;
+    //public GameObject outZ2;
 
     /*Traffic Lights*/
     public GameObject tlX1;
@@ -70,28 +70,30 @@ public class FourWayIntersection : IntersectionParent
         timeLeftBothRed = timeOutBothRed;
         light_configruation = !light_configruation;
         changeLights();
-        outX1.GetComponent<OutgoingCounter>().reset();
+        /*outX1.GetComponent<OutgoingCounter>().reset();
         outX2.GetComponent<OutgoingCounter>().reset();
         outZ1.GetComponent<OutgoingCounter>().reset();
-        outZ2.GetComponent<OutgoingCounter>().reset();
+        outZ2.GetComponent<OutgoingCounter>().reset();*/
+        inX1.GetComponent<IncomingCounter>().reset();
+        inX2.GetComponent<IncomingCounter>().reset();
+        inZ1.GetComponent<IncomingCounter>().reset();
+        inZ2.GetComponent<IncomingCounter>().reset();
     }
 
     public override TrafficIntersection getIntersection()
     {
         TrafficIntersection intersection = new TrafficIntersection();
         if(isZ){
-            intersection.stationaryX += inX1.GetComponent<IncomingCounter>().getNumberCars();
-            intersection.stationaryX += inX2.GetComponent<IncomingCounter>().getNumberCars();
+            intersection.stationaryX = (inX1.GetComponent<IncomingCounter>().getNumberCars() + inX2.GetComponent<IncomingCounter>().getNumberCars());
         }else if(isX){
-            intersection.stationaryY += inZ1.GetComponent<IncomingCounter>().getNumberCars();
-            intersection.stationaryY += inZ2.GetComponent<IncomingCounter>().getNumberCars();
+            intersection.stationaryY = (inZ1.GetComponent<IncomingCounter>().getNumberCars() + inZ2.GetComponent<IncomingCounter>().getNumberCars());
         }
-        intersection.movingX += outX1.GetComponent<OutgoingCounter>().getNumberCars();
-        intersection.movingX += outX2.GetComponent<OutgoingCounter>().getNumberCars();
-        intersection.movingY += outZ1.GetComponent<OutgoingCounter>().getNumberCars();
-        intersection.movingY += outZ2.GetComponent<OutgoingCounter>().getNumberCars();
+        //intersection.movingX = (outX1.GetComponent<OutgoingCounter>().getNumberCars() + outX2.GetComponent<OutgoingCounter>().getNumberCars());
+        //intersection.movingY = (outZ1.GetComponent<OutgoingCounter>().getNumberCars() + outZ2.GetComponent<OutgoingCounter>().getNumberCars());
+        intersection.movingX = (inX1.GetComponent<IncomingCounter>().getMovingCars() + inX2.GetComponent<IncomingCounter>().getMovingCars());
+        intersection.movingY = (inZ1.GetComponent<IncomingCounter>().getMovingCars() + inZ2.GetComponent<IncomingCounter>().getMovingCars());
 
-        if(isX)
+        if (isX)
         {
             intersection.phase = 0;
         }

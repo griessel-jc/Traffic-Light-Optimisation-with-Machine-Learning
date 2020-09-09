@@ -54,7 +54,7 @@ public class Path : NetworkBehaviour
 
         nextCurve = startpoint[Random.Range(0,startpoint.Count)];
         t = 0f;
-        speed = 0.4f;
+        speed = 0.1f;
         coroutingAllowed = true;
 
         nextCurveOptions = new int[90][];
@@ -218,7 +218,10 @@ public class Path : NetworkBehaviour
 
             transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
-            transform.rotation = Quaternion.LookRotation(directionVector);
+            if (directionVector != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(directionVector);
+            }
             yield return new WaitForEndOfFrame();
         }
 
