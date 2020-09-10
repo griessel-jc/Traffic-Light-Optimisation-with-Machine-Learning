@@ -13,10 +13,10 @@ public class ReinforcementLearning {
     private double[] lastState;                                                     //holds the last 
     private double[] currState;
     private int currIteration;
-    private final static int minibatchSize      = 100;                                //minibatch size m
-    private final static int memorySize         = 500;                               //memory size
+    private final static int minibatchSize      = 64;                                //minibatch size m
+    private final static int memorySize         = 128;                               //memory size
     private final static double discount        = 0.8;
-    private final static int totalIterations    = 1000;                             //how many iterations before updating target 
+    private final static int totalIterations    = 500;                             //how many iterations before updating target 
     private final static Random random          = new Random(42069);                //
      
     public ReinforcementLearning(int[] hl) {
@@ -72,7 +72,7 @@ public class ReinforcementLearning {
             
             int memoryPosition = this.random.nextInt((numMemories));
             Transition memory = this.replayBuffer.get(memoryPosition);
-            this.prediction.Backpropagate(memory.action, Loss(memory.state_before,memory.action,memory.state_after));
+            this.prediction.Backpropagate(this.prediction.Q(memory.state_before, memory.action),memory.action, Loss(memory.state_before,memory.action,memory.state_after));
             ++i;
         }
     }

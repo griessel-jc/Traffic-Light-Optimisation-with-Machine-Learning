@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/simu")
 public class SimulationController { 
-    private ReinforcementLearning rl = new ReinforcementLearning(new int[]{300,300});
+    private ReinforcementLearning rl = new ReinforcementLearning(new int[]{300,300,300,300});
     
     @Autowired
     private IntersectionService intersectionService;
