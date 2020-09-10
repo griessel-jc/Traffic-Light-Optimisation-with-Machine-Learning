@@ -273,30 +273,30 @@ public class NeuralNetwork {
      * Backpropagate() - adjusts the weights and biases of the neural network to
      * reflect the reward.
      *
-     * @param output - the output node that corresponds to the chosen action
+     * @param Q - the last Q value
+     * @param action - the action that was taken   
      * @param loss - the amount to promote demote the action by
      */
-    public void Backpropagate(int output, double loss) { 
-        double target = levels[numberLayers - 1].get(output).output + learningRate*(loss);
+    public void Backpropagate(double Q, int action, double loss) { 
         /*
         ======
         OUTPUT
         ======
          */
         //1.) Error Infomation Term
-        levels[numberLayers - 1].get(output).error
-                = (target - levels[numberLayers - 1].get(output).output)
-                * levels[numberLayers - 1].get(output).F_Derivative(CalculateN(numberLayers - 1, output));
+        levels[numberLayers - 1].get(action).error
+                = Q
+                * levels[numberLayers - 1].get(action).F_Derivative(CalculateN(numberLayers - 1, action));
 
         //2.) Weight Error Term
         for (int i = 0; i < numNodesHiddenLayer[numHiddenLayers - 1]; i++) {
             /*For each node in the last hidden layer, adjust its weights to the current output node*/
-            int pos = (i * numOutput) + output; 
+            int pos = (i * numOutput) + action; 
             
             vdw[numHiddenLayers]
-                    .set(pos, (B1*vdw[numHiddenLayers].get(pos) +(1-B1)*levels[numberLayers - 1].get(output).error)/(1-B1));
+                    .set(pos, (B1*vdw[numHiddenLayers].get(pos) +(1-B1)*levels[numberLayers - 1].get(action).error)/(1-B1));
             sdw[numHiddenLayers]
-                    .set(pos, (B2*sdw[numHiddenLayers].get(pos) +(1-B2)*Math.pow(levels[numberLayers - 1].get(output).error,2))/(1-B2));
+                    .set(pos, (B2*sdw[numHiddenLayers].get(pos) +(1-B2)*Math.pow(levels[numberLayers - 1].get(action).error,2))/(1-B2));
              
             weights[numHiddenLayers]
                     .set(pos, weights[numHiddenLayers]
@@ -311,15 +311,15 @@ public class NeuralNetwork {
         //3.) Bias Error Term 
         
         vdb[numHiddenLayers]
-                .set(output, (B1*vdw[numHiddenLayers].get(output) +(1-B1)*levels[numberLayers - 1].get(output).error)/(1-B1));
+                .set(action, (B1*vdw[numHiddenLayers].get(action) +(1-B1)*levels[numberLayers - 1].get(action).error)/(1-B1));
         sdb[numHiddenLayers]
-                .set(output, (B2*sdw[numHiddenLayers].get(output) +(1-B2)*Math.pow(levels[numberLayers - 1].get(output).error,2))/(1-B2));
+                .set(action, (B2*sdw[numHiddenLayers].get(action) +(1-B2)*Math.pow(levels[numberLayers - 1].get(action).error,2))/(1-B2));
         biases[numHiddenLayers]
-                .set(output,biases[numHiddenLayers]
-                            .get(output)
+                .set(action,biases[numHiddenLayers]
+                            .get(action)
                             + (learningRate
-                            * vdb[numHiddenLayers].get(output)
-                            / (Math.sqrt(sdw[numHiddenLayers].get(output)) + adam_epsilon))
+                            * vdb[numHiddenLayers].get(action)
+                            / (Math.sqrt(sdw[numHiddenLayers].get(action)) + adam_epsilon))
                 );
         /*biases[numHiddenLayers]
                 .set(output,

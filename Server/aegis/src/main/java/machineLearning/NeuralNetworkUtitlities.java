@@ -60,7 +60,9 @@ public class NeuralNetworkUtitlities {
         } else {
             System.out.print("CREATING NEW...");
             nn = new NeuralNetwork(numInput, numOutput, hiddenLayers);
+            saveModelState(nn);
             System.out.print("SUCCESS!\n");
+            
         }
         return nn;
     }
