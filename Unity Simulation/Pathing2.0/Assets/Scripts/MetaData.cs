@@ -8,7 +8,7 @@ public class MetaData : MonoBehaviour
     // Start is called before the first frame update
 	public TextMeshProUGUI UI_intersection;
 	private GameObject[] cars;
-	private int stopped;
+	public int stopped;
 
 
     void Start(){
