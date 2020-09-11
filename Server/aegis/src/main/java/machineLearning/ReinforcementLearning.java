@@ -6,7 +6,7 @@ import java.util.Random;
 public class ReinforcementLearning {
     public NeuralNetwork target, prediction;
     private NeuralNetworkUtitlities utility;
-    private ArrayList<Transition> replayBuffer;                                     //replay buffer
+    //private ArrayList<Transition> replayBuffer;                                     //replay buffer
     private int lastAction;                                 
     private int currentAction; 
     private int numMemories; 
@@ -14,18 +14,18 @@ public class ReinforcementLearning {
     private double[] currState;
     private int currIteration;
     private final static int minibatchSize      = 64;                                //minibatch size m
-    private final static int memorySize         = 128;                               //memory size
     private final static double discount        = 0.8;
-    private final static int totalIterations    = 500;                             //how many iterations before updating target 
+    private final static int totalIterations    = 100;                             //how many iterations before updating target 
     private final static Random random          = new Random(42069);                //
-     
+    private final ReplayBuffer replayBuffer;
     public ReinforcementLearning(int[] hl) {
         this.lastAction             = -1; 
         this.utility                = new  NeuralNetworkUtitlities(hl);
         this.target                 = NeuralNetworkUtitlities.createNeuralNetwork();
         this.prediction             = NeuralNetworkUtitlities.createNeuralNetwork();
         this.currIteration          = 0;
-        this.replayBuffer           = new ArrayList<>();
+        this.replayBuffer           = new ReplayBuffer();
+        //this.replayBuffer           = new ArrayList<>();
     } 
     
     /**
@@ -39,7 +39,9 @@ public class ReinforcementLearning {
         this.currState              = state; 
         this.currentAction          = prediction.maxA(this.currState);
         if(lastState != null){
-            storeTransitionAndLearn(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState));
+            //double difference = Math.abs(this.prediction.Q(lastState,lastAction)-this.target.maxQ(currState));
+            double difference = Math.abs(Reward(lastState,lastAction,currState));
+            storeTransitionAndLearn(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState,difference));
             //this.replayBuffer.add(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState));
             NeuralNetworkUtitlities.saveModelState(prediction);
         }
@@ -61,17 +63,11 @@ public class ReinforcementLearning {
      * @param t - the transition to store
      */
     public void storeTransitionAndLearn(Transition t){
-        replayBuffer.add(t);
-        ++numMemories;
-        while(numMemories > memorySize){
-            replayBuffer.remove(0);
-            --numMemories;
-        }
+        replayBuffer.enqueue(t); 
         int i = 0;
-        while(i < minibatchSize/* && i < numMemories*/){
-            
-            int memoryPosition = this.random.nextInt((numMemories));
-            Transition memory = this.replayBuffer.get(memoryPosition);
+        while(i < minibatchSize && i < replayBuffer.occupancy/* && i < numMemories*/){ 
+            int memoryPosition = this.random.nextInt((i)+1-(0))+0;
+            Transition memory = this.replayBuffer.getTransition(memoryPosition);
             this.prediction.Backpropagate(this.prediction.Q(memory.state_before, memory.action),memory.action, Loss(memory.state_before,memory.action,memory.state_after));
             ++i;
         }
