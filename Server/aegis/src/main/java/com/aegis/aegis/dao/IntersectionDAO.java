@@ -19,4 +19,6 @@ public interface IntersectionDAO {
     public void addStatistic2(statisticDto statistic);
     
     public Intersection findbyName(String name); 
+    
+    public void addGeneration();
 }

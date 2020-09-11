@@ -62,7 +62,7 @@ public class CommandCenter : MonoBehaviour
     {
         int i = 0;
         TrafficIntersection obj = null;
-        String json = "[";
+        String json = "{\"statistics\":[";
         for (; i < intersections.Length - 1; i++)
         {
             try
@@ -91,7 +91,7 @@ public class CommandCenter : MonoBehaviour
         obj.name = "intersection" + (i+1);
         //obj.name = intersections[i].name;
         json += obj.toJson(i+1);
-        json += "]";
+        json += "],\"numStationaryCars\":"+ GameObject.Find("GlobalData").GetComponent<MetaData>().stopped+"}";
         //Debug.Log("Sending: " + json);
         byte[] bytes = Encoding.UTF8.GetBytes(json);
         UnityWebRequest apiRequest = UnityWebRequest.Put(localSpringServerURL, bytes);//.SetRequestHeader("content-type", "application/json" );
@@ -109,39 +109,56 @@ public class CommandCenter : MonoBehaviour
         {
             String stringResponse = apiRequest.downloadHandler.text;
             // Example: 32 = 100000
-            int intResponse = Convert.ToInt32(stringResponse);
+            
 
-            String bitStream = Convert.ToString(intResponse, 2);
-
-            ////Debug.Log("Original bitstream: " + bitStream);
-
-            ////Debug.Log("Bitstream length: " + bitStream.Length);
-            ////Debug.Log("Intersections length: " + intersections.Length);
-
-            if (bitStream.Length < intersections.Length)
+            if (stringResponse == "-1")
             {
-                String temp = "";
-
-                int padAmount = (intersections.Length - bitStream.Length);
-
-                for(int k = 0; k < padAmount; k++)
+                GameObject[] carsArray = GameObject.FindGameObjectsWithTag("CarSpawned");
+                for (int k = 0; k < carsArray.Length; k++)
                 {
-                    temp += "0";
+                    Destroy(carsArray[k]);
                 }
 
-                bitStream = temp += bitStream;
-            }
-
-            ////Debug.Log("After padding: " + bitStream);
-
-            //Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
-
-            for (int j = 0; j < intersections.Length; j++)
-            {
-                if (bitStream.ToCharArray().GetValue(j).Equals('1'))
+                for (int k = 0; k < intersections.Length; k++)
                 {
-                    //Debug.Log("Making change to intersection: " + intersections[j].name);
-                    intersections[j].makeChange();
+                    intersections[k].resetGeneration();
+                }
+            }
+            else
+            {
+                int intResponse = Convert.ToInt32(stringResponse);
+                String bitStream = Convert.ToString(intResponse, 2);
+
+                //Debug.Log("Original bitstream: " + bitStream);
+
+                //Debug.Log("Bitstream length: " + bitStream.Length);
+                //Debug.Log("Intersections length: " + intersections.Length);
+
+                if (bitStream.Length < intersections.Length)
+                {
+                    String temp = "";
+
+                    int padAmount = (intersections.Length - bitStream.Length);
+
+                    for (int k = 0; k < padAmount; k++)
+                    {
+                        temp += "0";
+                    }
+
+                    bitStream = temp += bitStream;
+                }
+
+                //Debug.Log("After padding: " + bitStream);
+
+                Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
+
+                for (int j = 0; j < intersections.Length; j++)
+                {
+                    if (bitStream.ToCharArray().GetValue(j).Equals('1'))
+                    {
+                        Debug.Log("Making change to intersection: " + intersections[j].name);
+                        intersections[j].makeChange();
+                    }
                 }
             }
         }

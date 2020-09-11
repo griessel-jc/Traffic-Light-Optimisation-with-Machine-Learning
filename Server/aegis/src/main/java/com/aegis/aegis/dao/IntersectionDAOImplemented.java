@@ -1,6 +1,5 @@
-
 package com.aegis.aegis.dao;
-
+import com.aegis.aegis.modal.Generation;
 import com.aegis.aegis.modal.Intersection;
 import com.aegis.aegis.modal.Statistic;
 import com.aegis.aegis.modal.Statistic2;
@@ -160,6 +159,15 @@ public class IntersectionDAOImplemented implements IntersectionDAO{
             return i;
         }
         throw new RecordNotFoundException("No Intersection record exists for given username", name);
+    }
+
+    @Override
+    public void addGeneration() {
+        try{
+            Generation gen = new Generation();
+            Session currSession = entityManager.unwrap(Session.class);
+            currSession.saveOrUpdate(gen);
+        }catch(RecordNotFoundException re){} 
     }
 
      

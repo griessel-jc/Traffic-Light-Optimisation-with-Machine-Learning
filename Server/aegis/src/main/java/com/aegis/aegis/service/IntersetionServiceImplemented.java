@@ -41,6 +41,9 @@ public class IntersetionServiceImplemented implements IntersectionService {
         intersectionDao.addStatistic2(statistic);
     }
 
-
+    @Override
+    public void addGeneration() {
+        intersectionDao.addGeneration();
+    }
     
 }
