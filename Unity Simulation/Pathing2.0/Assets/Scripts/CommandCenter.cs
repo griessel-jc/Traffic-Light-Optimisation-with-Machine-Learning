@@ -45,7 +45,7 @@ public class CommandCenter : MonoBehaviour
     void reset()
     {
         timeleft = timeout;
-        //Debug.Log("Reseting");
+        ////Debug.Log("Reseting");
     }
 
     void scanIntersections()
@@ -78,8 +78,8 @@ public class CommandCenter : MonoBehaviour
             json += obj.toJson(i+1);
             json += ",";
         }
-        //Debug.Log("length: " + intersections.Length);
-        //Debug.Log("I: " + i);
+        ////Debug.Log("length: " + intersections.Length);
+        ////Debug.Log("I: " + i);
         try
         {
             obj = intersections[i].getIntersection();
@@ -92,7 +92,7 @@ public class CommandCenter : MonoBehaviour
         //obj.name = intersections[i].name;
         json += obj.toJson(i+1);
         json += "]";
-        Debug.Log("Sending: " + json);
+        //Debug.Log("Sending: " + json);
         byte[] bytes = Encoding.UTF8.GetBytes(json);
         UnityWebRequest apiRequest = UnityWebRequest.Put(localSpringServerURL, bytes);//.SetRequestHeader("content-type", "application/json" );
         apiRequest.method = "POST";
@@ -102,7 +102,7 @@ public class CommandCenter : MonoBehaviour
 
         if (apiRequest.isNetworkError || apiRequest.isNetworkError)
         {
-            //Debug.LogError(apiRequest.error);
+            ////Debug.LogError(apiRequest.error);
             yield break;
         }
         else
@@ -113,10 +113,10 @@ public class CommandCenter : MonoBehaviour
 
             String bitStream = Convert.ToString(intResponse, 2);
 
-            //Debug.Log("Original bitstream: " + bitStream);
+            ////Debug.Log("Original bitstream: " + bitStream);
 
-            //Debug.Log("Bitstream length: " + bitStream.Length);
-            //Debug.Log("Intersections length: " + intersections.Length);
+            ////Debug.Log("Bitstream length: " + bitStream.Length);
+            ////Debug.Log("Intersections length: " + intersections.Length);
 
             if (bitStream.Length < intersections.Length)
             {
@@ -132,15 +132,15 @@ public class CommandCenter : MonoBehaviour
                 bitStream = temp += bitStream;
             }
 
-            //Debug.Log("After padding: " + bitStream);
+            ////Debug.Log("After padding: " + bitStream);
 
-            Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
+            //Debug.Log("response: " + (string)apiRequest.downloadHandler.text);
 
             for (int j = 0; j < intersections.Length; j++)
             {
                 if (bitStream.ToCharArray().GetValue(j).Equals('1'))
                 {
-                    Debug.Log("Making change to intersection: " + intersections[j].name);
+                    //Debug.Log("Making change to intersection: " + intersections[j].name);
                     intersections[j].makeChange();
                 }
             }
