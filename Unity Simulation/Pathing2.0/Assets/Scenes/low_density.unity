@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 644687072}
   m_IndirectSpecularColor: {r: 0.446576, g: 0.49641317, b: 0.57481736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -14959,7 +14959,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -15016,7 +15016,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644687071}
-  m_LocalRotation: {x: 0.42101005, y: 0.07898997, z: -0.03683362, w: 0.90285903}
+  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
   m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -19968,6 +19968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831722949}
+  - component: {fileID: 831722950}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -20157,6 +20158,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &831722950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831722948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5957727d9608244ad422db3b64af64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirectionalLight: {fileID: 644687072}
+  Preset: {fileID: 11400000, guid: ec2a34a10c875e242b527d9d07917518, type: 2}
+  timeOfDay: 0
+  carSpawner: {fileID: 1267113631}
 --- !u!1001 &836746291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29771,6 +29788,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266952113}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1267113631 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7453260953865859766, guid: 4d5d8b4d19200735fb7822960785d981,
+    type: 3}
+  m_PrefabInstance: {fileID: 1088061245}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1269992029
 PrefabInstance:
   m_ObjectHideFlags: 0
