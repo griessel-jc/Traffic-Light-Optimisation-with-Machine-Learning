@@ -9,7 +9,7 @@ public class IntersectionSelection : MonoBehaviour
 
     public GameObject IntersectionDataPanel;
 
-    public GameObject Intersection;
+    //public GameObject Intersection;
     private Color color;
 
     /// <summary>
@@ -29,8 +29,7 @@ public class IntersectionSelection : MonoBehaviour
 
         IntersectionDataPanel.SetActive(true);
 
-        //StartCoroutine(CalcIntersectionData());
-
+        StartCoroutine(CalcIntersectionData());
     }
 
     /// <summary>
@@ -46,9 +45,9 @@ public class IntersectionSelection : MonoBehaviour
         IntersectionDataPanel.SetActive(false);
     }
 
-    /*private IEnumerator CalcIntersectionData() {
+    private IEnumerator CalcIntersectionData() {
         while(true){
-            TrafficIntersection IntersectionData = Intersection.GetComponent<HighwayIntersection>().getIntersection(); //hard coded atm
+            TrafficIntersection IntersectionData = GetComponentInParent<IntersectionParent>().getIntersection(); //hard coded atm
         
             float totalCars = IntersectionData.movingX + IntersectionData.movingY + IntersectionData.stationaryX + IntersectionData.stationaryY;
             float stationaryCars = IntersectionData.stationaryX + IntersectionData.stationaryY;
@@ -60,5 +59,5 @@ public class IntersectionSelection : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
-    }*/
+    }
 }
