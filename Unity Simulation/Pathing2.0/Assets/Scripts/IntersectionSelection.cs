@@ -27,7 +27,7 @@ public class IntersectionSelection : MonoBehaviour
         color.a = .50f;
         GetComponent<Renderer>().material.color = color;
 
-        //IntersectionDataPanel.SetActive(true);
+        IntersectionDataPanel.SetActive(true);
 
         //StartCoroutine(CalcIntersectionData());
 
@@ -43,7 +43,7 @@ public class IntersectionSelection : MonoBehaviour
         color.a = .05f;
         GetComponent<Renderer>().material.color = color;
 
-        //IntersectionDataPanel.SetActive(false);
+        IntersectionDataPanel.SetActive(false);
     }
 
     /*private IEnumerator CalcIntersectionData() {
