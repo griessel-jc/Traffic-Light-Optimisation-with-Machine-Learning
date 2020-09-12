@@ -82,7 +82,7 @@ public class SimulationController {
     @PostMapping("/resetModel")
     public void resetModel(){
         NeuralNetworkUtitlities.deleteModel();
-        rl = new ReinforcementLearning(new int[]{300,300});
+        rl = new ReinforcementLearning(new int[]{300,300,300,300});
     }
     
     @PostMapping("/print")
