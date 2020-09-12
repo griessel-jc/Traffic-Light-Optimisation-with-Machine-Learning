@@ -255,4 +255,12 @@ public class HighwayIntersection : IntersectionParent
         }
         yield return null;
     }
+    
+    public override void resetGeneration()
+    {
+        inX1.GetComponent<IncomingCounter>().resetGeneration();
+        inX2.GetComponent<IncomingCounter>().resetGeneration();
+        inZ1.GetComponent<IncomingCounter>().resetGeneration();
+        inZ2.GetComponent<IncomingCounter>().resetGeneration();
+    }
 }
