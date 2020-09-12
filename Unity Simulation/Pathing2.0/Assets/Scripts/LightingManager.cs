@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -13,6 +14,7 @@ public class LightingManager : MonoBehaviour
     //Variables
     [SerializeField, Range(0, 24)]
     private float timeOfDay;
+    private float tValue = 0.0f;
 
     [SerializeField]
     public GameObject carSpawner;
@@ -36,15 +38,43 @@ public class LightingManager : MonoBehaviour
             timeOfDay %= 24; //Modulus to ensure always between 0-24
             if (timeOfDay > 6 && timeOfDay < 9)
             {
-                spawningScript.speed = 90;
+                tValue += Time.deltaTime * 0.05f;
+                spawningScript.speed = Mathf.Lerp(60.0f, 90.0f, tValue);
+            }
+            /*Yes, the branching is stupid and there is probably a better way to code this but it is 1am*/
+            /*The spawn rate does jump from 90->60->90 with this is implementation and the time values
+            are not set low enough to hide this but it is safer and tested with these so leave the code as is :)*/
+            else if (timeOfDay > 9.01 && timeOfDay < 9.1)
+            {
+                tValue = 0.0f;
+            }
+            else if (timeOfDay > 9.1 && timeOfDay < 12.9)
+            {
+                tValue += Time.deltaTime * 0.05f;
+                spawningScript.speed = Mathf.Lerp(90.0f, 60.0f, tValue);
+            }
+            else if (timeOfDay > 12.9 && timeOfDay < 15)
+            {
+                tValue = 0.0f;
             }
             else if(timeOfDay > 15 && timeOfDay < 18)
             {
-                spawningScript.speed = 90;
+                
+                tValue += Time.deltaTime * 0.05f;
+                spawningScript.speed = Mathf.Lerp(60.0f, 90.0f, tValue);
+            }
+            else if (timeOfDay > 18 && timeOfDay < 18.1)
+            {
+                tValue = 0.0f;
+            }
+            else if (timeOfDay > 5.9 && timeOfDay < 6.00)
+            {
+                tValue = 0.0f;
             }
             else
             {
-                spawningScript.speed = 60;
+                tValue += Time.deltaTime * 0.05f;
+                spawningScript.speed = Mathf.Lerp(90.0f, 60.0f, tValue);
             }
             UpdateLighting(timeOfDay / 24f);
         }
@@ -72,6 +102,7 @@ public class LightingManager : MonoBehaviour
 
     }
 
+    /*
     //Try to find a directional light to use if we haven't set one
     private void OnValidate()
     {
@@ -97,4 +128,5 @@ public class LightingManager : MonoBehaviour
             }
         }
     }
+    */
 }
