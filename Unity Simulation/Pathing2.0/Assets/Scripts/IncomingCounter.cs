@@ -24,6 +24,12 @@ public class IncomingCounter : MonoBehaviour
         numMovingCars = 0;
     }
 
+    public void resetGeneration()
+    {
+        numStationaryCars = 0;
+        numMovingCars = 0;
+    }
+
     public int getNumberCars(){
         //hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, layerMask);
         //Debug.Log("<color=blue> Number stat cars: "+hitColliders.Length+"</color>");

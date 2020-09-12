@@ -1,6 +1,7 @@
 package com.aegis.aegis.controller;
  
 import com.aegis.aegis.service.IntersectionService;
+import dto.completeDto;
 import dto.intersectionDto;
 import dto.intersectionsDto;
 import dto.statisticDto;
@@ -53,8 +54,9 @@ public class SimulationController {
     
     @CrossOrigin(origins = "http://localhost:7777")
     @PostMapping("/addStatistics")
-    public int addstatistics(@RequestBody statisticDto[] stats){
+    public int addstatistics(@RequestBody completeDto complete){
         double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
+        statisticDto[] stats = complete.getStatistics();
         for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
             addStat(stats[i]);
             //addStat2(stats[i]);
@@ -64,7 +66,11 @@ public class SimulationController {
             state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
             state[(i*NeuralNetworkUtitlities.numNumbersData)+4] = stats[i].getPhase();
         } 
-        return rl.getAction(state);
+        int action = rl.getAction(state,complete.getNumStationaryCars());
+        if(action == -1){
+            intersectionService.addGeneration();
+        }
+        return action;
     }
     @CrossOrigin(origins = "http://localhost:7777")
     @PostMapping("/addStatistics2")
@@ -76,7 +82,7 @@ public class SimulationController {
     @PostMapping("/resetModel")
     public void resetModel(){
         NeuralNetworkUtitlities.deleteModel();
-        rl = new ReinforcementLearning(new int[]{300,300});
+        rl = new ReinforcementLearning(new int[]{300,300,300,300});
     }
     
     @PostMapping("/print")

@@ -22,6 +22,13 @@ public class ReplayBuffer {
         return this.buffer[index];
     }
     
+    public void reset(){
+        occupancy = 0;
+        for (int i = 0; i < maxSize; i++) {
+            buffer[i] = null;
+        }
+    }
+    
     public void enqueue(Transition t) {
         if (occupancy == 0) {
             oldest = t.id; 
@@ -61,6 +68,6 @@ public class ReplayBuffer {
                 ++oldest;
             } 
         }
-
     }
+
 }

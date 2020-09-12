@@ -15,4 +15,6 @@ public interface IntersectionService {
     void addStatistic(statisticDto statistic);
     
     void addStatistic2(statisticDto statistic);
+    
+    void addGeneration();
 }

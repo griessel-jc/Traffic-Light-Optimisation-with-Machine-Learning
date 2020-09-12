@@ -231,4 +231,11 @@ public class ThreeWayIntersection : IntersectionParent
         }
         yield return null;
     }
+    
+    public override void resetGeneration()
+    {
+        inX.GetComponent<IncomingCounter>().resetGeneration();
+        inZ1.GetComponent<IncomingCounter>().resetGeneration();
+        inZ2.GetComponent<IncomingCounter>().resetGeneration();
+    }
 }
