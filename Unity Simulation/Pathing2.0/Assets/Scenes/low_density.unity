@@ -1891,6 +1891,7 @@ MonoBehaviour:
   UI_intersection: {fileID: 1717865665}
   stopped: 0
   time: {fileID: 1331218820}
+  spawner: {fileID: 1267113631}
 --- !u!4 &118610747
 Transform:
   m_ObjectHideFlags: 0
@@ -30380,10 +30381,10 @@ RectTransform:
   m_Father: {fileID: 1469991179}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -107.4, y: -57.4}
-  m_SizeDelta: {x: 210, y: 108}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -115.46, y: 76.04}
+  m_SizeDelta: {x: 209.5322, y: 133.08511}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296345024
 MonoBehaviour:
@@ -34374,10 +34375,10 @@ RectTransform:
   m_Father: {fileID: 460312878}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -437, y: 327}
+  m_SizeDelta: {x: 874, y: 654}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1469991180
 MonoBehaviour:
@@ -40276,7 +40277,10 @@ MonoBehaviour:
 
     Moving cars: 0
 
-'
+    Time:
+    00:00
+
+    Spawn Rate: 99 cars/min'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bcf24a600f8f41c44adf0eaeebb6e75b, type: 2}
   m_sharedMaterial: {fileID: -5069564259325556581, guid: bcf24a600f8f41c44adf0eaeebb6e75b,
@@ -40305,8 +40309,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -40322,7 +40326,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 37
+  m_firstOverflowCharacterIndex: 52
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -40346,12 +40350,12 @@ MonoBehaviour:
   m_margin: {x: -0.10644531, y: 0, z: 28.36261, w: 0.756958}
   m_textInfo:
     textComponent: {fileID: 1717865665}
-    characterCount: 52
+    characterCount: 87
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 10
+    spaceCount: 15
+    wordCount: 18
     linkCount: 0
-    lineCount: 3
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
