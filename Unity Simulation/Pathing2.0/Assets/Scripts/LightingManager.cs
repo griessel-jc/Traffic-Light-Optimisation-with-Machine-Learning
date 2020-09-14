@@ -15,7 +15,7 @@ public class LightingManager : NetworkBehaviour
     //Variables
     [SerializeField, Range(0, 24)]
     [SyncVar]
-    private float timeOfDay;
+    public float timeOfDay;
     private float tValue = 0.0f;
 
     [SerializeField]

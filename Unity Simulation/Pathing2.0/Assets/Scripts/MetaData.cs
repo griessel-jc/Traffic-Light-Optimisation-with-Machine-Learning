@@ -9,7 +9,8 @@ public class MetaData : MonoBehaviour
 	public TextMeshProUGUI UI_intersection;
 	private GameObject[] cars;
 	public int stopped;
-
+    public GameObject time;
+    public GameObject spawner;
 
     void Start(){
         StartCoroutine(Calc());
@@ -19,7 +20,6 @@ public class MetaData : MonoBehaviour
     	while(true){
     		stopped = 0;
     		cars = GameObject.FindGameObjectsWithTag("CarSpawned");
-
     		for(int i =0; i < cars.Length; i++){
     			if(cars[i].GetComponent<Path>().speed == 0){
     				stopped = stopped + 1;
@@ -28,8 +28,10 @@ public class MetaData : MonoBehaviour
 
 
         	UI_intersection.text = "Number of cars: " + cars.Length.ToString() +"\n"
-        							+ "stationary cars: " + stopped.ToString() + "\n"
-        							+ "moving cars: " + (cars.Length - stopped).ToString() + "\n";
+        							+ "Stationary cars: " + stopped.ToString() + "\n"
+        							+ "Moving cars: " + (cars.Length - stopped).ToString() + "\n"
+                                    + "Time: " + Mathf.Floor(time.GetComponent<LightingManager>().timeOfDay).ToString() + ":" + String.format("%02d",Mathf.Floor((time.GetComponent<LightingManager>().timeOfDay %1) * 60)) + "\n"
+                                    + "Spawn Rate: " + spawner.GetComponent<spawning>().speed.ToString();
         	yield return new WaitForSeconds(1);
     	}
     }
