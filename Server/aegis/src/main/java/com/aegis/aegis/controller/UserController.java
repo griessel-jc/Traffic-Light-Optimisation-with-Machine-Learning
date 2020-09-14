@@ -35,15 +35,13 @@ public class UserController {
     
     @Autowired
     private UserService userService; 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @GetMapping("/getUsers")
     public List<User> get() {
         return userService.getUsers();
     }
     
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @PostMapping("/changeRole")
     public String changeRole(@RequestBody adminDto admin){
         userService.changeRole(admin);
@@ -63,8 +61,7 @@ public class UserController {
         return userService.getUser(id);
     }
     
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @DeleteMapping("/deleteUser/{id}")
     public String delete(@PathVariable int id) {
 
@@ -85,15 +82,13 @@ public class UserController {
     public User FindByUsername(@RequestBody userDto username){
         return userService.findByUsername(username.getUsername());
     }
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @PostMapping("/login")
     public User Login(@RequestBody loginDto login){
         return userService.checkLogin(login.getUsername(), login.getPassword());
     }
     
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @PostMapping("/register")
     public String Register(@RequestBody loginDto regUser){
         userService.save(regUser);
@@ -101,7 +96,6 @@ public class UserController {
     }
     
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/registerEnc")
     public String RegisterEncrypted(@RequestBody loginDto regUser){
         userService.saveEncrypted(regUser);
