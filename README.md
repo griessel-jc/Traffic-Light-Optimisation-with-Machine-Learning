@@ -6,10 +6,15 @@ Traffic in big cities can quickly become an issue and in today's times having pe
 - [Git Hub Boards](https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning/projects/1)
 
 ### Documents:
-- [SRS Document](https://docs.google.com/document/d/12U0sbMHtN0hu1ZvjNlRLRra1eFrxwJQ5yBW24WS0Kp8/edit?usp=sharing)
+- [SRS Document](https://docs.google.com/document/d/1eAyJ9G06l1lmgcqCTheV70fToOEOCEJhwa5ln3IvMO0/edit)
+- [Coding Standards](https://docs.google.com/document/d/1InJWy2IhB9PpMIdWKsOTQqAvSV-frXWTlyMCSbN2ptw/edit?usp=sharing)
+- [Installion Manual](https://docs.google.com/document/d/1x6ZiMAT8Qi2fKVTq8rmmD2MvIuykocylTufLMkb5HN8/edit)
+- [User Manual](https://docs.google.com/document/d/1LhNsORokHXgobBF2hBluUihjAdw82lQBsTMyffnl3xo/edit?usp=sharing)
 
 ### Videos:
 - [Demo1](https://drive.google.com/file/d/1HNoL0pdnFfn3Cb0Z3-eRs1o_N3_JG22i/view)
+- [Demo2](https://drive.google.com/drive/u/1/folders/1eManveyzaB7YgjVQGENpVwN_1OA-YnqH)
+- [Demo3](https://drive.google.com/file/d/1dd6qi-dmBLVNAwj5R6ijZf_kdjn7Lgma/view?usp=sharing)
 
 
 ### Team Aegis
