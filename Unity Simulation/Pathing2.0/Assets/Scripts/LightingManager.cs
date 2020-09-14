@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using Mirror;
 
 [ExecuteAlways]
-public class LightingManager : MonoBehaviour
+public class LightingManager : NetworkBehaviour
 {
     //Scene References
     [SerializeField]
@@ -13,6 +14,7 @@ public class LightingManager : MonoBehaviour
     public LightingPreset Preset;
     //Variables
     [SerializeField, Range(0, 24)]
+    [SyncVar]
     private float timeOfDay;
     private float tValue = 0.0f;
 
