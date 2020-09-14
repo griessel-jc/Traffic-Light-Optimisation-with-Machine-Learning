@@ -26,7 +26,7 @@ import dto.adminDto;
 import dto.userDto;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -35,15 +35,15 @@ public class UserController {
     
     @Autowired
     private UserService userService; 
-    
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getUsers")
     public List<User> get() {
         return userService.getUsers();
     }
     
-    
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/changeRole")
     public String changeRole(@RequestBody adminDto admin){
         userService.changeRole(admin);
@@ -63,7 +63,8 @@ public class UserController {
         return userService.getUser(id);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/deleteUser/{id}")
     public String delete(@PathVariable int id) {
 
@@ -79,23 +80,28 @@ public class UserController {
         return user;
     }
     */
+    
     @PostMapping("/findByUsername")
     public User FindByUsername(@RequestBody userDto username){
         return userService.findByUsername(username.getUsername());
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public User Login(@RequestBody loginDto login){
         return userService.checkLogin(login.getUsername(), login.getPassword());
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public String Register(@RequestBody loginDto regUser){
         userService.save(regUser);
         return "Success";
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/registerEnc")
     public String RegisterEncrypted(@RequestBody loginDto regUser){
         userService.saveEncrypted(regUser);
