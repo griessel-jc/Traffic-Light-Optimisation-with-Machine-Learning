@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*") 
 @RestController
 @RequestMapping("/simu")
 public class SimulationController { 
@@ -24,14 +25,14 @@ public class SimulationController {
     @Autowired
     private IntersectionService intersectionService;
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @GetMapping("/getIntersections")
     public List<intersectionDto> getIntersections(){
         return intersectionService.getIntersections();
     } 
     
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @GetMapping("/getIntersections2")
     public intersectionsDto getIntersections2(){
         return intersectionService.getIntersections2();
@@ -79,6 +80,7 @@ public class SimulationController {
             addStat2(stats[i]);
         } 
     }
+    
     @PostMapping("/resetModel")
     public void resetModel(){
         NeuralNetworkUtitlities.deleteModel();
