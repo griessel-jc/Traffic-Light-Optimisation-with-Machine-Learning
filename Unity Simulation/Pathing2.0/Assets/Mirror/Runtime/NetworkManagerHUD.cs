@@ -16,7 +16,7 @@ namespace Mirror
     [HelpURL("https://mirror-networking.com/docs/Components/NetworkManagerHUD.html")]
     public class NetworkManagerHUD : MonoBehaviour
     {
-        NetworkManager manager;
+        public NetworkManager manager;
 
         /// <summary>
         /// Whether to show the default control HUD at runtime.
