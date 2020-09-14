@@ -30,8 +30,8 @@ public class MetaData : MonoBehaviour
         	UI_intersection.text = "Number of cars: " + cars.Length.ToString() +"\n"
         							+ "Stationary cars: " + stopped.ToString() + "\n"
         							+ "Moving cars: " + (cars.Length - stopped).ToString() + "\n"
-                                    + "Time: " + Mathf.Floor(time.GetComponent<LightingManager>().timeOfDay).ToString() + ":" + String.format("%02d",Mathf.Floor((time.GetComponent<LightingManager>().timeOfDay %1) * 60)) + "\n"
-                                    + "Spawn Rate: " + spawner.GetComponent<spawning>().speed.ToString();
+                                    + "Time: " + (Mathf.Floor(time.GetComponent<LightingManager>().timeOfDay)+100).ToString().Remove(0,1) + ":" + ((Mathf.Floor((time.GetComponent<LightingManager>().timeOfDay %1) * 60) +100).ToString()).Remove(0,1) + "\n"
+                                    + "Spawn Rate: " + Mathf.Floor(spawner.GetComponent<spawning>().speed).ToString();
         	yield return new WaitForSeconds(1);
     	}
     }
