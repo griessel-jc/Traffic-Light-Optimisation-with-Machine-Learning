@@ -189,7 +189,7 @@ public class Path : NetworkBehaviour
                     speed = 0;
                 }
                 else{
-                	Debug.Log("xxxxxxxxxxxxxxxxxxxxxxxx");
+                	//Debug.Log("xxxxxxxxxxxxxxxxxxxxxxxx");
                     speed = maxSpeed*(Mathf.Pow(2,hit.distance/30.0f) - 1.15f);
                 }
             }
