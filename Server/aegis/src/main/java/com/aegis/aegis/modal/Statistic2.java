@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name= "statistic_2")
@@ -22,7 +23,8 @@ public class Statistic2 {
     @Column(name = "tl_id")
     private Integer tl_id;
     
-    @Column(name = "timestamp")
+    @CreationTimestamp 
+    @Column(name = "timestamp", nullable=false,columnDefinition="timestamp default current_timestamp")
     private java.sql.Timestamp timestamp;
     
     @Column(name = "stationary_vehicles_X")

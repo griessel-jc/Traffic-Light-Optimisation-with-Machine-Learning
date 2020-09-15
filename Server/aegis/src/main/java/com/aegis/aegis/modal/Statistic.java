@@ -1,5 +1,6 @@
 
 package com.aegis.aegis.modal;
+import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -9,10 +10,13 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name= "statistic")
-public class Statistic {
+public class Statistic implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +26,8 @@ public class Statistic {
     @Column(name = "tl_id")
     private Integer tl_id;
     
-    @Column(name = "timestamp")
+    @CreationTimestamp 
+    @Column(name = "timestamp", nullable=false,columnDefinition="timestamp default current_timestamp")
     private java.sql.Timestamp timestamp;
     
     @Column(name = "stationary_vehicles_X")
