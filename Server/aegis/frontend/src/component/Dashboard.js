@@ -56,6 +56,16 @@ function Dashboard(props) {
                     <div className="col-12 brand">
                         <img src={BrandImage}/>
                     </div>
+
+                    <div className="download-wrapper">
+                        <h2>Download client</h2>
+                        <div className="download-link-wrapper">
+                            <div className="download-link">Windows</div>
+                            <div className="download-link">Mac</div>
+                            <div className="download-link">Linux</div>
+                        </div>
+                        <div>Install/user manual</div>
+                    </div>
                     
 
                     <div className="main-content">
