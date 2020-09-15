@@ -59,12 +59,13 @@ function Dashboard(props) {
 
                     <div className="download-wrapper">
                         <h2>Download client</h2>
-                        <div className="download-link-wrapper">
+                        <div className="download-link-wrapper col-12">
                             <div className="download-link">Windows</div>
                             <div className="download-link">Mac</div>
                             <div className="download-link">Linux</div>
                         </div>
-                        <div>Install/user manual</div>
+                        <a href="https://docs.google.com/document/d/1x6ZiMAT8Qi2fKVTq8rmmD2MvIuykocylTufLMkb5HN8/edit#heading=h.35161rjx73iu" target="_blank" className="manuals"><div>Installation manual</div></a>
+                        <a href="https://docs.google.com/document/d/1LhNsORokHXgobBF2hBluUihjAdw82lQBsTMyffnl3xo/edit#heading=h.v9vp2xrsc9by" target="_blank" className="manuals"><div>User manual</div></a>
                     </div>
                     
 
