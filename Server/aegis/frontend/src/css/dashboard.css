@@ -232,3 +232,11 @@ body {
     margin-bottom: 50px;
     margin-top: 20px;
 }
+
+.brand {
+    text-align: center;
+}
+
+.brand > img {
+    height: 400px;
+}
