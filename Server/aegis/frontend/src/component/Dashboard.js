@@ -6,6 +6,9 @@ import { ReactComponent as UserIcon } from '../images/users-cog-solid.svg';
 import { ReactComponent as LogoutIcon } from '../images/sign-out-alt-solid.svg';
 import CodehesionLogo from '../images/codehesion_logo.png';
 import AegisLogo from '../images/Aegis_logo.png';
+import DashboardImage from '../images/dashboard.png';
+import SimulationImage from '../images/simulation.png';
+import MainImage from '../images/main.gif';
 
 
 function Dashboard(props) {
@@ -58,6 +61,7 @@ function Dashboard(props) {
                             at various times of day, under various kinds of conditions. The aim of the project is to use artificial intelligence to affect traffic light states 
                             to better control the flow of traffic in a Unity simulation representing real life traffic situations. </p>
                     </div>
+                    <img className="banner" src={MainImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -70,6 +74,7 @@ function Dashboard(props) {
                             above the stationary vehicles to show that the flow of the traffic is in a good state.
                         </p>
                     </div>
+                    <img className="banner" src={DashboardImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -81,6 +86,7 @@ function Dashboard(props) {
                             game level to optimize the movement of cars. Traffic data for both the AI-simulation and Non-AI-simulation is represented in graph form on this website. 
                         </p>
                     </div>
+                    <img className="banner" src={SimulationImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -97,8 +103,8 @@ function Dashboard(props) {
                             <div className="main-title-front">ABOUT US</div>
                             <div className="main-title-back">ABOUT US</div>
                         </div>
-                        <p>We are five University of Pretoria students, from three different degree programs. For more information on individual members, 
-                            take a look at the student links found on our team's GitHub page. (https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning) </p>
+                        <p>We are five University of Pretoria students, from three different degree programs: BSc Computer Science, BIS Multimedia, and BSc Information and Knowledge Systems. For more information on individual members, 
+                            take a look at the student links found on our team's GitHub page. (<a href="https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning">https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning</a>) </p>
                     </div>
                 </div>
 

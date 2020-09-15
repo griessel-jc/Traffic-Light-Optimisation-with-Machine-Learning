@@ -225,3 +225,10 @@ body {
         padding-top: 40px;
     }
 }
+
+.banner {
+    width: 100%;
+    height: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
