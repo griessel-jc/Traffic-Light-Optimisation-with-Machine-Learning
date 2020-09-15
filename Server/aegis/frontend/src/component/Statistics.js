@@ -245,7 +245,13 @@ class Statistics extends Component {
 
                 <div className="stat-wrapper">
                     <h2>Statistics</h2>
-                   
+
+                    <p className="stat-info">
+                        The following graphs displays each intersections' moving and stationary vehicles in realtime, retrieved from the Unity simulation. 
+                        Intersections' data from an optimisation artificial intelligence enabled traffic light simulation is displayed along side with data 
+                        from a simulation without the optimisation aritificial intelligence.
+                    </p>
+
                     <div className="scene-wrapper row"> 
 
                         <div className="col-12 col-md-6">
