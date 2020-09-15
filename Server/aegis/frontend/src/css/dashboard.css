@@ -256,6 +256,10 @@ body {
     margin: 20px 50px;
 }
 
+.download-link:hover {
+    background-color: rgba(19, 143, 19, 0.678);
+}
+
 .manuals > div{
     display: inline-block;
     color:#6387FF;
