@@ -6,6 +6,10 @@ import { ReactComponent as UserIcon } from '../images/users-cog-solid.svg';
 import { ReactComponent as LogoutIcon } from '../images/sign-out-alt-solid.svg';
 import CodehesionLogo from '../images/codehesion_logo.png';
 import AegisLogo from '../images/Aegis_logo.png';
+import DashboardImage from '../images/dashboard.png';
+import SimulationImage from '../images/simulation.png';
+import MainImage from '../images/main.gif';
+import BrandImage from '../images/Brand.png';
 
 
 function Dashboard(props) {
@@ -48,6 +52,23 @@ function Dashboard(props) {
             </div>
             <div className="main">
                 <div className="main-wrapper">
+
+                    <div className="col-12 brand">
+                        <img src={BrandImage}/>
+                    </div>
+
+                    <div className="download-wrapper">
+                        <h2>Download client</h2>
+                        <div className="download-link-wrapper col-12">
+                            <a href="../images/Aegis_logo.png" download="Window_build.png"><div className="download-link">Windows</div></a>
+                            <a href="../images/Aegis_logo.png" download="Mac_build.png"><div className="download-link">Mac</div></a>
+                            <a href="../images/Aegis_logo.png" download="Linux_build.png"><div className="download-link">Linux</div></a>
+                        </div>
+                        <a href="https://docs.google.com/document/d/1x6ZiMAT8Qi2fKVTq8rmmD2MvIuykocylTufLMkb5HN8/edit#heading=h.35161rjx73iu" target="_blank" className="manuals"><div>Installation manual</div></a>
+                        <a href="https://docs.google.com/document/d/1LhNsORokHXgobBF2hBluUihjAdw82lQBsTMyffnl3xo/edit#heading=h.v9vp2xrsc9by" target="_blank" className="manuals"><div>User manual</div></a>
+                    </div>
+                    
+
                     <div className="main-content">
                         <div className="main-title">
                             <div className="main-title-front">ABOUT THE PROJECT</div>
@@ -58,6 +79,7 @@ function Dashboard(props) {
                             at various times of day, under various kinds of conditions. The aim of the project is to use artificial intelligence to affect traffic light states 
                             to better control the flow of traffic in a Unity simulation representing real life traffic situations. </p>
                     </div>
+                    <img className="banner" src={MainImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -70,6 +92,7 @@ function Dashboard(props) {
                             above the stationary vehicles to show that the flow of the traffic is in a good state.
                         </p>
                     </div>
+                    <img className="banner" src={DashboardImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -81,6 +104,7 @@ function Dashboard(props) {
                             game level to optimize the movement of cars. Traffic data for both the AI-simulation and Non-AI-simulation is represented in graph form on this website. 
                         </p>
                     </div>
+                    <img className="banner" src={SimulationImage}/>
 
                     <div className="main-content">
                         <div className="main-title">
@@ -97,8 +121,8 @@ function Dashboard(props) {
                             <div className="main-title-front">ABOUT US</div>
                             <div className="main-title-back">ABOUT US</div>
                         </div>
-                        <p>We are five University of Pretoria students, from three different degree programs. For more information on individual members, 
-                            take a look at the student links found on our team's GitHub page. (https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning) </p>
+                        <p>We are five University of Pretoria students, from three different degree programs: BSc Computer Science, BIS Multimedia, and BSc Information and Knowledge Systems. For more information on individual members, 
+                            take a look at the student links found on our team's GitHub page. (<a href="https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning">https://github.com/COS301-SE-2020/Traffic-Light-Optimisation-with-Machine-Learning</a>) </p>
                     </div>
                 </div>
 
