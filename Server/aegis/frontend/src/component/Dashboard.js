@@ -60,9 +60,9 @@ function Dashboard(props) {
                     <div className="download-wrapper">
                         <h2>Download client</h2>
                         <div className="download-link-wrapper col-12">
-                            <a href="/root/Traffic-Light-Optimisation-with-Machine-Learning/BuildForDownload/Windows.zip" download="Windows.zip"><div className="download-link">Windows</div></a>
-                            <a href="/root/Traffic-Light-Optimisation-with-Machine-Learning/BuildForDownload/Mac.zip" download="Mac.zip"><div className="download-link">Mac</div></a>
-                            <a href="/root/Traffic-Light-Optimisation-with-Machine-Learning/BuildForDownload/Linux_DebianBased.zip" download="Linux_DebianBased.zip"><div className="download-link">Linux</div></a>
+                            <a href="/BuildForDownload/Windows.zip" download="Windows.zip"><div className="download-link">Windows</div></a>
+                            <a href="/BuildForDownload/Mac.zip" download="Mac.zip"><div className="download-link">Mac</div></a>
+                            <a href="/BuildForDownload/Linux_DebianBased.zip" download="Linux_DebianBased.zip"><div className="download-link">Linux</div></a>
                         </div>
                         <a href="https://docs.google.com/document/d/1x6ZiMAT8Qi2fKVTq8rmmD2MvIuykocylTufLMkb5HN8/edit#heading=h.35161rjx73iu" target="_blank" className="manuals"><div>Installation manual</div></a>
                         <a href="https://docs.google.com/document/d/1LhNsORokHXgobBF2hBluUihjAdw82lQBsTMyffnl3xo/edit#heading=h.v9vp2xrsc9by" target="_blank" className="manuals"><div>User manual</div></a>
