@@ -235,8 +235,30 @@ body {
 
 .brand {
     text-align: center;
+    margin-top: 30px;
 }
 
 .brand > img {
     height: 400px;
+}
+
+.download-wrapper {
+    text-align: center;
+}
+
+.download-link {
+    color: white;
+    display: inline-block;
+    background-color: rgba(5, 199, 5, 0.678);
+    width: 200px;
+    padding: 10px;
+    border-radius: 30px;
+    margin: 20px 50px;
+}
+
+.manuals > div{
+    display: inline-block;
+    color:#6387FF;
+    font-size: larger;
+    margin: 20px 50px 40px 50px;
 }
