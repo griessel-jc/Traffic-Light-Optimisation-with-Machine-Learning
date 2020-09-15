@@ -50,7 +50,7 @@ public class CustomNetworkManagerHUD : NetworkManagerHUD
             {
                 //Add right ip with port
                 manager.networkAddress = "142.93.139.199";
-                tpt.port = 7778;
+                tpt.port = 7777;
                 manager.StartClient();
             }
             //manager.networkAddress = "142.93.139.199"/*GUILayout.TextField(manager.networkAddress)*/;
@@ -59,7 +59,7 @@ public class CustomNetworkManagerHUD : NetworkManagerHUD
             {
                 //Add right ip with port
                 manager.networkAddress = "142.93.139.199";
-                tpt.port = 7777;
+                tpt.port = 7778;
                 manager.StartClient();
             }
         }
