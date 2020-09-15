@@ -19,7 +19,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator IntegrationTestConnectToSpringServer()
         {
-            string localSpringServerURL = "localhost:8080/api/testCall";
+            string localSpringServerURL = "127.0.0.1:8080/api/testCall";
             /*get JSON*/
             UnityWebRequest apiRequest = UnityWebRequest.Get(localSpringServerURL);
             yield return apiRequest.SendWebRequest();
