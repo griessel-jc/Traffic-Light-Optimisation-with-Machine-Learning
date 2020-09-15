@@ -246,7 +246,7 @@ class Statistics extends Component {
                 <div className="stat-wrapper">
                     <h2>Statistics</h2>
                    
-                    <div className="scene-wrapper"> 
+                    <div className="scene-wrapper col-12 row"> 
 
                         <div className="col-6">
                         <h1>AI</h1>
