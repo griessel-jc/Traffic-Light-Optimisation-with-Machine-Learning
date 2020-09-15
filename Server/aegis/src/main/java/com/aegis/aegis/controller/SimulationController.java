@@ -5,6 +5,7 @@ import dto.completeDto;
 import dto.intersectionDto;
 import dto.intersectionsDto;
 import dto.statisticDto;
+import exception.BadGatewayException;
 import java.util.List; 
 import machineLearning.ReinforcementLearning;
 import machineLearning.NeuralNetworkUtitlities;
@@ -55,23 +56,29 @@ public class SimulationController {
     
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/addStatistics")
-    public int addstatistics(@RequestBody completeDto complete){
-        double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
-        statisticDto[] stats = complete.getStatistics();
-        for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
-            addStat(stats[i]);
-            //addStat2(stats[i]);
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+4] = stats[i].getPhase();
-        } 
-        int action = rl.getAction(state,complete.getNumStationaryCars());
-        if(action == -1){
-            intersectionService.addGeneration();
+    public String addstatistics(@RequestBody completeDto complete){
+        try{
+            System.out.println("adding statistic...");
+            double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
+            statisticDto[] stats = complete.getStatistics();
+            for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
+                addStat(stats[i]);
+                //addStat2(stats[i]);
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+4] = stats[i].getPhase();
+            } 
+            int action = rl.getAction(state,complete.getNumStationaryCars());
+            if(action == -1){
+                intersectionService.addGeneration();
+            }
+            return action+"";
+        }catch(Exception e){
+            throw new BadGatewayException(e.getMessage(),"ERROR");
         }
-        return action;
+        
     }
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/addStatistics2")
