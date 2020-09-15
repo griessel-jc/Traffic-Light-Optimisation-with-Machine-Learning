@@ -53,7 +53,7 @@ public class SimulationController {
         intersectionService.addStatistic2(statistic);
     }
     
-    @CrossOrigin(origins = "http://localhost:7777")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/addStatistics")
     public int addstatistics(@RequestBody completeDto complete){
         double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
@@ -73,7 +73,7 @@ public class SimulationController {
         }
         return action;
     }
-    @CrossOrigin(origins = "http://localhost:7777")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/addStatistics2")
     public void addstatistics2(@RequestBody statisticDto[] stats){
         for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
