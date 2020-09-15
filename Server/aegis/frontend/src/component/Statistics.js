@@ -249,7 +249,7 @@ class Statistics extends Component {
                     <div className="scene-wrapper row"> 
 
                         <div className="col-12 col-md-6">
-                        <h1>Artificial Intelligence</h1>
+                        <h1 className="stat-type-title">Artificial Intelligence</h1>
                         {this.state.ai.map(function (trafficlight, index) {
                             return (
                                 <div className="mixed-chart chart-wrapper" key={index}>
@@ -265,7 +265,7 @@ class Statistics extends Component {
                         })} 
                         </div>
                         <div className="col-12 col-md-6"> 
-                        <h1>NORMAL</h1>
+                        <h1 className="stat-type-title">Normal</h1>
                         {this.state.normal.map(function (trafficlight, index) {
                             return (
                                 <div className="mixed-chart chart-wrapper" key={index}>

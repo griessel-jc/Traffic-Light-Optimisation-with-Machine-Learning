@@ -33,3 +33,9 @@
 .chart-wrapper > h4 {
     color: white;
 }
+
+.stat-type-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #6387FF;
+}
