@@ -267,6 +267,11 @@ body {
     margin: 20px 50px 40px 50px;
 }
 
+.manuals:hover > div {
+    color:#3e5fcc;
+    text-decoration: underline;
+}
+
 @media only screen and (max-width: 575px) {
     .download-link {
         margin: 20px 0px;
