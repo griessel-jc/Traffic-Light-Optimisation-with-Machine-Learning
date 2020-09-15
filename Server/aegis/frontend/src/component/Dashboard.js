@@ -9,6 +9,7 @@ import AegisLogo from '../images/Aegis_logo.png';
 import DashboardImage from '../images/dashboard.png';
 import SimulationImage from '../images/simulation.png';
 import MainImage from '../images/main.gif';
+import BrandImage from '../images/Brand.png';
 
 
 function Dashboard(props) {
@@ -51,6 +52,12 @@ function Dashboard(props) {
             </div>
             <div className="main">
                 <div className="main-wrapper">
+
+                    <div className="col-12 brand">
+                        <img src={BrandImage}/>
+                    </div>
+                    
+
                     <div className="main-content">
                         <div className="main-title">
                             <div className="main-title-front">ABOUT THE PROJECT</div>
