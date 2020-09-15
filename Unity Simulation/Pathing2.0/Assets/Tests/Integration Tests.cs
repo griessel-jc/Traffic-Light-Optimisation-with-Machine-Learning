@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.Networking;
+using Unity.PerformanceTesting;
 
 namespace Tests
 {
@@ -33,6 +34,20 @@ namespace Tests
                 Assert.IsNotNull(apiRequest.downloadHandler.text);
             }
             //yield return null;
+        }
+
+        [Test, Performance]
+        public void Testeeeee()
+        {
+            Measure.Method(() =>
+            {
+                for (int i = 0; i < 1000000; i++)
+                {
+                }
+            })
+            .MeasurementCount(10)
+            .IterationsPerMeasurement(5)
+            .Run();
         }
     }
 }
