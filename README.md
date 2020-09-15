@@ -10,6 +10,7 @@ Traffic in big cities can quickly become an issue and in today's times having pe
 - [Coding Standards](https://docs.google.com/document/d/1InJWy2IhB9PpMIdWKsOTQqAvSV-frXWTlyMCSbN2ptw/edit?usp=sharing)
 - [Installation Manual](https://docs.google.com/document/d/1x6ZiMAT8Qi2fKVTq8rmmD2MvIuykocylTufLMkb5HN8/edit)
 - [User Manual](https://docs.google.com/document/d/1LhNsORokHXgobBF2hBluUihjAdw82lQBsTMyffnl3xo/edit?usp=sharing)
+- [Testing Policy](https://docs.google.com/document/d/1uQSWXwHwujGRCfhbE4_SyaJXH8ZU_CBVqf4pOfi2lyE/edit?usp=sharing)
 
 ### Videos:
 - [Demo1](https://drive.google.com/file/d/1HNoL0pdnFfn3Cb0Z3-eRs1o_N3_JG22i/view)

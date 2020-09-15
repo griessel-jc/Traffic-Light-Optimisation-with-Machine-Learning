@@ -80,12 +80,20 @@ public class SimulationController {
         }
         
     }
+    
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/addStatistics2")
-    public void addstatistics2(@RequestBody statisticDto[] stats){
-        for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
-            addStat2(stats[i]);
-        } 
+    public void addstatistics2(@RequestBody completeDto complete){
+        try{
+            System.out.println("adding statistic 2...");
+            statisticDto[] stats = complete.getStatistics();
+            for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
+                addStat2(stats[i]);
+            } 
+        }catch(Exception e){
+            throw new BadGatewayException(e.getMessage(),"ERROR");
+        }
+
     }
     
     @PostMapping("/resetModel")
