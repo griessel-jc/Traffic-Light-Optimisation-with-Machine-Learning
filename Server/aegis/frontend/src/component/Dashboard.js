@@ -51,7 +51,7 @@ function Dashboard(props) {
                 </div>
             </div>
             <div className="main">
-                <div className="main-wrapper">
+                <div className="main-wrapper container">
 
                     <div className="col-12 brand">
                         <img src={BrandImage}/>
