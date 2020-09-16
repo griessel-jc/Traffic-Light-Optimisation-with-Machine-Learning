@@ -51,7 +51,7 @@ function Dashboard(props) {
                 </div>
             </div>
             <div className="main">
-                <div className="main-wrapper">
+                <div className="main-wrapper container">
 
                     <div className="col-12 brand">
                         <img src={BrandImage}/>
@@ -126,7 +126,7 @@ function Dashboard(props) {
                     </div>
                 </div>
 
-                <div className="footer">
+                <div className="footer container">
                     <div className="footer-content">
                         <p>DEVELOPED BY</p>
                         <img src={AegisLogo}/>
