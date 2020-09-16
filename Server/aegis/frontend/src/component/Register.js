@@ -76,6 +76,7 @@ function Register(props) {
                         <li>Must be less than 12 characters</li>
                       </ul>
                     </div>
+                    <div className="arrow-down"></div>
                   </div>
                   <div>
                     <label htmlFor="username">Username</label>
@@ -83,6 +84,16 @@ function Register(props) {
                   </div>
                 </div>
                 <div className="input-wrapper">
+                  <div className="popper-wrapper-password">
+                    <div className="popper-header">Requirements</div>
+                    <div className="popper-content">
+                      <ul>
+                        <li>Must contain 8 or more characters</li>
+                        <li>Must be less than 20 characters</li>
+                      </ul>
+                    </div>
+                    <div className="arrow-down"></div>
+                  </div>
                   <div>
                     <label htmlFor="password">Password</label>
                     <input type="password" placeholder="Password" {...password} name="password" id="password" />
