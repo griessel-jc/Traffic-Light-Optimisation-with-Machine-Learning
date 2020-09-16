@@ -68,7 +68,7 @@ function Register(props) {
               <h1>Sign up</h1>
               <form onKeyPress={handleKeyPress}>
                 <div className="input-wrapper">
-                  <div className="popper-wrapper-username">
+                  <div className="popper-wrapper-username" id="pw-u">
                     <div className="popper-header">Requirements</div>
                     <div className="popper-content">
                       <ul>
@@ -80,7 +80,7 @@ function Register(props) {
                   </div>
                   <div>
                     <label htmlFor="username">Username</label>
-                    <input type="text" placeholder="Username" {...username} name="username" id="username" />
+                    <input type="text" placeholder="Username" {...username} name="username" id="username" onFocus={() => document.getElementById('pw-u').style.display = "block"} onBlur={() => document.getElementById('pw-u').style.display = "none"}/>
                   </div>
                 </div>
                 <div className="input-wrapper">
