@@ -68,6 +68,15 @@ function Register(props) {
               <h1>Sign up</h1>
               <form onKeyPress={handleKeyPress}>
                 <div className="input-wrapper">
+                  <div className="popper-wrapper-username">
+                    <div className="popper-header">Requirements</div>
+                    <div className="popper-content">
+                      <ul>
+                        <li>Must contain 6 or more characters</li>
+                        <li>Must be less than 12 characters</li>
+                      </ul>
+                    </div>
+                  </div>
                   <div>
                     <label htmlFor="username">Username</label>
                     <input type="text" placeholder="Username" {...username} name="username" id="username" />
