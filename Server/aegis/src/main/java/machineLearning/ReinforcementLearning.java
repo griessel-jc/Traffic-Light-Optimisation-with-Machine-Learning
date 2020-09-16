@@ -46,8 +46,9 @@ public class ReinforcementLearning {
         this.currentAction = prediction.maxA(this.currState); 
         if (lastState != null) {
             //double difference = Math.abs(this.prediction.Q(lastState,lastAction)-this.target.maxQ(currState));
-            double difference = Math.abs(Reward(lastState, lastAction, currState));
-            storeTransitionAndLearn(new Transition(lastState, lastAction, Reward(lastState, lastAction, currState), currState, difference));
+            //double difference = Math.abs(Reward(lastState, lastAction, currState));
+            double TDError = Reward(lastState, lastAction, currState) + (discount * this.target.maxQ(currState));
+            storeTransitionAndLearn(new Transition(lastState, lastAction, Reward(lastState, lastAction, currState), currState, TDError));
             //this.replayBuffer.add(new Transition(lastState, lastAction, Reward(lastState,lastAction,currState), currState));
             NeuralNetworkUtitlities.saveModelState(prediction);
             //NeuralNetworkUtitlities.emptyFile();
