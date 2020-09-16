@@ -126,7 +126,7 @@ function Dashboard(props) {
                     </div>
                 </div>
 
-                <div className="footer">
+                <div className="footer container">
                     <div className="footer-content">
                         <p>DEVELOPED BY</p>
                         <img src={AegisLogo}/>
