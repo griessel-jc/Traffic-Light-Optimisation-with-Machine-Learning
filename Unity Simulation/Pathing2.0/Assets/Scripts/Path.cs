@@ -11,7 +11,7 @@ public class Path : NetworkBehaviour
 	private int nextCurve;
     
     [SyncVar]
-	private float speed;
+	public float speed;
 
     [SyncVar]
 	private Vector3 carPosition;
@@ -21,9 +21,6 @@ public class Path : NetworkBehaviour
 
 	[SyncVar]
     private bool coroutingAllowed;
-
-    [SyncVar]
-    private bool stopped;
 
     [SyncVar]
     private SyncListCustom moveToArray;
@@ -57,7 +54,7 @@ public class Path : NetworkBehaviour
 
         nextCurve = startpoint[Random.Range(0,startpoint.Count)];
         t = 0f;
-        speed = 0.4f;
+        speed = 0.1f;
         coroutingAllowed = true;
 
         nextCurveOptions = new int[90][];
@@ -157,12 +154,12 @@ public class Path : NetworkBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {	
+
         if(coroutingAllowed)
         	StartCoroutine(MoveCar(nextCurve));
         
     }
-
 
 
     private IEnumerator MoveCar(int curveNum)
@@ -173,15 +170,7 @@ public class Path : NetworkBehaviour
     	Vector3 p2 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(2).position;
     	Vector3 p3 = curves.transform.Find("Curve (" + curveNum.ToString() + ")").GetChild(3).position;
 		
-		if((Vector3.Distance(p0,p3) > 10)){
-            maxSpeed = 0.4f;
-        }
-        else if((Vector3.Distance(p0,p3) > 6)){
-            maxSpeed = 1.2f;
-        }
-        else{
-            maxSpeed = 0.99f;
-        }
+		maxSpeed = 10.0f/(Vector3.Distance(p0,p3));
 
 
         Vector3 carPositionPrev;
@@ -195,12 +184,13 @@ public class Path : NetworkBehaviour
     	while (t < 1)
         {
             myRay = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
-            if(Physics.Raycast(myRay, out hit, 20) && hit.collider.gameObject.CompareTag("Car")){
-                if(hit.distance < 1.5f){
+            if(Physics.Raycast(myRay, out hit, 30) && hit.collider.gameObject.CompareTag("Car")){
+                if(hit.distance < 5.0f){
                     speed = 0;
                 }
                 else{
-                    speed = maxSpeed*(hit.distance/20);
+                	//Debug.Log("xxxxxxxxxxxxxxxxxxxxxxxx");
+                    speed = maxSpeed*(Mathf.Pow(2,hit.distance/30.0f) - 1.15f);
                 }
             }
             else if(speed < maxSpeed && speed < (maxSpeed - 0.01f)){
@@ -221,7 +211,10 @@ public class Path : NetworkBehaviour
 
             transform.position = carPosition;
             directionVector = carPosition - carPositionPrev;
-            transform.rotation = Quaternion.LookRotation(directionVector);
+            if (directionVector != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(directionVector);
+            }
             yield return new WaitForEndOfFrame();
         }
 

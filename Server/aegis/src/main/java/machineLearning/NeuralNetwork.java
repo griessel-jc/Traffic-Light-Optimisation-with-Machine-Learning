@@ -1,6 +1,5 @@
 package machineLearning; 
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -8,61 +7,68 @@ import java.util.Random;
 public class NeuralNetwork {
 
     private final Random random;
-    private double epsilon;
+    
     /* Holds the levels(layers) of Neurons */
     private final ArrayList<Neuron>[] levels;
     /* Holds the weights of Neurons */
     private ArrayList<Double>[] weights;
+    /* Very similar to momentum*/
+    private ArrayList<Double>[] vdw;
+    /* Very similar to RMSprop*/
+    private ArrayList<Double>[] sdw;
     /* Holds the biases of Neurons */
     private ArrayList<Double>[] biases;
-    private final double learningRate;
+    /* Very similar to momentum*/
+    private ArrayList<Double>[] vdb;
+    /* Very similar to RMSprop*/
+    private ArrayList<Double>[] sdb;
     private final int numInput;
     private final int numOutput;
     private final int numHiddenLayers;
     private final int numberLayers;
     private final int[] numNodesHiddenLayer;
     private int lastAction;
-    private int currAction;
-    private boolean target;
-
+    private int currAction; 
+    private final double learningRate = 0.001;
+    private final static double B1              = 0.9;
+    private final static double B2              = 0.999;
+    private final static double adam_epsilon    = 10e-9;
+    private final static double greed_epsilon   = 0.1;
+    private int epoch                           = 0;
     /**
      * NeuralNetwork() - instantiates the neural network.
-     *
-     * @param target - the target neural network, otherwise prediction neural
-     * network.
      * @param numInput - the number of inputs.
      * @param numOutput - the number of outputs, corresponding to the number of
      * actions.
      * @param numNodesHiddenLayer - an array holding the number of nodes in each
      * hidden layer.
-     * @param learningRate - the learning rate.
-     * @param epsilon - a threshold for whether the neural network should
-     * explore or exploit.
+     * @param learningRate - the learning rate. 
+     * @param epsilon - a threshold for whether the neural network should explore or exploit.
      */
-    public NeuralNetwork(boolean target, int numInput, int numOutput, int[] numNodesHiddenLayer, double learningRate, double epsilon) {
+    public NeuralNetwork(int numInput, int numOutput, int[] numNodesHiddenLayer) {
         /*
         ====================
         Initialize variables
         ====================
          */
-        this.target = target;
         this.lastAction = 0;
         this.numHiddenLayers = numNodesHiddenLayer.length;
         this.numNodesHiddenLayer = numNodesHiddenLayer;
         this.numOutput = numOutput;
-        this.numInput = numInput;
-        this.learningRate = learningRate;
+        this.numInput = numInput; 
         this.random = new Random(42069);
         this.numberLayers = 1
                 + //1 input layer 
                 this.numHiddenLayers
                 + //N hidden layers
-                1;                        //1 output layer
-
-        levels = (ArrayList<Neuron>[]) new ArrayList[numberLayers];
+                1;                        //1 output layer 
+        levels  = (ArrayList<Neuron>[]) new ArrayList[numberLayers];
         weights = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
-        biases = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
-
+        vdw     = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
+        sdw     = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
+        biases  = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
+        vdb     = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
+        sdb     = (ArrayList<Double>[]) new ArrayList[numberLayers - 1];
         /*
         =================
         Initialize levels
@@ -78,15 +84,24 @@ public class NeuralNetwork {
         ++i;
         //Hidden
         for (; i <= numHiddenLayers; i++) {
-            levels[i] = new ArrayList<>();
-            biases[i - 1] = new ArrayList<>();
-            weights[i - 1] = new ArrayList<>();
+            levels[i]       = new ArrayList<>();
+            biases[i - 1]   = new ArrayList<>();
+            weights[i - 1]  = new ArrayList<>();
+            vdw[i - 1]      = new ArrayList<>();
+            sdw[i - 1]      = new ArrayList<>();
+            vdb[i - 1]      = new ArrayList<>();
+            sdb[i - 1]      = new ArrayList<>();
             for (int j = 0; j < this.numNodesHiddenLayer[i - 1]; j++) {
                 levels[i].add(new Neuron());//add the necessary number of nodes in each hidden layer
-                biases[i - 1].add(Random());//add a bias for the current neuron
+                //biases[i - 1].add(Random());//add a bias for the current neuron
+                biases[i - 1].add(0.0);//add a bias for the current neuron
+                vdb[i-1].add(0.0);
+                sdb[i-1].add(0.0);
                 for (int k = 0; k < levels[i - 1].size(); k++) {
                     //add a weight from every neuron in the previous level to the current neuron
-                    weights[i - 1].add(Random());
+                    weights[i - 1].add(Random()*Math.sqrt(1.0/levels[i - 1].size()));
+                    vdw[i-1].add(0.0);
+                    sdw[i-1].add(0.0);
                 }
             }
         }
@@ -97,27 +112,27 @@ public class NeuralNetwork {
             levels[numberLayers - 1].add(new Neuron()); //create output nodes
         }
 
-        biases[i - 1] = new ArrayList<>();
-        weights[i - 1] = new ArrayList<>();
+        biases[i - 1]   = new ArrayList<>();
+        weights[i - 1]  = new ArrayList<>();
+        vdw[i - 1]      = new ArrayList<>();
+        sdw[i - 1]      = new ArrayList<>();
+        vdb[i - 1]      = new ArrayList<>();
+        sdb[i - 1]      = new ArrayList<>();
+        
         for (int j = 0; j < levels[i].size(); j++) {
-            biases[i - 1].add(Random());
+            biases[i - 1].add(0.0);
+            vdb[i-1].add(0.0);
+            sdb[i-1].add(0.0);
             //For each node in the current layer
             for (int k = 0; k < levels[i - 1].size(); k++) {
                 //Add a weight from every node in the previous level to the current node
-                weights[i - 1].add(Random());
+                weights[i - 1].add(Random()*Math.sqrt(1.0/levels[i - 1].size()));
+                vdw[i-1].add(0.0);
+                sdw[i-1].add(0.0);
             }
         }
     }
-
-    
-    /**
-     * isTarget() - determine if the current neural network is the target neural network or not
-     * @return a boolean whether or not this neural network is the target
-     */
-    public boolean isTarget() {
-        return this.target;
-    }
-    
+ 
     /**
      * setBiases() - sets the biases of the neural network.
      * @param biases
@@ -141,6 +156,7 @@ public class NeuralNetwork {
         }
         return copy;
     }
+    
     /**
      * setWeights() - sets the weights of the neural network.
      * @param weights
@@ -176,16 +192,15 @@ public class NeuralNetwork {
     }
 
     /**
-     * maxA() - determines the action with the greatest Q value
+     * maxA() - performs feed-forward and determines the action with the greatest Q value
      *
-     * @param input - an array of input for the neural network
      * @return an int corresponding to which action should be taken
      */
     public int maxA(double[] s) {
         //INPUT: feed in input
         this.lastAction = this.currAction;
         Q(s);
-        if (this.Random() > epsilon) {
+        if (this.Random() > greed_epsilon) {
             /*Exploit*/
             double greatest = levels[numberLayers - 1].get(0).output;
             for (int j = 1; j < this.numOutput; j++) {
@@ -258,44 +273,58 @@ public class NeuralNetwork {
      * Backpropagate() - adjusts the weights and biases of the neural network to
      * reflect the reward.
      *
-     * @param output - the output node that corresponds to the chosen action
+     * @param Q - the last Q value
+     * @param action - the action that was taken   
      * @param loss - the amount to promote demote the action by
      */
-    public void Backpropagate(int output, double loss) {
-        System.out.println("BACKPROPAGATING:");
-        System.out.println("-----------------");
-        System.out.println("output  : "+output);
-        System.out.println("loss    : "+loss);
-        System.out.println("-----------------");
-        double target = levels[numberLayers - 1].get(output).output + learningRate*(loss);
+    public void Backpropagate(double Q, int action, double loss) { 
         /*
         ======
         OUTPUT
         ======
          */
         //1.) Error Infomation Term
-        levels[numberLayers - 1].get(output).error
-                = (target - levels[numberLayers - 1].get(output).output)
-                * levels[numberLayers - 1].get(output).F_Derivative(CalculateN(numberLayers - 1, output));
+        levels[numberLayers - 1].get(action).error
+                = Q
+                * levels[numberLayers - 1].get(action).F_Derivative(CalculateN(numberLayers - 1, action));
 
         //2.) Weight Error Term
         for (int i = 0; i < numNodesHiddenLayer[numHiddenLayers - 1]; i++) {
             /*For each node in the last hidden layer, adjust its weights to the current output node*/
-            int pos = (i * numOutput) + output;
+            int pos = (i * numOutput) + action; 
+            
+            vdw[numHiddenLayers]
+                    .set(pos, (B1*vdw[numHiddenLayers].get(pos) +(1-B1)*levels[numberLayers - 1].get(action).error)/(1-B1));
+            sdw[numHiddenLayers]
+                    .set(pos, (B2*sdw[numHiddenLayers].get(pos) +(1-B2)*Math.pow(levels[numberLayers - 1].get(action).error,2))/(1-B2));
+             
             weights[numHiddenLayers]
                     .set(pos, weights[numHiddenLayers]
                             .get(pos)
                             + (learningRate
-                            * levels[numberLayers - 1].get(output).error
-                            * levels[numberLayers - 1].get(output).output)
+                            * vdw[numHiddenLayers].get(pos)
+                            / (Math.sqrt(sdw[numHiddenLayers].get(pos)) + adam_epsilon))
+                            /** levels[numberLayers - 1].get(output).error
+                            * levels[numberLayers - 1].get(output).output)*/
                     );
-
         }
         //3.) Bias Error Term 
+        
+        vdb[numHiddenLayers]
+                .set(action, (B1*vdw[numHiddenLayers].get(action) +(1-B1)*levels[numberLayers - 1].get(action).error)/(1-B1));
+        sdb[numHiddenLayers]
+                .set(action, (B2*sdw[numHiddenLayers].get(action) +(1-B2)*Math.pow(levels[numberLayers - 1].get(action).error,2))/(1-B2));
         biases[numHiddenLayers]
+                .set(action,biases[numHiddenLayers]
+                            .get(action)
+                            + (learningRate
+                            * vdb[numHiddenLayers].get(action)
+                            / (Math.sqrt(sdw[numHiddenLayers].get(action)) + adam_epsilon))
+                );
+        /*biases[numHiddenLayers]
                 .set(output,
-                        learningRate * levels[numberLayers - 1].get(output).error);
-
+                learningRate * levels[numberLayers - 1].get(output).error);*/
+        
         /*
         ======
         HIDDEN
@@ -315,19 +344,47 @@ public class NeuralNetwork {
                     //For Each Weight from the previous layer(h-1) to the current node i in layer (h)
                     //2.) Weight Error Term
                     int pos = (l * j) + i;
-                    weights[h - 1].set(pos, weights[h - 1].get(pos)
+                    
+                    vdw[h - 1]
+                            .set(pos, (B1*vdw[h - 1].get(pos) +(1-B1)*levels[h].get(i).error)/(1-Math.pow(B1,epoch+1)));
+                    sdw[h - 1]
+                            .set(pos, (B2*sdw[h - 1].get(pos) +(1-B2)*Math.pow(levels[h].get(i).error,2))/(1-Math.pow(B2,epoch+1)));
+                    /*weights[h - 1].set(pos, weights[h - 1].get(pos)
                             + (learningRate
                             * levels[h].get(i).error
-                            * levels[h].get(i).output));
+                            * levels[h].get(i).output));*/
+                    weights[h-1]
+                    .set(pos, weights[h-1].get(pos)
+                            + (learningRate
+                            * vdw[h-1].get(pos)
+                            / (Math.sqrt(sdw[h-1].get(pos)) + adam_epsilon)) 
+                    );
                 }
                 //3.) Bias Error Term
+                
+                vdb[h - 1]
+                .set(i, (B1*vdb[h - 1].get(i) +(1-B1)*levels[h].get(i).error)/(1-B1));
+                sdb[h - 1]
+                .set(i, (B2*sdb[h - 1].get(i) +(1-B2)*Math.pow(levels[h].get(i).error,2))/(1-B2));
                 biases[h - 1].set(i, learningRate
                         * levels[h].get(i).error);
+                
+                biases[h - 1]
+                .set(i,biases[h - 1]
+                            .get(i)
+                            + (learningRate
+                            * vdb[h-1].get(i)
+                            / (Math.sqrt(sdb[h - 1].get(i)) + adam_epsilon))
+                );
             }
 
         }
     }
-
+    
+    public void incrementEpoch(){
+        ++epoch; 
+    }
+    
     /**
      * Calculates the sum of weights and bias of a Neuron.
      *
@@ -394,15 +451,14 @@ public class NeuralNetwork {
     }
 
     private double Random() {
-        return this.random.nextDouble() * ((1)) - 0.5;
+        return this.random.nextDouble() * ((4)) - 2;
     }
 
     /**
      * Print() - Print the Neural Network, including weights and biases.
      */
     public void Print() {
-        System.out.println("\n\n\n");
-        System.out.println((target? "TARGET" : "PREDICTION"));
+        System.out.println("\n");
         //INPUT 
         int i = 0;
         System.out.print("LEVEL " + (i) + " - INPUT(" + (numInput) + ")[ ");
@@ -440,7 +496,7 @@ public class NeuralNetwork {
         }
 
         //OUTPUT
-        System.out.println("W" + (i + 1) + " : ");
+        System.out.println("W" + (i - 1) + " : ");
         for (int j = 0; j < numNodesHiddenLayer[numHiddenLayers - 1]; j++) {
             //for each node in the last output layer
             System.out.print((j) + "{");
@@ -461,7 +517,7 @@ public class NeuralNetwork {
             System.out.print(levels[i].get(j).output + "    ");
         }
         System.out.print("]\n");
-        System.out.println("\n\n\n");
+        System.out.println("\n");
     }
 
     /**

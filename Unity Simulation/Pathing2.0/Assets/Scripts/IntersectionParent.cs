@@ -19,4 +19,9 @@ public class IntersectionParent : NetworkBehaviour
     {
 
     }
+    
+    public virtual void resetGeneration()
+    {
+
+    }
 }

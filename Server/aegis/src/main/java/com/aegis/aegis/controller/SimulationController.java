@@ -1,10 +1,11 @@
 package com.aegis.aegis.controller;
  
-import com.aegis.aegis.modal.Intersection;
 import com.aegis.aegis.service.IntersectionService;
-import com.google.gson.Gson;
+import dto.completeDto;
 import dto.intersectionDto;
+import dto.intersectionsDto;
 import dto.statisticDto;
+import exception.BadGatewayException;
 import java.util.List; 
 import machineLearning.ReinforcementLearning;
 import machineLearning.NeuralNetworkUtitlities;
@@ -16,26 +17,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*") 
 @RestController
 @RequestMapping("/simu")
 public class SimulationController { 
-    private final ReinforcementLearning rl = new ReinforcementLearning(
-            0.8,                //Discount factor
-            1000,               //Number iterations before copying prediction model to target model
-            6,                  //Numbr of intersection
-            new int[]{100,100}, //Number hidden layers
-            0.04,               //Learning rate
-            0.05                //Epsilon - for epsilon-greedy algorithm
-    );
+    private ReinforcementLearning rl = new ReinforcementLearning(new int[]{300,300,300,300});
     
     @Autowired
     private IntersectionService intersectionService;
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
     @GetMapping("/getIntersections")
     public List<intersectionDto> getIntersections(){
         return intersectionService.getIntersections();
     } 
+    
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*") 
+    @GetMapping("/getIntersections2")
+    public intersectionsDto getIntersections2(){
+        return intersectionService.getIntersections2();
+    } 
+    
     
     @PostMapping("/addStatistic")
     public List<intersectionDto> addStatistic(@RequestBody statisticDto statistic){
@@ -47,18 +50,61 @@ public class SimulationController {
         intersectionService.addStatistic(statistic);
     }
     
-    @CrossOrigin(origins = "http://localhost:7777")
-    @PostMapping("/addStatistics")
-    public int addstatistics(@RequestBody statisticDto[] stats){
-        double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
-        for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
-            addStat(stats[i]);
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
-            state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getPhase();
-        } 
-        return rl.getAction(state);
+    public void addStat2(statisticDto statistic){
+        intersectionService.addStatistic2(statistic);
     }
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/addStatistics")
+    public String addstatistics(@RequestBody completeDto complete){
+        try{
+            System.out.println("adding statistic...");
+            double [] state = new double[NeuralNetworkUtitlities.numIntersections*NeuralNetworkUtitlities.numNumbersData];
+            statisticDto[] stats = complete.getStatistics();
+            for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
+                addStat(stats[i]);
+                //addStat2(stats[i]);
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+0] = stats[i].getStationaryX();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+1] = stats[i].getStationaryY();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+2] = stats[i].getMovingX();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+3] = stats[i].getMovingY();
+                state[(i*NeuralNetworkUtitlities.numNumbersData)+4] = stats[i].getPhase();
+            } 
+            int action = rl.getAction(state,complete.getNumStationaryCars());
+            if(action == -1){
+                intersectionService.addGeneration();
+            }
+            return action+"";
+        }catch(Exception e){
+            throw new BadGatewayException(e.getMessage(),"ERROR");
+        }
+        
+    }
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/addStatistics2")
+    public void addstatistics2(@RequestBody completeDto complete){
+        try{
+            System.out.println("adding statistic 2...");
+            statisticDto[] stats = complete.getStatistics();
+            for (int i = 0; i < NeuralNetworkUtitlities.numIntersections; i++) {
+                addStat2(stats[i]);
+            } 
+        }catch(Exception e){
+            throw new BadGatewayException(e.getMessage(),"ERROR");
+        }
+
+    }
+    
+    @PostMapping("/resetModel")
+    public void resetModel(){
+        NeuralNetworkUtitlities.deleteModel();
+        rl = new ReinforcementLearning(new int[]{300,300,300,300});
+    }
+    
+    @PostMapping("/print")
+    public void print(){
+        rl.prediction.Print();
+    }
+    
 }

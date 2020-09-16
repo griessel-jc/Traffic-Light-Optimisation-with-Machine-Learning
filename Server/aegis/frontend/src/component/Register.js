@@ -31,7 +31,7 @@ function Register(props) {
 
             var data = { username: un, password: pw }
             console.log(data);
-            axios.post('http://localhost:8080/api/registerEnc', data).then(response => {
+            axios.post('http://142.93.139.199:8080/api/registerEnc', data).then(response => {
                 setLoading(false);
                 props.history.push('/');
             }).catch(error => {
@@ -68,15 +68,37 @@ function Register(props) {
               <h1>Sign up</h1>
               <form onKeyPress={handleKeyPress}>
                 <div className="input-wrapper">
+                  <div className="popper-wrapper-username" id="pw-u">
+                    <div className="popper-header">Requirements</div>
+                    <div className="popper-content">
+                      <ul>
+                        <li>Must contain 6 or more characters</li>
+                        <li>Must be less than 12 characters</li>
+                        <li>Must not contain spaces</li>
+                      </ul>
+                    </div>
+                    <div className="arrow-down"></div>
+                  </div>
                   <div>
                     <label htmlFor="username">Username</label>
-                    <input type="text" placeholder="Username" {...username} name="username" id="username" />
+                    <input type="text" placeholder="Username" {...username} name="username" id="username" onFocus={() => document.getElementById('pw-u').style.display = "block"} onBlur={() => document.getElementById('pw-u').style.display = "none"}/>
                   </div>
                 </div>
                 <div className="input-wrapper">
+                  <div className="popper-wrapper-password" id="pw-p">
+                    <div className="popper-header">Requirements</div>
+                    <div className="popper-content">
+                      <ul>
+                        <li>Must contain 8 or more characters</li>
+                        <li>Must be less than 20 characters</li>
+                        <li>Must not contain spaces</li>
+                      </ul>
+                    </div>
+                    <div className="arrow-down"></div>
+                  </div>
                   <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Password" {...password} name="password" id="password" />
+                    <input type="password" placeholder="Password" {...password} name="password" id="password" onFocus={() => document.getElementById('pw-p').style.display = "block"} onBlur={() => document.getElementById('pw-p').style.display = "none"}/>
                   </div>
                 </div>
                 <div className="input-wrapper">

@@ -6,21 +6,13 @@
 package WebSocketEndpoint;
 
 import com.aegis.aegis.controller.UserController; 
-import com.aegis.aegis.modal.Intersection;
-import com.aegis.aegis.service.UserService;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import java.io.IOException;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import javax.websocket.EncodeException;
 
 public class WebsocketServer extends WebSocketServer {
 

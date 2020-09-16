@@ -9,6 +9,9 @@ TagManager:
   - Red
   - Green
   - Orange
+  - CarSpawned
+  - CountingTag
+  - gameTime
   layers:
   - Default
   - TransparentFX

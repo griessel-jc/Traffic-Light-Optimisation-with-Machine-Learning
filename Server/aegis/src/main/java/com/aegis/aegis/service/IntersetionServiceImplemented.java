@@ -2,9 +2,8 @@
 package com.aegis.aegis.service;
  
 import com.aegis.aegis.dao.IntersectionDAO;
-import com.aegis.aegis.modal.Intersection; 
-import com.aegis.aegis.modal.Statistic;
 import dto.intersectionDto;
+import dto.intersectionsDto;
 import dto.statisticDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,12 @@ public class IntersetionServiceImplemented implements IntersectionService {
     public List<intersectionDto> getIntersections() {
         return intersectionDao.get();
     }
-
+    
+    @Transactional
+    @Override
+    public intersectionsDto getIntersections2() {
+        return intersectionDao.get2();
+    }
     @Override
     public void addIntersection(intersectionDto i) {
         intersectionDao.addIntersection(i);
@@ -30,6 +34,16 @@ public class IntersetionServiceImplemented implements IntersectionService {
     @Override
     public void addStatistic(statisticDto statistic) {
         intersectionDao.addStatistic(statistic);
+    }
+    
+    @Override
+    public void addStatistic2(statisticDto statistic) {
+        intersectionDao.addStatistic2(statistic);
+    }
+
+    @Override
+    public void addGeneration() {
+        intersectionDao.addGeneration();
     }
     
 }
