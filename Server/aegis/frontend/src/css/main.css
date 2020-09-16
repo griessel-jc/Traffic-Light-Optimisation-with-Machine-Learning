@@ -272,3 +272,55 @@ input:focus {
         padding-top: 25px;
     }
 }
+
+form {
+    position: relative;
+}
+
+.popper-wrapper-username {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    width: 60%;
+    left: 40%;
+    bottom: 92%;
+    display: none;
+}
+
+.popper-header {
+    background-color:#a0b6ff;
+    padding: 5px 10px 5px 10px; 
+    border-radius: 5px 5px 0px 0px;
+    font-weight: bold;
+    color: white;
+}
+
+.popper-content {
+    padding: 10px 0px 0px 0px; 
+    border-radius: 5px 5px 0px 0px;
+}
+
+.popper-wrapper-password {
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    width: 60%;
+    left: 40%;
+    bottom: 60%;
+    display: none;
+}
+
+.arrow-down {
+    margin: 0 auto;
+    width: 0; 
+    height: 0; 
+
+    position: relative;
+    bottom: -10px;
+
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 20px solid #fff;
+  }
+  
