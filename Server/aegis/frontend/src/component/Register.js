@@ -84,7 +84,7 @@ function Register(props) {
                   </div>
                 </div>
                 <div className="input-wrapper">
-                  <div className="popper-wrapper-password">
+                  <div className="popper-wrapper-password" id="pw-p">
                     <div className="popper-header">Requirements</div>
                     <div className="popper-content">
                       <ul>
@@ -96,7 +96,7 @@ function Register(props) {
                   </div>
                   <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Password" {...password} name="password" id="password" />
+                    <input type="password" placeholder="Password" {...password} name="password" id="password" onFocus={() => document.getElementById('pw-p').style.display = "block"} onBlur={() => document.getElementById('pw-p').style.display = "none"}/>
                   </div>
                 </div>
                 <div className="input-wrapper">
